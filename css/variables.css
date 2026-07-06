@@ -1,0 +1,35 @@
+/* css/variables.css */
+:root {
+  /* Exact Branding Colors based on image_c1e1a6.png and image_c1e202.png */
+  --pinnacle-crimson: #8B0000;    /* The deep premium maroon used in the header & icons */
+  --pinnacle-gold: #E3C18A;       /* The champagne gold text used for "Pinnacle Towers" logo */
+  --pinnacle-dark-text: #2B1818;  /* Deep off-black/maroon variant for headings like "Living Areas" */
+  
+  /* System Neutral Backgrounds */
+  --pinnacle-bg-light: #F8FAFC;   /* Soft, clean gray for the main dashboard body background */
+  --pinnacle-card-white: #FFFFFF; /* High-contrast white for structural data cards */
+  --pinnacle-text-muted: #64748B; /* Secondary text color for smaller details */
+  
+  /* Status Colors */
+  --pinnacle-success: #10B981;    /* Vibrant green matching the "Completed" badge in image_c1e4ed.png */
+  
+  /* Shared Layout Constants */
+  --radius-md: 10px;
+  --spacing-sm: 12px;
+  --spacing-md: 20px;
+  --sidebar-width: 260px;
+  
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+}
+
+body {
+  background-color: var(--pinnacle-bg-light);
+  color: var(--pinnacle-dark-text);
+}
