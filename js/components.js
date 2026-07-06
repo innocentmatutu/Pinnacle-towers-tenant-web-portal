@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div>
                 <div class="brand" style="color: var(--pinnacle-gold); font-weight: bold; font-size: 1.5rem; margin-bottom: 0.5rem; letter-spacing: 0.5px;">Pinnacle Towers</div>
                 <div style="font-size: 0.8rem; color: var(--pinnacle-gold); opacity: 0.8; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
-                    🧑‍💼 ${user.role} Portal
+                     ${user.role} Portal
                 </div>
                 <nav style="display: flex; flex-direction: column; gap: 8px;">
                     ${menuItems}

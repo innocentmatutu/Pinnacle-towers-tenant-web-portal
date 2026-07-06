@@ -1,0 +1,8 @@
+/* css/style.css */
+@import 'variables.css';
+
+/* Custom finance module styles can be added here later */
+.card {
+    border-radius: var(--radius-md);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
