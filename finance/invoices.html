@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoices & Receipts | Pinnacle Towers</title>
+    <link rel="stylesheet" href="../css/variables.css">
+</head>
+<body>
+    <div id="sidebar-container"></div>
+    
+    <main style="margin-left: var(--sidebar-width); padding: var(--spacing-md);">
+        <h1>Invoices & Receipts</h1>
+        <p>Manage and download tenant invoices and payment receipts here.</p>
+        
+        <div id="invoice-template" style="background: #fff; border: 1px solid #ccc; padding: 20px; width: 300px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <h3 style="color: var(--pinnacle-crimson);">Pinnacle Towers Invoice</h3>
+            <p><strong>Tenant:</strong> <span id="inv-tenant">Loading...</span></p>
+            <p><strong>Amount Due:</strong> <span id="inv-amount">Loading...</span></p>
+            <button onclick="window.print()" style="margin-top: 15px; padding: 8px 16px; cursor: pointer; background: var(--pinnacle-crimson); color: white; border: none; border-radius: 4px;">Download/Print PDF</button>
+        </div>
+    </main>
+
+    <script src="../js/components.js"></script>
+    <script>
+        async function loadInvoice() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('user');
+
+            if (!username) {
+                document.getElementById('invoice-template').innerHTML = "<p>Please select a tenant from the dashboard to generate an invoice.</p>";
+                return;
+            }
+
+            try {
+                const response = await fetch('../tenant/rent_data.json');
+                const data = await response.json();
+                const tenantData = data[username];
+
+                if (tenantData) {
+                    document.getElementById('inv-tenant').innerText = username;
+                    document.getElementById('inv-amount').innerText = "KES " + tenantData.currentRent.toLocaleString();
+                } else {
+                    document.getElementById('inv-tenant').innerText = "Not Found";
+                }
+            } catch (error) {
+                console.error("Error loading invoice:", error);
+                document.getElementById('inv-tenant').innerText = "Error loading data";
+            }
+        }
+        loadInvoice();
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "tenant_101": {
+    "currentRent": 45000,
+    "outstandingBalance": 5000,
+    "lastPayment": {
+      "amount": 45000,
+      "date": "2026-06-05"
+    }
+  }
+}

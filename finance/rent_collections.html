@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rent Collections | Pinnacle Towers</title>
+    <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="../css/style.css"> 
+</head>
+<body>
+    <div id="sidebar-container"></div>
+    
+    <main style="margin-left: 250px; padding: 20px;">
+        <h1>Rent Collections</h1>
+        <form id="update-rent-form">
+            <input type="text" id="username" placeholder="Tenant Username" required>
+            <input type="number" id="current-rent" placeholder="New Current Rent" required>
+            <input type="number" id="outstanding" placeholder="Outstanding Balance" required>
+            <button type="submit">Update Record & Download</button>
+        </form>
+    </main>
+
+    <script src="../js/components.js"></script>
+    
+    <script>
+        document.getElementById('update-rent-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("Record updated successfully!");
+        });
+    </script>
+</body>
+</html>

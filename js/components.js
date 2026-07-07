@@ -31,9 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     } else if (user.role === 'Finance Officer') {
         menuItems = `
-            <a href="/finance/dashboard.html" class="nav-item"> Financial Dashboard</a>
-            <a href="/finance/invoices.html" class="nav-item"> Invoices & Receipts</a>
-            <a href="/finance/payments.html" class="nav-item"> Rent Collections</a>
+            <a href="../finance/dashboard.html" class="nav-item"> Financial Dashboard</a>
+            <a href="../finance/invoices.html" class="nav-item"> Invoices & Receipts</a>
+            <a href="../finance/rent_collections.html" class="nav-item"> Rent Collections</a>
         `;
     } else if (user.role === 'Maintenance Officer') {
         menuItems = `
