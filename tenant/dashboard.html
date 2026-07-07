@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinnacle Towers - Portal Workspace</title>
+    <!-- Links to your shared crimson branding styles -->
+    <link rel="stylesheet" href="../css/variables.css">
+    <style>
+        .dashboard-main {
+            margin-left: var(--sidebar-width);
+            padding: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+        .welcome-header {
+            background: var(--pinnacle-card-white);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--pinnacle-crimson);
+        }
+        .placeholder-card {
+            background: var(--pinnacle-card-white);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: center;
+            color: var(--pinnacle-text-muted);
+            border: 2px dashed rgba(0,0,0,0.1);
+            margin-top: var(--spacing-md);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- This div automatically catches the correct crimson role sidebar from components.js -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main Workspace Area -->
+    <main class="dashboard-main">
+        <header class="welcome-header">
+            <h2>Internal Staff Portal Workspace</h2>
+            <p style="color: var(--pinnacle-text-muted);">Pinnacle Towers Administrative Management Framework</p>
+        </header>
+
+        <section class="placeholder-card">
+            <h3>Operational Workspace Setup</h3>
+            <p style="margin-top: 10px;">This specific sub-view module is currently allocated to assigned group feature branches.</p>
+        </section>
+    </main>
+
+    <!-- Script that runs the role authentication and builds the navigation UI -->
+    <script src="../js/components.js"></script>
+</body>
+</html>

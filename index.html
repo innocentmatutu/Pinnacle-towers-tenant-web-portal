@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinnacle Towrs - Secure Gateway</title>
+    <!-- Links to variables.css for branding crimson -->
+    <link rel="stylesheet" href="css/variables.css">
+    <style>
+        /* Modern Reset and Page Centering */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--pinnacle-bg-light); /* Matching that light off-white bg */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+
+        .pinnacle-auth-card {
+            background: var(--pinnacle-card-white);
+            padding: 24px 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            border-top: 5px solid var(--pinnacle-crimson); 
+            
+            width: 100%;
+            max-width: 420px; /* Slight increase for better content flow */
+            /*text-align: center; /* Center-align the header text */
+            box-sizing: border-box;
+        }
+
+        /* Header Layout and Text */
+        .auth-header h1 {
+            color: var(--pinnacle-dark-text);
+            font-size: 1.6rem;
+            margin-bottom: 4px;
+            text-align: center; /* Center-align the header text */
+        }
+
+        .auth-header p {
+            color: #6c757d; /* A clean muted navy-grey */
+            font-size: 0.85rem;
+            margin-bottom: 20px; /* Clean separation before the form starts */
+            text-align: center; /* Center-align the header text */
+        }
+
+        .input-group {
+            text-align: left; /* Left-align the labels */
+            margin-bottom: 14px; 
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--pinnacle-dark-text);
+            margin-bottom: 5px;
+        }
+
+        /* Shared styling for Text Inputs and the Select Dropdown */
+        .auth-field, .auth-dropdown {
+            width: 100%;
+            padding: 12px 15px; 
+            font-size: 0.95rem;
+            color: var(--pinnacle-dark-text);
+            background-color: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.12); 
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        /* Placeholder coloring */
+        .auth-field::placeholder {
+            color: #b0b3b8; 
+        }
+
+        /* Field hover/focus states */
+        .auth-field:focus, .auth-dropdown:focus {
+            border-color: #a8aeb4; /* Soft grey focus */
+            box-shadow: 0 0 0 3px rgba(0,0,0,0.03); /* Subtle outer glow */
+        }
+
+        /* Dropdown specific styling (handling the arrow) */
+        .auth-dropdown {
+            appearance: none; /* Reset native arrow */
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+            padding-right: 40px; /* Space for the arrow */
+            cursor: pointer;
+        }
+
+
+        .secure-login-btn {
+            width: 100%;
+            margin-top: 15px; /* Clean spacing above the button */
+            padding: 12px;
+            background-color: var(--pinnacle-crimson); /* The official deep maroon */
+            color: white;
+            border: none;
+            border-radius: 8px; 
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .secure-login-btn:hover {
+            background-color: #7a121e; /* Darker shade of crimson for hover */
+        }
+
+        .secure-login-btn:active {
+            transform: translateY(1px); /* Slight click effect */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Unified Authentication Card -->
+    <div class="pinnacle-auth-card">
+        
+        <!-- Header Text -->
+        <header class="auth-header">
+            <h1>Pinnacle Towers</h1>
+            <p>Portal Authentication Gateway</p>
+        </header>
+
+        <!-- Main Form Area -->
+        <form id="loginForm">
+            
+            <!-- Username Input -->
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" class="auth-field" required placeholder="Enter your username">
+            </div>
+
+            <!-- Password Input -->
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper" style="position: relative; width: 100%;">
+                    <input type="password" id="password" class="auth-field" required placeholder="Enter your password">
+                    <button type="button" id="togglePassword" class="toggle-password-btn">Show</button>
+                </div>  
+            </div>
+
+
+
+            <!-- Role Selector (Dropdown) -->
+            <div class="input-group">
+                <label for="role">Portal Access Role</label>
+                <select id="role" class="auth-dropdown">
+                    <option value="tenant">Tenant</option>
+                    <option value="manager" selected>Property Manager</option>
+                    <option value="finance">Finance Officer</option>
+                    <option value="maintenance">Maintenance Officer</option>
+                    <option value="security">Security Officer</option>
+                    <option value="admin">System Administrator</option>
+                </select>
+            </div>
+
+            <!-- The Maroon Secure Login Button -->
+            <button type="submit" class="secure-login-btn">Secure Login</button>
+            <!-- Place this right under the secure-login-btn -->
+            <div style="text-align: center; margin-top: 15px;">
+                <a href="reset-password.html" style="color: var(--pinnacle-crimson); font-size: 0.85rem; font-weight: 600; text-decoration: none;">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Your existing login logic and redirects stay exactly the same! -->
+    <script>
+        // 1. Password Visibility Toggle Functionality
+        const passwordInput = document.getElementById('password');
+        const togglePasswordBtn = document.getElementById('togglePassword');
+
+        togglePasswordBtn.addEventListener('click', function () {
+            const isPassword = passwordInput.getAttribute('type') === 'password';
+            passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+            this.textContent = isPassword ? 'Hide' : 'Show';
+        });
+
+        // 2. Authentication and Navigation Routing Logic
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const selectedRole = document.getElementById('role').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (password === 'password123' && username !== '') {
+                errorMsg.style.display = 'none';
+
+                const sessionUser = {
+                username: username, 
+                role: selectedRole,
+                authenticated: true,
+                loginTime: new Date().toISOString()
+                };
+
+                localStorage.setItem('user', JSON.stringify(sessionUser));
+                window.location.href = `${selectedRole}/dashboard.html`;
+            } else {
+                errorMsg.style.display = 'block';
+                errorMsg.textContent = "Authentication failed. Hint: use password123";
+            }
+});
+    </script>
+
+</body>
+</html>

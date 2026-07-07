@@ -1,6 +1,5 @@
 /* css/variables.css */
 :root {
-  /* Exact Branding Colors based on image_c1e1a6.png and image_c1e202.png */
   --pinnacle-crimson: #8B0000;    /* The deep premium maroon used in the header & icons */
   --pinnacle-gold: #E3C18A;       /* The champagne gold text used for "Pinnacle Towers" logo */
   --pinnacle-dark-text: #2B1818;  /* Deep off-black/maroon variant for headings like "Living Areas" */
@@ -32,4 +31,39 @@
 body {
   background-color: var(--pinnacle-bg-light);
   color: var(--pinnacle-dark-text);
+}
+
+/* Container to allow absolute positioning of the button inside the input */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Ensure the password text field leaves room on the right so text doesn't overlap the button */
+.password-wrapper .auth-field {
+    padding-right: 65px ; 
+    width: 100%; 
+}
+
+/* Clean, unstyled button sitting perfectly on the inside-right edge */
+.toggle-password-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--pinnacle-crimson); /* Uses your deep crimson branding color */
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+    z-index: 10; /* Ensures it stays interactive and visible */
+    padding: 0;
+    margin: 0;
+}
+
+.toggle-password-btn:hover {
+    color: #7a121e; /* Darker crimson on hover */
 }
