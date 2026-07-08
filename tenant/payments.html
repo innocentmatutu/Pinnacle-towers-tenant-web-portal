@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Rent & Payments | Pinnacle Towers</title>
     <link rel="stylesheet" href="../css/variables.css">
+    <link rel="stylesheet" href="payments.css">
 </head>
 <body>
     <div id="sidebar-container"></div>
@@ -11,17 +12,98 @@
     <main style="margin-left: var(--sidebar-width); padding: var(--spacing-md);">
         <h1>Rent & Payments</h1>
         
-        <!-- Rent Overview Module -->
-        <section id="rent-overview-module" style="background: var(--pinnacle-card-white); padding: var(--spacing-md); border-radius: var(--radius-md); margin-top: var(--spacing-md);">
+        <section id="rent-overview-module" class="card">
             <h2 style="color: var(--pinnacle-crimson);">Rent Overview</h2>
             <div id="rent-data">
                 <p>Loading your rent information...</p>
             </div>
         </section>
+
+        <section id="payment-selection-module" class="card" style="display: none;">
+            <h2 style="color: var(--pinnacle-crimson); margin-bottom: var(--spacing-sm);">Make Payment</h2>
+            
+            <div style="margin-bottom: 15px;">
+                <label>Amount to Pay (KES):</label>
+                <input type="number" id="payment-amount" placeholder="5000" style="padding: 8px; width: 100%; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <div class="payment-tabs">
+                <button class="tab-btn" onclick="togglePaymentMethod('mpesa')">M-Pesa</button>
+                <button class="tab-btn" onclick="togglePaymentMethod('bank')">Bank Deposit</button>
+            </div>
+
+            <div id="mpesa-form" class="payment-form" style="display: none; margin-top: 15px;">
+                <label>Enter M-Pesa Phone Number:</label>
+                <input type="tel" placeholder="2547XXXXXXXX" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                <button class="primary-btn" onclick="processPayment()" style="background: var(--pinnacle-crimson); color: white; padding: 10px 20px; border: none; cursor: pointer;">Pay Now</button>
+            </div>
+
+            <div id="bank-form" class="payment-form" style="display: none; margin-top: 15px;">
+                <p><strong>Bank:</strong> Equity Bank</p>
+                <p><strong>Account Name:</strong> Pinnacle Towers Ltd</p>
+                <p><strong>Account No:</strong> 1234567890</p>
+                <p class="reference-note"><em>Please use your Unit Number as the payment reference.</em></p>
+                <button class="primary-btn" onclick="processPayment()" style="background: var(--pinnacle-crimson); color: white; padding: 10px 20px; border: none; cursor: pointer;">Confirm Bank Transfer</button>
+            </div>
+        </section>
     </main>
 
-    <!-- Scripts -->
     <script src="../js/components.js"></script>
     <script src="rent_overview.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const user = JSON.parse(localStorage.getItem("user"));
+            const paymentModule = document.getElementById("payment-selection-module");
+            const rentOverview = document.getElementById("rent-overview-module");
+
+            if (user && user.role === 'Tenant') {
+                paymentModule.style.display = 'block';
+            } else {
+                paymentModule.style.display = 'none';
+                rentOverview.innerHTML = `
+                    <h2 style="color: var(--pinnacle-crimson);">Access Denied</h2>
+                    <p>Dashboard access is restricted to Tenants.</p>
+                `;
+            }
+        });
+
+        function processPayment() {
+            const user = JSON.parse(localStorage.getItem("user"));
+            const amountInput = document.getElementById("payment-amount");
+            const amount = parseFloat(amountInput.value);
+
+            if (isNaN(amount) || amount <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+
+            // Update database
+            let users = JSON.parse(localStorage.getItem("users_db"));
+            let tenant = users.find(u => u.username === user.username);
+            
+            if (tenant) {
+                tenant.outstandingBalance -= amount;
+                localStorage.setItem("users_db", JSON.stringify(users));
+            }
+
+            // Log transaction
+            let logs = JSON.parse(localStorage.getItem("payments_log") || "[]");
+            logs.push({
+                username: user.username,
+                amount: amount,
+                date: new Date().toISOString().split('T')[0],
+                status: "Completed"
+            });
+            localStorage.setItem("payments_log", JSON.stringify(logs));
+
+            alert("Payment of KES " + amount + " successful!");
+            location.reload();
+        }
+
+        function togglePaymentMethod(method) {
+            document.querySelectorAll('.payment-form').forEach(form => form.style.display = 'none');
+            document.getElementById(method + '-form').style.display = 'block';
+        }
+    </script>
 </body>
 </html>

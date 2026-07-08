@@ -16,3 +16,62 @@
         border: none !important;
     }
 }
+
+.card {
+    background: var(--pinnacle-card-white);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-top: var(--spacing-md);
+}
+
+.payment-tabs {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--pinnacle-crimson);
+    background: transparent;
+    color: var(--pinnacle-crimson);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tab-btn:hover {
+    background: var(--pinnacle-crimson);
+    color: white;
+}
+
+.payment-form {
+    padding: var(--spacing-sm);
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    background: #fdfdfd;
+}
+
+.payment-form input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: var(--radius-md);
+}
+
+.primary-btn {
+    background: var(--pinnacle-crimson);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+}
+
+.reference-note {
+    font-size: 0.9em;
+    color: var(--pinnacle-text-muted);
+    margin-top: 10px;
+}

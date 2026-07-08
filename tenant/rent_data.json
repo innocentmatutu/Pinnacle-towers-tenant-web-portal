@@ -6,5 +6,21 @@
       "amount": 45000,
       "date": "2026-06-05"
     }
+  },
+  "tenant_102": {
+    "currentRent": 45000,
+    "outstandingBalance": 5000,
+    "lastPayment": {
+      "amount": 45000,
+      "date": "2026-06-05"
+    }
+  },
+  "tenant_103": {
+    "currentRent": 45000,
+    "outstandingBalance": 5000,
+    "lastPayment": {
+      "amount": 45000,
+      "date": "2026-06-05"
+    }
   }
 }

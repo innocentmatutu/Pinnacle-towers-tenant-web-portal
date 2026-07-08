@@ -11,7 +11,7 @@ async function loadRentOverview() {
     }
 
     try {
-        // 2. Fetch data from the JSON file in the same directory
+        // 2. Fetch data
         const response = await fetch('rent_data.json'); 
         if (!response.ok) throw new Error("Could not find rent data.");
         
@@ -19,9 +19,9 @@ async function loadRentOverview() {
         const rent = data[user.username];
 
         if (rent) {
-            // 3. Define conditional Pay Now button
-            const payButton = rent.outstandingBalance > 0 
-                ? `<button onclick="window.location.href='payment_gateway.html'" style="margin-top: 15px; padding: 10px 20px; background: var(--pinnacle-success); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Pay Now</button>` 
+            // 3. Define conditional status message (Pay button removed)
+            const statusMessage = rent.outstandingBalance > 0 
+                ? `<p style="color: var(--pinnacle-crimson); font-weight: bold; margin-top: 10px;">Please use the payment portal below to clear your balance.</p>` 
                 : `<p style="color: var(--pinnacle-success); font-weight: bold; margin-top: 10px;">✓ Account is up to date.</p>`;
 
             // 4. Inject content
@@ -32,7 +32,7 @@ async function loadRentOverview() {
                         <strong>Outstanding Balance:</strong> KES ${rent.outstandingBalance.toLocaleString()}
                     </p>
                     <p><strong>Last Payment:</strong> KES ${rent.lastPayment.amount.toLocaleString()} (Paid on ${rent.lastPayment.date})</p>
-                    ${payButton}
+                    ${statusMessage}
                 </div>
             `;
         } else {

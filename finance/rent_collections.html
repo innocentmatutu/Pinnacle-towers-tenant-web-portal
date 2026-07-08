@@ -4,28 +4,87 @@
     <meta charset="UTF-8">
     <title>Rent Collections | Pinnacle Towers</title>
     <link rel="stylesheet" href="../css/variables.css">
-    <link rel="stylesheet" href="../css/style.css"> 
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Finance-specific overrides to match the professional portal look */
+        .card {
+            background: var(--pinnacle-card-white);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-top: var(--spacing-md);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--pinnacle-dark-text);
+        }
+
+        .form-group input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: var(--radius-md);
+            font-family: var(--font-main);
+        }
+
+        .submit-btn {
+            margin-top: var(--spacing-md);
+            background: var(--pinnacle-crimson);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            filter: brightness(1.1);
+        }
+    </style>
 </head>
 <body>
     <div id="sidebar-container"></div>
     
-    <main style="margin-left: 250px; padding: 20px;">
+    <main style="margin-left: var(--sidebar-width); padding: var(--spacing-md);">
         <h1>Rent Collections</h1>
-        <form id="update-rent-form">
-            <input type="text" id="username" placeholder="Tenant Username" required>
-            <input type="number" id="current-rent" placeholder="New Current Rent" required>
-            <input type="number" id="outstanding" placeholder="Outstanding Balance" required>
-            <button type="submit">Update Record & Download</button>
-        </form>
+        
+        <section class="card">
+            <h2 style="color: var(--pinnacle-crimson); margin-bottom: var(--spacing-sm);">Update Tenant Record</h2>
+            <form id="collection-form">
+                <div class="collection-grid">
+                    <div class="form-group">
+                        <label>Tenant Username</label>
+                        <input type="text" placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label>New Current Rent</label>
+                        <input type="number" placeholder="KES 0.00">
+                    </div>
+                    <div class="form-group">
+                        <label>Outstanding Balance</label>
+                        <input type="number" placeholder="KES 0.00">
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Update Record & Download Report</button>
+            </form>
+        </section>
     </main>
 
     <script src="../js/components.js"></script>
-    
-    <script>
-        document.getElementById('update-rent-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert("Record updated successfully!");
-        });
-    </script>
 </body>
 </html>
