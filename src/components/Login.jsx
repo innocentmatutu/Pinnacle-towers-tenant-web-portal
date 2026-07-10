@@ -13,7 +13,12 @@ function Login() {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
-    if (password === 'password123' && username.trim() !== '') {
+    // Read the password from localStorage.
+    // If none exists, use the default password.
+    const savedPassword =
+      localStorage.getItem('password') || 'password123';
+
+    if (password === savedPassword && username.trim() !== '') {
       setError('');
 
       const sessionUser = {
