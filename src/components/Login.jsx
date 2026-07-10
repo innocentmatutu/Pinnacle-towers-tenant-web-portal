@@ -16,19 +16,27 @@ function Login() {
     if (password === 'password123' && username.trim() !== '') {
       setError('');
 
+      // Create session user object mapping the short dropdown value 
+      // to the full role name expected by App.jsx
       const sessionUser = {
         username: username.trim(),
-        role: role,
+        role: role === 'finance' ? 'Finance Officer' : 'Tenant',
         authenticated: true,
         loginTime: Date.now().toString()
       };
 
       localStorage.setItem('user', JSON.stringify(sessionUser));
 
-      if (role === 'tenant') {
-        navigate('/tenant/dashboard');
+      // Routing logic based on your specific requirements
+      if (role === 'finance') {
+        // Finance Officer access
+        navigate('/finance/invoices'); 
+      } else if (role === 'tenant') {
+        // Tenant access
+        navigate('/tenant/dashboard'); 
       } else {
-        alert(`Logged in as a ${role}. Dynamic dashboard routing will trigger as features are built!`);
+        // Default fallback for other roles
+        navigate('/tenant/dashboard'); 
       }
     } else {
       setError('Authentication failed. Hint: use password123');
