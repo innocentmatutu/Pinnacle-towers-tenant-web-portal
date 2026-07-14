@@ -1,32 +1,56 @@
 import { useState, useEffect } from 'react';
+import './payments.css';
 
 export default function RentCollections() {
   const [collections, setCollections] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [inputAmounts, setInputAmounts] = useState({});
 
   useEffect(() => {
-    // Fetch rent data for all tenants
-    const fetchCollections = async () => {
-      try {
-        const response = await fetch('/rent_data.json');
-        const data = await response.json();
-        // Convert the JSON object into an array for easy mapping
-        const formattedData = Object.keys(data).map(key => ({
-          tenantId: key,
-          ...data[key]
-        }));
-        setCollections(formattedData);
-      } catch (error) {
-        console.error("Error loading collections:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCollections();
+    loadData();
   }, []);
 
-  if (loading) return <p>Loading collection records...</p>;
+  const loadData = () => {
+    let savedData = localStorage.getItem('rent_data');
+
+    // AUTO-INITIALIZER: If no data, seed it automatically so the table isn't empty
+    if (!savedData) {
+      const initialData = {
+        "dfghjk": { "currentRent": 45000, "outstandingBalance": 10000, "lastPayment": { "date": "2026-07-01", "amount": 35000 } },
+        "rtyui": { "currentRent": 50000, "outstandingBalance": 25000, "lastPayment": { "date": "2026-06-15", "amount": 25000 } }
+      };
+      localStorage.setItem('rent_data', JSON.stringify(initialData));
+      savedData = JSON.stringify(initialData);
+    }
+
+    const data = JSON.parse(savedData);
+    setCollections(Object.keys(data).map(key => ({ tenantId: key, ...data[key] })));
+  };
+
+  const handleUpdate = (tenantId) => {
+    const amount = parseFloat(inputAmounts[tenantId]);
+    if (!amount || amount <= 0) return alert("Please enter a valid amount greater than 0");
+
+    const rawData = localStorage.getItem('rent_data');
+    if (!rawData) return;
+
+    const data = JSON.parse(rawData);
+    
+    if (data[tenantId]) {
+      // Update balance and payment record
+      data[tenantId].outstandingBalance = Math.max(0, data[tenantId].outstandingBalance - amount);
+      data[tenantId].lastPayment = { 
+        date: new Date().toISOString().split('T')[0], 
+        amount: amount 
+      };
+      
+      localStorage.setItem('rent_data', JSON.stringify(data));
+      
+      // Reset input field and refresh the list
+      setInputAmounts(prev => ({ ...prev, [tenantId]: '' }));
+      loadData();
+      alert(`Successfully updated payment for ${tenantId}`);
+    }
+  };
 
   return (
     <div className="collections-container">
@@ -39,20 +63,27 @@ export default function RentCollections() {
         <thead>
           <tr>
             <th>Tenant ID</th>
-            <th>Current Rent</th>
             <th>Outstanding</th>
-            <th>Last Payment</th>
+            <th>Update Payment (KES)</th>
           </tr>
         </thead>
         <tbody>
           {collections.map((item) => (
             <tr key={item.tenantId}>
               <td>{item.tenantId}</td>
-              <td>KES {item.currentRent.toLocaleString()}</td>
               <td className={item.outstandingBalance > 0 ? 'text-crimson' : 'text-success'}>
                 KES {item.outstandingBalance.toLocaleString()}
               </td>
-              <td>{item.lastPayment.date}</td>
+              <td>
+                <input 
+                  type="number" 
+                  value={inputAmounts[item.tenantId] || ''}
+                  placeholder="Enter amount" 
+                  onChange={(e) => setInputAmounts({...inputAmounts, [item.tenantId]: e.target.value})}
+                  style={{ marginRight: '10px', padding: '5px' }}
+                />
+                <button className="primary-btn" onClick={() => handleUpdate(item.tenantId)}>Update</button>
+              </td>
             </tr>
           ))}
         </tbody>

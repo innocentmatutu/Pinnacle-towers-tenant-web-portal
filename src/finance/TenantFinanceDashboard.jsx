@@ -1,47 +1,74 @@
 import { useState, useEffect } from 'react';
+import RentOverview from './RentOverview'; // Integrated RentOverview
+import './payments.css';
 
 export default function TenantDashboard() {
   const [user, setUser] = useState(null);
-  const [rentData, setRentData] = useState(null);
+  const [rentData, setRentData] = useState({});
+  const [searchTerm, setSearchTerm] = useState('');
+  const [totalCollected, setTotalCollected] = useState(0);
 
   useEffect(() => {
-    // 1. Load user session
     const sessionUser = JSON.parse(localStorage.getItem("user"));
     setUser(sessionUser);
 
-    // 2. Fetch rent data (Assuming rent_data.json is in your public folder)
-    const fetchRent = async () => {
-      try {
-        const response = await fetch('/rent_data.json');
-        const data = await response.json();
-        setRentData(data[sessionUser?.username]);
-      } catch (err) {
-        console.error("Failed to load rent data", err);
+    // Load data from localStorage to ensure sync with RentCollections
+    const loadData = () => {
+      const storedData = localStorage.getItem('rent_data');
+      if (storedData) {
+        const data = JSON.parse(storedData);
+        setRentData(data);
+        
+        // Calculate total rent
+        const total = Object.values(data).reduce((sum, item) => sum + item.currentRent, 0);
+        setTotalCollected(total);
       }
     };
 
-    if (sessionUser) fetchRent();
+    loadData();
   }, []);
+
+  const filteredTenants = Object.keys(rentData).filter(tenantId => 
+    tenantId.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <main className="dashboard-container">
       <h1>Dashboard</h1>
       
-      {/* 3. Role-based content */}
-      {user?.role === 'Tenant' ? (
+      {user?.role === 'Finance Officer' && (
+        <section className="card">
+          <h2>Finance Overview</h2>
+          <div style={{ marginBottom: '20px', padding: '15px', background: '#f8f9fa', borderRadius: '5px' }}>
+            <h3>Total Rent Collected: KES {totalCollected.toLocaleString()}</h3>
+          </div>
+
+          <input 
+            type="text" 
+            placeholder="Search tenant by ID..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{ width: '100%', padding: '10px', marginBottom: '15px' }}
+          />
+
+          <table className="collections-table">
+            <thead>
+              <tr><th>Tenant ID</th><th>Current Rent</th></tr>
+            </thead>
+            <tbody>
+              {filteredTenants.map(id => (
+                <tr key={id}><td>{id}</td><td>KES {rentData[id].currentRent.toLocaleString()}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      )}
+
+      {user?.role === 'Tenant' && (
         <section className="card">
           <h2>Welcome, {user.username}</h2>
-          {rentData ? (
-            <div className="rent-summary">
-              <p><strong>Current Rent:</strong> KES {rentData.currentRent.toLocaleString()}</p>
-              <p><strong>Outstanding Balance:</strong> KES {rentData.outstandingBalance.toLocaleString()}</p>
-            </div>
-          ) : <p>Loading rent details...</p>}
-        </section>
-      ) : (
-        <section className="card">
-          <h2>System Overview</h2>
-          <p>Welcome to the Property Management Portal.</p>
+          {/* Integrated RentOverview for consistent tenant data */}
+          <RentOverview />
         </section>
       )}
     </main>

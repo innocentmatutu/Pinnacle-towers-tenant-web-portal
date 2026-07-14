@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './payments.css';
 
 export default function RentOverview() {
   const [rent, setRent] = useState(null);
@@ -12,32 +13,44 @@ export default function RentOverview() {
       return;
     }
 
-    // 2. Fetch Data
-    const fetchRent = async () => {
+    // 2. Load and Sync Data
+    const loadRentData = async () => {
       try {
-        const response = await fetch('/rent_data.json');
-        if (!response.ok) throw new Error("Could not find rent data.");
-        
-        const data = await response.json();
-        setRent(data[user.username]);
+        let data = JSON.parse(localStorage.getItem('rent_data'));
+
+        // If data is missing in localStorage, fetch it from the server
+        if (!data) {
+          const response = await fetch('/rent_data.json');
+          if (!response.ok) throw new Error("Could not fetch rent data.");
+          data = await response.json();
+          // Save to localStorage for future use
+          localStorage.setItem('rent_data', JSON.stringify(data));
+        }
+
+        // Check if user exists in the data
+        if (data && data[user.username]) {
+          setRent(data[user.username]);
+        } else {
+          setError("No rent records found for this user.");
+        }
       } catch (err) {
         console.error("Rent Load Error:", err);
-        setError("Unable to retrieve rent details at this time. Please contact administration.");
+        setError("Unable to retrieve rent details at this time.");
       }
     };
 
-    fetchRent();
-  }, []);
+    loadRentData();
+  }, [user]);
 
   // 3. Conditional Rendering
-  if (error) return <p>{error}</p>;
+  if (error) return <p style={{ color: 'var(--pinnacle-crimson)' }}>{error}</p>;
   if (!rent) return <p>Loading your rent information...</p>;
 
   return (
     <div className="rent-details" style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '15px' }}>
       <p><strong>Current Rent:</strong> KES {rent.currentRent.toLocaleString()}</p>
       
-      <p style={{ color: rent.outstandingBalance > 0 ? 'var(--pinnacle-crimson)' : 'inherit' }}>
+      <p style={{ color: rent.outstandingBalance > 0 ? 'var(--pinnacle-crimson)' : 'var(--pinnacle-success)' }}>
         <strong>Outstanding Balance:</strong> KES {rent.outstandingBalance.toLocaleString()}
       </p>
       
