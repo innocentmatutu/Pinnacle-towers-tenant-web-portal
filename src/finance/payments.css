@@ -1,70 +1,57 @@
-/* css/style.css */
-@import '/css/variables.css';
+/* src/finance/payments.css */
+@import '../../css/variables.css';
 
-/* Custom finance module styles can be added here later */
-.card {
+/* Container Layout */
+.invoice-container, 
+.collections-container {
+    padding: var(--spacing-md);
+    background: var(--pinnacle-bg-light);
+    min-height: 80vh;
+}
+
+/* Header Styling */
+.invoice-container header h1, 
+.collections-container header h1 {
+    color: var(--pinnacle-crimson);
+    margin-bottom: var(--spacing-sm);
+}
+
+/* Table Styling */
+.invoice-table, 
+.collections-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--pinnacle-card-white);
     border-radius: var(--radius-md);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-@media print {
-    /* Hide the sidebar and buttons when printing */
-    .app-sidebar, button, #search-box {
-        display: none !important;
-    }
-    #invoice-template {
-        display: block !important;
-        border: none !important;
-    }
+    overflow: hidden;
 }
 
-.payment-tabs {
-    display: flex;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-md);
-}
-
-.tab-btn {
-    padding: 10px 20px;
-    border: 2px solid var(--pinnacle-crimson);
-    background: transparent;
-    color: var(--pinnacle-crimson);
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.tab-btn:hover {
-    background: var(--pinnacle-crimson);
-    color: white;
-}
-
-.payment-form {
+.invoice-table th, 
+.collections-table th {
+    background: #f1f5f9;
     padding: var(--spacing-sm);
-    border: 1px solid #e2e8f0;
-    border-radius: var(--radius-md);
-    background: #fdfdfd;
+    text-align: left;
+    color: var(--pinnacle-dark-text);
 }
 
-.payment-form input {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: var(--radius-md);
+.invoice-table td, 
+.collections-table td {
+    padding: var(--spacing-sm);
+    border-bottom: 1px solid #e2e8f0;
 }
 
-.primary-btn {
-    background: var(--pinnacle-crimson);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: var(--radius-md);
-    cursor: pointer;
+/* Status Badges */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 500;
 }
 
-.reference-note {
-    font-size: 0.9em;
-    color: var(--pinnacle-text-muted);
-    margin-top: 10px;
-}
+.status-badge.paid { background: #dcfce7; color: var(--pinnacle-success); }
+.status-badge.pending { background: #fef3c7; color: #d97706; }
+
+/* Rent specific text colors */
+.text-crimson { color: var(--pinnacle-crimson); font-weight: bold; }
+.text-success { color: var(--pinnacle-success); font-weight: bold; }
