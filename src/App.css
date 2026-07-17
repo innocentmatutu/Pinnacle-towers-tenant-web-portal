@@ -1,0 +1,123 @@
+
+.menu-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 35px;
+  height: 25px;
+  display: flex;
+  
+  justify-content: space-between;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.billing-container {
+  
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 1.05);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.billing-header {
+  margin-bottom: 24px;
+}
+
+.billing-header h2 {
+  margin: 0 0 8px 0;
+  color: #1a1a1a;
+  font-size: 24px;
+}
+
+.billing-header p {
+  margin: 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.billing-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 15px;
+}
+
+.billing-table th {
+  background-color: #f8f9fa;
+  color: #4a5568;
+  font-weight: 600;
+  padding: 14px 16px;
+  border-bottom: 2px solid #edf2f7;
+}
+
+.billing-table td {
+  padding: 16px;
+  border-bottom: 1px solid #edf2f7;
+  color: #2d3748;
+}
+
+.billing-table tbody tr:hover {
+  background-color: #fcfdfd;
+}
+
+.invoice-id {
+  font-family: monospace;
+  font-weight: bold;
+  color: #4a5568;
+}
+
+/* Badges */
+.status-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-badge.paid {
+  background-color: #e6fffa;
+  color: #047481;
+}
+
+/* Download Button */
+.download-invoice-btn {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #4a5568;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.download-invoice-btn:hover:not(:disabled) {
+  background-color: #f7fafc;
+  border-color: #cbd5e0;
+  color: #2d3748;
+}
+
+.download-invoice-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 16px;
+}
