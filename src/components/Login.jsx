@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
@@ -9,6 +9,30 @@ function Login() {
   const [role, setRole] = useState('tenant');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+
+  // Custom dropdown states
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const roles = [
+    { value: 'tenant', label: 'Tenant' },
+    { value: 'manager', label: 'Property Manager' },
+    { value: 'finance', label: 'Finance Officer' },
+    { value: 'maintenance', label: 'Maintenance Officer' },
+    { value: 'security', label: 'Security Officer' },
+    { value: 'admin', label: 'System Administrator' }
+  ];
+
+  // Close custom dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -30,8 +54,8 @@ function Login() {
 
       localStorage.setItem('user', JSON.stringify(sessionUser));
 
-      if (role === 'tenant') {
-        navigate('/tenant/dashboard');
+      if (role === 'admin') {
+        navigate('/admin/dashboard');
       } else {
         alert(`Logged in as a ${role}. Dynamic dashboard routing will trigger as features are built!`);
       }
@@ -39,6 +63,8 @@ function Login() {
       setError('Authentication failed. Hint: use password123');
     }
   };
+
+  const selectedRoleLabel = roles.find(r => r.value === role)?.label || 'Select Role';
 
   return (
     <div style={styles.bodyWrapper}>
@@ -84,20 +110,52 @@ function Login() {
             </div>  
           </div>
 
-          <div style={styles.inputGroup}>
+          {/* Custom Dropdown Container */}
+          <div style={styles.inputGroup} ref={dropdownRef}>
             <label style={styles.label}>Portal Access Role</label>
-            <select 
-              style={styles.authDropdown}
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
+            <div 
+              style={{
+                ...styles.customDropdownHeader,
+                ...(isDropdownOpen ? styles.customDropdownHeaderOpen : {})
+              }}
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
-              <option value="tenant">Tenant</option>
-              <option value="manager">Property Manager</option>
-              <option value="finance">Finance Officer</option>
-              <option value="maintenance">Maintenance Officer</option>
-              <option value="security">Security Officer</option>
-              <option value="admin">System Administrator</option>
-            </select>
+              <span>{selectedRoleLabel}</span>
+              <span style={{
+                ...styles.dropdownArrow,
+                ...(isDropdownOpen ? styles.dropdownArrowRotate : {})
+              }}>▼</span>
+            </div>
+
+            {isDropdownOpen && (
+              <ul style={styles.customDropdownList}>
+                {roles.map((r) => (
+                  <li 
+                    key={r.value}
+                    style={{
+                      ...styles.customDropdownItem,
+                      ...(role === r.value ? styles.customDropdownItemSelected : {})
+                    }}
+                    onClick={() => {
+                      setRole(r.value);
+                      setIsDropdownOpen(false);
+                    }}
+                    onMouseEnter={(e) => {
+                      if (role !== r.value) e.currentTarget.style.backgroundColor = '#f3f4f6';
+                      e.currentTarget.style.color = '#800000';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (role !== r.value) {
+                        e.currentTarget.style.backgroundColor = '#ffffff';
+                        e.currentTarget.style.color = '#212529';
+                      }
+                    }}
+                  >
+                    {r.label}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <button type="submit" style={styles.loginBtn}>Secure Login</button>
@@ -118,35 +176,35 @@ const styles = {
     backgroundColor: '#f8f9fa',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh', // Switched to exact viewport height
+    alignItems: 'flex-start', // Pushes the container toward the top
+    paddingTop: '6vh',        // Adds breathing room from the top edge
+    height: '100vh',
     width: '100vw',
     position: 'absolute',
     top: 0,
     left: 0,
     margin: 0,
-    padding: 0,
     boxSizing: 'border-box',
-    overflow: 'hidden', // Strictly disables any window scrolling
+    overflow: 'hidden',
     fontFamily: 'sans-serif'
   },
   authCard: {
     background: '#ffffff',
-    padding: '24px 40px', // Shorter vertical padding (was 35px)
+    padding: '24px 30px',
     borderRadius: '12px', 
     boxShadow: '0 10px 25px rgba(0, 0, 0, 0.05)', 
     borderTop: '5px solid #800000', 
     width: '100%',
-    maxWidth: '460px', 
+    maxWidth: '380px', 
     boxSizing: 'border-box',
     textAlign: 'center'
   },
   authHeader: { 
-    marginBottom: '20px' // Tighter spacing under header
+    marginBottom: '20px' 
   },
   title: { 
     color: '#212529', 
-    fontSize: '1.7rem', // Slightly smaller title font to save space
+    fontSize: '1.7rem', 
     fontWeight: '700',
     margin: '0 0 4px 0'
   },
@@ -156,8 +214,9 @@ const styles = {
     margin: 0 
   },
   inputGroup: { 
-    marginBottom: '14px', // Tighter field spacing (was 20px)
-    textAlign: 'left' 
+    marginBottom: '14px', 
+    textAlign: 'left',
+    position: 'relative' 
   },
   label: { 
     display: 'block', 
@@ -168,7 +227,7 @@ const styles = {
   },
   authField: {
     width: '100%',
-    height: '42px', // Compact input boxes (was 46px)
+    height: '42px', 
     padding: '0 12px', 
     fontSize: '0.9rem',
     color: '#212529',
@@ -195,27 +254,68 @@ const styles = {
     cursor: 'pointer',
     outline: 'none'
   },
-  authDropdown: {
+  // Custom Dropdown Styles replacing system select
+  customDropdownHeader: {
     width: '100%',
-    height: '42px', // Compact dropdown box
-    padding: '0 12px', 
+    height: '42px',
+    padding: '0 12px',
     fontSize: '0.9rem',
     color: '#212529',
-    backgroundColor: '#ffffff', 
-    border: '1px solid #ced4da', 
+    backgroundColor: '#ffffff',
+    border: '1px solid #ced4da',
     borderRadius: '6px',
-    outline: 'none',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     cursor: 'pointer',
     boxSizing: 'border-box',
-    appearance: 'none', 
-    backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23212529' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>")`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'right 15px center',
-    backgroundSize: '16px'
+    transition: 'border-color 0.2s, box-shadow 0.2s'
+  },
+  customDropdownHeaderOpen: {
+    borderColor: '#800000',
+    boxShadow: '0 0 0 3px rgba(128, 0, 0, 0.1)'
+  },
+  dropdownArrow: {
+    fontSize: '10px',
+    color: '#6c757d',
+    transition: 'transform 0.2s ease'
+  },
+  dropdownArrowRotate: {
+    transform: 'rotate(180deg)'
+  },
+  customDropdownList: {
+    position: 'absolute',
+    top: 'calc(100% + 4px)',
+    left: 0,
+    width: '100%',
+    backgroundColor: '#ffffff',
+    border: '1px solid #ced4da',
+    borderRadius: '6px',
+    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+    listStyle: 'none',
+    padding: '4px',
+    margin: 0,
+    zIndex: 50,
+    maxHeight: '120px',
+    overflowY: 'auto',
+    boxSizing: 'border-box'
+  },
+  customDropdownItem: {
+    padding: '10px 12px',
+    fontSize: '0.9rem',
+    color: '#212529',
+    borderRadius: '4px',
+    cursor: 'pointer',
+    transition: 'background-color 0.15s, color 0.15s'
+  },
+  customDropdownItemSelected: {
+    backgroundColor: '#fdf2f2',
+    color: '#800000',
+    fontWeight: '600'
   },
   loginBtn: {
     width: '100%',
-    height: '44px', // Tighter action button
+    height: '44px', 
     marginTop: '6px',
     backgroundColor: '#800000',
     color: '#ffffff',
@@ -231,7 +331,7 @@ const styles = {
     fontWeight: '600', 
     textDecoration: 'none',
     display: 'inline-block',
-    marginTop: '14px' // Pulled upward
+    marginTop: '14px' 
   },
   errorBanner: {
     color: '#dc3545',
