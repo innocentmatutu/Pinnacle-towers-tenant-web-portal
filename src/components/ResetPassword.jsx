@@ -8,7 +8,8 @@ function ResetPassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-
+  
+  // TODO: Backend API will send password reset email.
   const handlePasswordReset = (e) => {
     e.preventDefault();
 
@@ -23,8 +24,16 @@ function ResetPassword() {
     }
 
     setError('');
-    setSuccess(true);
 
+    // Save the new password temporarily
+    localStorage.setItem('password', password);
+
+    setSuccess(true);
+    
+    // TODO:
+    // POST /api/auth/reset-password
+    // Body: { token, password }
+    
     setTimeout(() => {
       navigate('/');
     }, 3000);
