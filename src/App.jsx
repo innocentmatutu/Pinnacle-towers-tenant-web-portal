@@ -1,8 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, Link } from 'react-router-dom';
-
-// Import your components
 import Login from './components/Login';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
+import ChangePassword from './components/ChangePassword';
+
 import TenantDashboard from './components/TenantDashboard'; // Correct path from your folder tree
 import TenantFinanceDashboard from './finance/TenantFinanceDashboard';
 import Payments from './finance/Payments';
@@ -63,8 +65,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         
-        {/* Tenant Routes */}
-        {/* Using your custom TenantDashboard component without the AppLayout wrapper */}
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="/tenant/dashboard" element={<TenantDashboard />} />
         <Route path="/tenant/payments" element={<AppLayout><Payments /></AppLayout>} />
         
