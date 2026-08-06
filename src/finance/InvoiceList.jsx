@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 import './payments.css';
 
 export default function InvoiceList() {
@@ -21,11 +21,14 @@ export default function InvoiceList() {
   const downloadPDF = (inv) => {
     const doc = new jsPDF();
     doc.text(`Pinnacle Towers - Invoice`, 14, 15);
-    doc.autoTable({
+    
+    // Using the explicit autoTable function import to prevent crashing
+    autoTable(doc, {
       startY: 25,
       head: [['Invoice ID', 'Date', 'Amount (KES)', 'Status']],
       body: [[inv.id, inv.date, inv.amount.toLocaleString(), inv.status]],
     });
+
     doc.save(`${inv.id}.pdf`);
   };
 

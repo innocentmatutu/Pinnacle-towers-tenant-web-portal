@@ -18,10 +18,17 @@ export default function TenantDashboard() {
       if (storedData) {
         const data = JSON.parse(storedData);
         setRentData(data);
-        
-        // Calculate total rent
-        const total = Object.values(data).reduce((sum, item) => sum + item.currentRent, 0);
-        setTotalCollected(total);
+      }
+
+      // Load synchronized total rent collected or compute default base
+      const storedTotal = localStorage.getItem('total_rent_collected');
+      if (storedTotal) {
+        setTotalCollected(parseFloat(storedTotal));
+      } else {
+        // Fallback initial combined sum based on initial seed data (e.g. 35000 + 25000 = 60000 or custom)
+        const initialTotal = 95000; 
+        setTotalCollected(initialTotal);
+        localStorage.setItem('total_rent_collected', initialTotal);
       }
     };
 

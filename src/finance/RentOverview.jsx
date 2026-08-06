@@ -13,19 +13,22 @@ export default function RentOverview() {
       return;
     }
 
-    // 2. Load and Sync Data
-    const loadRentData = async () => {
+    // 2. Load and Sync Data from localStorage
+    const loadRentData = () => {
       try {
-        let data = JSON.parse(localStorage.getItem('rent_data'));
+        let savedData = localStorage.getItem('rent_data');
 
-        // If data is missing in localStorage, fetch it from the server
-        if (!data) {
-          const response = await fetch('/rent_data.json');
-          if (!response.ok) throw new Error("Could not fetch rent data.");
-          data = await response.json();
-          // Save to localStorage for future use
-          localStorage.setItem('rent_data', JSON.stringify(data));
+        // AUTO-INITIALIZER: Seed data if missing so it never breaks
+        if (!savedData) {
+          const initialData = {
+            "dfghjk": { "currentRent": 45000, "outstandingBalance": 10000, "lastPayment": { "date": "2026-07-01", "amount": 35000 } },
+            "rtyui": { "currentRent": 50000, "outstandingBalance": 25000, "lastPayment": { "date": "2026-06-15", "amount": 25000 } }
+          };
+          localStorage.setItem('rent_data', JSON.stringify(initialData));
+          savedData = JSON.stringify(initialData);
         }
+
+        const data = JSON.parse(savedData);
 
         // Check if user exists in the data
         if (data && data[user.username]) {
@@ -40,7 +43,7 @@ export default function RentOverview() {
     };
 
     loadRentData();
-  }, [user]);
+  }, [user?.username]);
 
   // 3. Conditional Rendering
   if (error) return <p style={{ color: 'var(--pinnacle-crimson)' }}>{error}</p>;

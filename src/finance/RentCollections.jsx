@@ -12,7 +12,6 @@ export default function RentCollections() {
   const loadData = () => {
     let savedData = localStorage.getItem('rent_data');
 
-    // AUTO-INITIALIZER: If no data, seed it automatically so the table isn't empty
     if (!savedData) {
       const initialData = {
         "dfghjk": { "currentRent": 45000, "outstandingBalance": 10000, "lastPayment": { "date": "2026-07-01", "amount": 35000 } },
@@ -36,14 +35,42 @@ export default function RentCollections() {
     const data = JSON.parse(rawData);
     
     if (data[tenantId]) {
-      // Update balance and payment record
+      // 1. Update balance and payment record
       data[tenantId].outstandingBalance = Math.max(0, data[tenantId].outstandingBalance - amount);
+      const paymentDate = new Date().toISOString().split('T')[0];
       data[tenantId].lastPayment = { 
-        date: new Date().toISOString().split('T')[0], 
+        date: paymentDate, 
         amount: amount 
       };
       
       localStorage.setItem('rent_data', JSON.stringify(data));
+
+      // 2. Update Total Rent Collected Dashboard Storage
+      const currentTotal = parseFloat(localStorage.getItem('total_rent_collected') || '95000');
+      localStorage.setItem('total_rent_collected', currentTotal + amount);
+
+      // 3. Update existing invoice status instead of creating new duplicates
+      const existingInvoices = JSON.parse(localStorage.getItem('invoices_data') || '[]');
+      
+      // Look for a pending invoice for this tenant, or default to updating the latest one
+      const targetInvoiceIndex = existingInvoices.findIndex(inv => inv.tenantId === tenantId && inv.status === 'Pending');
+      
+      if (targetInvoiceIndex !== -1) {
+        existingInvoices[targetInvoiceIndex].status = 'Paid';
+        existingInvoices[targetInvoiceIndex].amount = amount;
+        existingInvoices[targetInvoiceIndex].date = paymentDate;
+      } else {
+        // If no explicit stored invoice, create/update structured invoice entry tied to tenant
+        existingInvoices.unshift({
+          id: `INV-${new Date().getFullYear()}-${tenantId.toUpperCase()}`,
+          tenantId: tenantId,
+          date: paymentDate,
+          amount: amount,
+          status: 'Paid'
+        });
+      }
+      
+      localStorage.setItem('invoices_data', JSON.stringify(existingInvoices));
       
       // Reset input field and refresh the list
       setInputAmounts(prev => ({ ...prev, [tenantId]: '' }));
