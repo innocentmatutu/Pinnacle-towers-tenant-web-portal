@@ -54,10 +54,14 @@ function Login() {
 
       localStorage.setItem('user', JSON.stringify(sessionUser));
 
-      if (role === 'admin') {
+      if (role === 'finance') {
+        navigate('/finance/dashboard');
+      } else if (role === 'tenant') {
+        navigate('/tenant/dashboard');
+      } else if (role === 'admin') {
         navigate('/admin/dashboard');
       } else {
-        alert(`Logged in as a ${role}. Dynamic dashboard routing will trigger as features are built!`);
+        navigate('/');
       }
     } else {
       setError('Authentication failed. Hint: use password123');
