@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import {jsPDF} from "jspdf";
 
+import './invoices.css'
 // Example Mock Data (In production, you'll fetch this from your API)
 const MOCK_INVOICES = [
-  { id: 'inv-1001', date: '2026-07-01', amount: 'Ksh.28,000.00', status: 'Paid' },
-  { id: 'inv-0992', date: '2026-06-01', amount: 'Ksh.32,000.00', status: 'Paid' },
+  { id: 'inv-1001', date: '2026-07-01', amount: 'Ksh.45,000.00', status: 'Paid' },
+  { id: 'inv-0992', date: '2026-06-01', amount: 'Ksh.39,000.00', status: 'Paid' },
   { id: 'inv-0854', date: '2026-05-01', amount: 'Ksh.30,000.00', status: 'Paid' },
 ];
 
-function BillingHistory() {
+function Invoice() {
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [downloadingId, setDownloadingId] = useState(null); // Tracks which PDF is downloading
@@ -71,8 +73,8 @@ function BillingHistory() {
   return (
     <div className="billing-container">
       <div className="billing-header">
-        <h2>Billing History</h2>
-        <p>View your past transactions and download invoice PDFs for your records.</p>
+        <h2>  Monthly Invoices</h2>
+        <p>View your past  Monthly Invoices and download PDFs for your records.</p>
       </div>
 
       <div className="table-responsive">
@@ -118,9 +120,13 @@ function BillingHistory() {
         </table>
       </div>
     </div>
+   
   );
+
 }
 
-export default BillingHistory;
+
+
+export default Invoice;
 
 

@@ -4,9 +4,12 @@ import Rules from'/BuildingRules.pdf';
 import HandBook from'/Handbook.pdf';
 import Circulars from '/Circulars.pdf';
 import Policies from '/Policies.pdf';
-function DownloadFiles() {
+
+import './documents.css'
+function Documents() {
   return (
     <>
+    <div className='document-container'>
      <div style={{ padding: '20px' }}>
       <h2>Download Your Lease Agreement</h2>
       {/* The '/' refers directly to the public folder.
@@ -16,6 +19,7 @@ function DownloadFiles() {
         href="/lease Agreement.pdf" 
         download="Lease_Agreement_Template.pdf" 
         className="download-btn"
+       
       >
         Download Lease Agreement (PDF)
       </a>
@@ -82,6 +86,7 @@ function DownloadFiles() {
       </a>
    
     </div>
+    </div>
     </>
    
   );
@@ -89,6 +94,6 @@ function DownloadFiles() {
     
 }
 
-export default DownloadFiles
+export default Documents
 
 
