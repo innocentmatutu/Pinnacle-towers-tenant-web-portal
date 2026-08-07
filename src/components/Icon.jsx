@@ -19,7 +19,8 @@ export default function Icon({ name, size = 18 }) {
     send: <path d="m22 2-7 20-4-9-9-4Z M11 13l4-4"/>,
     download: <><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></>,
     check: <path d="m5 12 4 4L19 6"/>,
-    pin: <><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></>
+    pin: <><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></>,
+    parking: <><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/><circle cx="12" cy="12" r="10"/></>
   };
   return <svg {...common}>{paths[name] || paths.dashboard}</svg>;
 }

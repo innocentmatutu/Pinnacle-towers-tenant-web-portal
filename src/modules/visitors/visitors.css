@@ -1,0 +1,144 @@
+/* Visitor Registration Form */
+.visitor-form {
+  margin-bottom: 24px;
+}
+
+.visitor-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 14px 0 20px;
+}
+
+@media (max-width: 600px) {
+  .visitor-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.visitor-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.visitor-form input {
+  height: 40px;
+  padding: 0 12px;
+  font: inherit;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  outline: none;
+  background: #fff;
+}
+
+.visitor-form input:focus {
+  border-color: var(--wine);
+  box-shadow: 0 0 0 3px var(--wine-light);
+}
+
+/* Visitor History List */
+.visitor-list {
+  margin-top: 8px;
+}
+
+.visitor-entry {
+  border-bottom: 1px solid #f0eeea;
+  padding: 14px 0;
+}
+
+.visitor-entry:last-child {
+  border-bottom: 0;
+}
+
+.visitor-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.visitor-avatar {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  background: #f6e7eb;
+  color: var(--wine);
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.visitor-info {
+  flex: 1;
+}
+
+.visitor-info b {
+  display: block;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.visitor-info small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.visitor-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: 8px;
+}
+
+.visitor-actions .text-button {
+  margin-top: 0;
+}
+
+.visitor-actions .text-button.danger {
+  color: #b01931;
+}
+
+/* QR Code Display */
+.visitor-qr {
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--canvas);
+  border: 1px dashed #dcd8d0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.qr-mock {
+  width: 48px;
+  height: 48px;
+  background: 
+    linear-gradient(90deg, var(--ink) 50%, transparent 50%),
+    linear-gradient(0deg, var(--ink) 50%, transparent 50%);
+  background-size: 8px 8px;
+  border-radius: 4px;
+  opacity: 0.85;
+}
+
+.visitor-qr small {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.visitor-qr b {
+  display: block;
+  font-size: 13px;
+  color: var(--wine);
+  font-family: monospace;
+  margin-top: 2px;
+}

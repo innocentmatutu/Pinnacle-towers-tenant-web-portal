@@ -1,0 +1,74 @@
+/* Forms */
+.parking-form {
+  margin-bottom: 24px;
+}
+
+.parking-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.parking-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.parking-form input,
+.parking-form select {
+  height: 40px;
+  padding: 0 12px;
+  font: inherit;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  outline: none;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.parking-form input:focus,
+.parking-form select:focus {
+  border-color: var(--wine);
+  box-shadow: 0 0 0 3px var(--wine-light);
+}
+
+.parking-form button[type="submit"] {
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+/* Request List */
+.parking-list {
+  margin-top: 8px;
+}
+
+.parking-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f0eeea;
+}
+
+.parking-row:last-child {
+  border-bottom: 0;
+}
+
+.parking-row b {
+  display: block;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.parking-row small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 2px;
+}
