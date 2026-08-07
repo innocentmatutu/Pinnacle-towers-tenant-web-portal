@@ -1,9 +1,9 @@
 import { useState } from "react";
-import DownloadFiles from './components/documents.jsx';
-import BillingHistory from './components/Invoices.jsx';
-import Invoice from "./components/Invoices.jsx";
-import Receipt from "./components/Receipt.jsx"
-import Paymentreceipts from "./components/Receipt.jsx";
+import DownloadFiles from './components/records/documents.jsx';
+import BillingHistory from './components/records/Invoices.jsx';
+import Invoice from "./components/records/Invoices.jsx";
+import Receipt from "./components/records/Receipt.jsx"
+import Paymentreceipts from "./components/records/Receipt.jsx";
 
 function Billings(){
   
