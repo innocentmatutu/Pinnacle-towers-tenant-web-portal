@@ -3,8 +3,10 @@ import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import Placeholder from "./components/Placeholder";
 import Messages from "./modules/messages/Messages";
-import Visitors from './modules/visitors/Visitors'; 
-import Parking from './modules/parking/Parking';
+import Visitors from "./modules/visitors/Visitors";
+import Parking from "./modules/parking/Parking";
+import Announcements from "./modules/announcements/Announcements";
+import Support from "./modules/support/Support";
 
 export default function App() {
   const [active, setActive] = useState("Dashboard");
@@ -74,7 +76,11 @@ export default function App() {
             <Visitors />
           ) : active === "Parking" ? (
             <Parking />
-          ) : (
+          ) : active === "Announcements" ? (
+            <Announcements />
+          ) : active === "Support" ? (
+            <Support />
+          ): (
             <Placeholder title={active} selectNav={selectNav} />
           )}
         </div>

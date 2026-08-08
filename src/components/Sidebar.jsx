@@ -12,6 +12,7 @@ const navItems = [
   ["file", "Documents"],
   ["message", "Messages"],
   ["bell", "Announcements"],
+  ["support", "Support"],
 ];
 
 export default function Sidebar({
