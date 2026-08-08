@@ -1,144 +1,215 @@
-/* Visitor Registration Form */
-.visitor-form {
-  margin-bottom: 24px;
+/* visitors.css */
+.visitors-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card-subtitle {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 2px 0 0;
+}
+
+/* Slide Down Form Card */
+.visitor-form-card {
+  border-top: 3px solid var(--wine);
 }
 
 .visitor-form-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
-  margin: 14px 0 20px;
-}
-
-@media (max-width: 600px) {
-  .visitor-form-grid {
-    grid-template-columns: 1fr;
-  }
+  margin: 16px 0;
 }
 
 .visitor-form label {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
 }
 
-.visitor-form input {
+.visitor-form input, select {
   height: 40px;
   padding: 0 12px;
-  font: inherit;
+  font-size: 13px;
   border: 1px solid var(--line);
   border-radius: 6px;
   outline: none;
-  background: #fff;
+  background: var(--canvas);
 }
 
-.visitor-form input:focus {
+.visitor-form input:focus,select:focus {
+  background: #fff;
   border-color: var(--wine);
   box-shadow: 0 0 0 3px var(--wine-light);
 }
 
-/* Visitor History List */
-.visitor-list {
-  margin-top: 8px;
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
 }
 
-.visitor-entry {
-  border-bottom: 1px solid #f0eeea;
-  padding: 14px 0;
+/* List & Filter Header */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-.visitor-entry:last-child {
-  border-bottom: 0;
+.filter-tabs {
+  display: flex;
+  background: var(--canvas);
+  padding: 4px;
+  border-radius: 8px;
+  gap: 4px;
 }
 
-.visitor-row {
+.tab-btn {
+  border: 0;
+  background: transparent;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: #fff;
+  color: var(--wine);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Visitor Cards Grid */
+.visitor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.visitor-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.visitor-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.visitor-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.visitor-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--wine-light);
+  color: var(--wine);
+  font-weight: 700;
+  font-size: 12px;
+  display: grid;
+  place-items: center;
+}
+
+.visitor-card-body h4 {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.visitor-phone {
+  margin: 2px 0 10px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.visitor-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11px;
+  color: #555;
+  background: var(--canvas);
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+.visitor-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.visitor-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.outline-button.compact {
+  padding: 6px 10px;
+  font-size: 11px;
+}
+
+.outline-button.compact:hover {
+  background-color: var(--wine-light);
+}
+
+/* Digital Pass Panel */
+.visitor-qr-panel {
+  background: var(--wine-light);
+  border-radius: 6px;
+  padding: 12px;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.visitor-avatar {
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  font-size: 11px;
-  font-weight: 700;
-  background: #f6e7eb;
-  color: var(--wine);
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-}
-
-.visitor-info {
-  flex: 1;
-}
-
-.visitor-info b {
-  display: block;
-  font-size: 12px;
-  color: var(--ink);
-}
-
-.visitor-info small {
-  display: block;
-  color: var(--muted);
-  font-size: 11px;
-  margin-top: 2px;
-}
-
-.visitor-actions {
-  display: flex;
-  gap: 10px;
-  margin-left: 8px;
-}
-
-.visitor-actions .text-button {
-  margin-top: 0;
-}
-
-.visitor-actions .text-button.danger {
-  color: #b01931;
-}
-
-/* QR Code Display */
-.visitor-qr {
-  margin-top: 12px;
-  padding: 12px;
-  background: var(--canvas);
-  border: 1px dashed #dcd8d0;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.qr-mock {
-  width: 48px;
-  height: 48px;
-  background: 
-    linear-gradient(90deg, var(--ink) 50%, transparent 50%),
-    linear-gradient(0deg, var(--ink) 50%, transparent 50%);
-  background-size: 8px 8px;
+.qr-code-box {
+  width: 44px;
+  height: 44px;
+  background: repeating-concentric-gradient(var(--wine) 0 2px, transparent 0 4px);
   border-radius: 4px;
-  opacity: 0.85;
+  border: 1px solid var(--wine);
 }
 
-.visitor-qr small {
+.qr-details small {
   display: block;
-  font-size: 10px;
-  color: var(--muted);
+  font-size: 9px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color: var(--wine);
+  font-weight: 700;
 }
 
-.visitor-qr b {
-  display: block;
-  font-size: 13px;
-  color: var(--wine);
+.qr-details code {
   font-family: monospace;
-  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
 }
