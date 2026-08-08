@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Icon from "../../components/Icon";
 import Card from "../../components/Card";
+import GuideDetail from "./GuideDetail";
 import "./support.css";
 
 const contacts = [
@@ -58,31 +59,24 @@ const faqs = [
 ];
 
 const guides = [
-  {
-    title: "Getting started with the tenant portal",
-    detail: "A walkthrough of the dashboard, payments, and messaging.",
-  },
-  {
-    title: "Registering a visitor and generating a QR pass",
-    detail: "Step-by-step guide to the Visitor Management module.",
-  },
-  {
-    title: "Requesting a parking permit",
-    detail: "How to request visitor parking or an additional permit.",
-  },
-  {
-    title: "Booking a shared facility",
-    detail: "How to reserve the rooftop terrace, gym, or meeting rooms.",
-  },
+  { id: "getting-started", title: "Getting started with the tenant portal", detail: "A walkthrough of the dashboard, payments, and messaging." },
+  { id: "registering-visitor", title: "Registering a visitor and generating a QR pass", detail: "Step-by-step guide to the Visitor Management module." },
+  { id: "parking-permit", title: "Requesting a parking permit", detail: "How to request visitor parking or an additional permit." },
+  { id: "booking-facility", title: "Booking a shared facility", detail: "How to reserve the rooftop terrace, gym, or meeting rooms." },
 ];
 
 function Support({ selectNav }) {
   const [openFaq, setOpenFaq] = useState(null);
   const [category, setCategory] = useState("all");
+  const [selectedGuideId, setSelectedGuideId] = useState(null);
 
   const filteredFaqs = faqs.filter(
     (f) => category === "all" || f.category === category,
   );
+
+  if (selectedGuideId) {
+    return <GuideDetail guideId={selectedGuideId} onBack={() => setSelectedGuideId(null)} />;
+  }
 
   return (
     <div className="support-page">
@@ -168,7 +162,7 @@ function Support({ selectNav }) {
         </div>
         <div className="guide-list">
           {guides.map((g) => (
-            <div className="guide-row" key={g.title}>
+            <div className="guide-row" key={g.id} onClick={() => setSelectedGuideId(g.id)}>
               <span className="guide-icon">
                 <Icon name="file" size={14} />
               </span>
