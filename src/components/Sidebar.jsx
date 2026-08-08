@@ -59,6 +59,7 @@ export default function Sidebar({
             <Icon name={icon} />
             <span>{label}</span>
             {label === "Messages" && <em>2</em>}
+            {label === "Announcements" && <em>3</em>}
           </button>
         ))}
       </nav>

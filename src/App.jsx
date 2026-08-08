@@ -3,10 +3,10 @@ import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import Placeholder from "./components/Placeholder";
 import Messages from "./modules/messages/Messages";
-import Visitors from "./modules/visitors/Visitors";
-import Parking from "./modules/parking/Parking";
 import Announcements from "./modules/announcements/Announcements";
 import Support from "./modules/support/Support";
+import ParkingDashboard from "./modules/parking/ParkingDashboard";
+import VisitorsDashboard from "./modules/visitors/VisitorsDashboard";
 
 export default function App() {
   const [active, setActive] = useState("Dashboard");
@@ -37,6 +37,33 @@ export default function App() {
     else setSidebarCompact(!sidebarCompact);
   };
 
+  const renderContent = () => {
+    switch (active) {
+      case "Messages":
+        return (
+          <Messages
+            message={message}
+            setMessage={setMessage}
+            attachment={attachment}
+            fileInput={fileInput}
+            setAttachment={setAttachment}
+            sent={sent}
+            sendMessage={sendMessage}
+          />
+        );
+      case "Visitors":
+        return <VisitorsDashboard/>;
+      case "Parking":
+        return <ParkingDashboard/>;
+      case "Announcements":
+        return <Announcements/>;
+      case "Support":
+        return <Support/>;
+      default:
+        return <Placeholder title={active} selectNav={selectNav} />;
+    }
+  };
+
   return (
     <div
       className={`app-shell ${menuOpen ? "sidebar-visible" : "sidebar-hidden"} ${sidebarCompact ? "sidebar-compact" : ""}`}
@@ -61,29 +88,7 @@ export default function App() {
           setMenuOpen={setMenuOpen}
           selectNav={selectNav}
         />
-        <div className="page-content">
-          {active === "Messages" ? (
-            <Messages
-              message={message}
-              setMessage={setMessage}
-              attachment={attachment}
-              fileInput={fileInput}
-              setAttachment={setAttachment}
-              sent={sent}
-              sendMessage={sendMessage}
-            />
-          ) : active === "Visitors" ? (
-            <Visitors />
-          ) : active === "Parking" ? (
-            <Parking />
-          ) : active === "Announcements" ? (
-            <Announcements />
-          ) : active === "Support" ? (
-            <Support selectNav={selectNav}/>
-          ): (
-            <Placeholder title={active} selectNav={selectNav} />
-          )}
-        </div>
+        <div className="page-content">{renderContent()}</div>
         <footer>
           © 2026 Pinnacle Towers. All rights reserved.{" "}
           <span>Privacy policy</span>

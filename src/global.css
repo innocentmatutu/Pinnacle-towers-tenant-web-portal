@@ -12,6 +12,7 @@
   --gold: #c99a43;
   --green: #22875e;
   --blue: #2d6fa8;
+  --sidebar-width: 260px;
 }
 * {
   box-sizing: border-box;
@@ -481,6 +482,10 @@ nav em {
 .icon-tile.blue {
   background: #e8f2fa;
   color: #3478ae;
+}
+.icon-tile.green {
+  background: #e8f5e9;
+  color: #2e7d32;
 }
 .status {
   font-size: 10px;
@@ -1079,6 +1084,12 @@ footer span {
   font-size: 10px;
   color: #87898d;
 }
+
+.sidebar.is-compact ~ .main-content .modal-overlay,
+.sidebar-collapsed .modal-overlay {
+  left: 72px;
+}
+
 @media (max-width: 1050px) {
   .summary-grid {
     grid-template-columns: 1fr 1fr;
