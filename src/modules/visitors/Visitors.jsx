@@ -257,7 +257,7 @@ export default function Visitors() {
         <div className="list-header">
           <h3>Visitor Activity</h3>
           <div className="filter-tabs">
-            {["all", "expected", "checked", "completed"].map((tab) => (
+            {["all", "expected", "checked", "cancelled", "completed"].map((tab) => (
               <button
                 key={tab}
                 className={`tab-btn ${filter === tab ? "active" : ""}`}
