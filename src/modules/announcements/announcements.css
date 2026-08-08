@@ -164,7 +164,7 @@
   align-items: center;
   padding-top: 8px;
   border-top: 1px solid var(--line);
-  margin-top: 4px;
+  margin-top: auto;
 }
 
 .notice-card-footer small {

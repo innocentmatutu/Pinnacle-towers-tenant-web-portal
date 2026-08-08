@@ -1,0 +1,128 @@
+/* support.css */
+.support-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faq-list {
+  margin-top: 4px;
+}
+
+.faq-item {
+  border-bottom: 1px solid #f0eeea;
+}
+
+.faq-item:last-child {
+  border-bottom: 0;
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border: 0;
+  background: none;
+  font: 600 12px "DM Sans", inherit;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-toggle {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--canvas);
+  color: var(--wine);
+  font-size: 13px;
+}
+
+.faq-answer {
+  margin: 0 0 16px;
+  padding-right: 32px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.guide-list {
+  margin-top: 4px;
+}
+
+.guide-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0eeea;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.guide-row:last-child {
+  border-bottom: 0;
+}
+
+.guide-row:hover {
+  color: var(--wine);
+}
+
+.guide-row div {
+  flex: 1;
+  min-width: 0;
+}
+
+.guide-row b {
+  display: block;
+  font-size: 12px;
+}
+
+.guide-row small {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.guide-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  background: var(--wine-light);
+  color: var(--wine);
+  flex-shrink: 0;
+}
+
+.contact-msg-btn {
+  margin-top: auto;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--wine);
+  background: var(--wine-light, rgba(120, 28, 48, 0.06));
+  border: 1px solid rgba(120, 28, 48, 0.18);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+.contact-msg-btn:hover {
+  background: var(--wine);
+  color: #ffffff;
+  border-color: var(--wine);
+}
+
+.action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

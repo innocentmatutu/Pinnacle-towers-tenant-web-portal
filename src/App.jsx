@@ -79,7 +79,7 @@ export default function App() {
           ) : active === "Announcements" ? (
             <Announcements />
           ) : active === "Support" ? (
-            <Support />
+            <Support selectNav={selectNav}/>
           ): (
             <Placeholder title={active} selectNav={selectNav} />
           )}
