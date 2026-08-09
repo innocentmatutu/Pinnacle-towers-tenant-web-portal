@@ -7,8 +7,15 @@ import Policies from '/Policies.pdf';
 
 import './documents.css'
 function Documents() {
+
+ 
+
+
   return (
+
     <>
+
+    <header>Files & Documents</header>
     <div className='document-container'>
      <div style={{ padding: '20px' }}>
       <h2>Download Your Lease Agreement</h2>

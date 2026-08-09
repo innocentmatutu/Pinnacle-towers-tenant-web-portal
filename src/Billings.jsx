@@ -1,18 +1,20 @@
 import { useState } from "react";
-import DownloadFiles from './components/records/documents.jsx';
-import BillingHistory from './components/records/Invoices.jsx';
+import Documents from './components/records/documents.jsx';
 import Invoice from "./components/records/Invoices.jsx";
-import Receipt from "./components/records/Receipt.jsx"
 import Paymentreceipts from "./components/records/Receipt.jsx";
 
+import './app.css'
 function Billings(){
   
   return(
      <>
+     <header>Billing & Payments</header>
+      <p style= {{fontSize:"35px", color:"#0c0c0c"}}>Monthly Invoices</p>
     <Invoice/>
-   <hr></hr> 
-    <p style={{fontSize:"40px" ,color:"#161616"}}>Payment Receipts</p>
+   <p style= {{fontSize:"35px", color:"#0c0c0c"}}>Payment Receipts</p>
+   
   <Paymentreceipts/>
+   
      </>
   );
 }

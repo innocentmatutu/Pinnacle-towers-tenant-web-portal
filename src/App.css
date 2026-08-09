@@ -46,4 +46,58 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--dark-color);
 }
 
+header{
+    font-family: helvetica;
+    font-size:40px;
+    color:#f8f9fa;
+    padding:20px;
+    background-color: #8B0000;
+    text-align: left;
+}
+.menu-container {
+  position: relative;
+  display: inline-block;
+}
 
+.menu-btn {
+  background: #1f2937;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.menu-btn:hover {
+  background: #DAA520;
+}
+
+.menu-btn-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 5px;
+  width: 200px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.menu-btn-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  background: white;
+  text-align: left;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.menu-btn-dropdown button:hover {
+  background: #f3f4f6;
+}

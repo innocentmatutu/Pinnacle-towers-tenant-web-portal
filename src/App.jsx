@@ -1,23 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Documents from './components/records/documents.jsx';
-
+import Report from './components/records/report.jsx';
 import Billings from './Billings.jsx';
-function App() {
-  {/*   
-   <div className="container">
-<button className="menu-btn"onClick={()=>setopen(!open)}>
- ☰
+import Menu from './Menu.jsx';
 
-</button> */}
+function App() {
   return (
-    <>
-<h1 class Name= "Bill-Tilt">Billing Settings</h1>
-  <p>Hello World!</p>
-      <Billings />
-      
-<Documents/>
-    </>
+    <BrowserRouter>
+      <Menu />
+
+      <main className="main-content">
+        <Routes>
+          <Route path="/Billings" element={<Billings />} />
+          <Route path="/documents" element={<Documents />} />
+          <Route path="/Report" element={<Report />} />
+
+          <Route path="/" element={<Navigate to="/Billings" />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
-export default App
+
+export default App;
