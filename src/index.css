@@ -1,5 +1,5 @@
 /* Custom Global Select Dropdown for Login & Portal Forms */
-select {
+/*select {
   width: 100% !important;
   padding: 10px 14px !important;
   font-size: 16px !important;
@@ -24,5 +24,30 @@ select {
 select:focus {
   border-color: #8B0000 !important;
   box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1) !important;
+}*/
+
+
+html,
+body,
+#root {
+    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
+html {
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+}
+
+#root {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}

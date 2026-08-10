@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-function Login() {
+function Login({ setUser }) {
   const navigate = useNavigate();
   
   const [username, setUsername] = useState('');
@@ -53,6 +53,7 @@ function Login() {
       };
 
       localStorage.setItem('user', JSON.stringify(sessionUser));
+      setUser(sessionUser);
 
       if (role === 'finance') {
         navigate('/finance/dashboard');

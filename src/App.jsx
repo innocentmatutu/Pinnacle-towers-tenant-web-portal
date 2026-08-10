@@ -1,85 +1,202 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Navigate,
+    useNavigate
+} from 'react-router-dom';
+
 import Login from './components/Login';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import ChangePassword from './components/ChangePassword';
+import MyProfile from './components/MyProfile';
 
-import TenantDashboard from './components/TenantDashboard'; // Correct path from your folder tree
+import Sidebar from './components/Sidebar';
+import Topbar from './components/Topbar';
+
+import TenantDashboard from './dashboard/TenantDashboard';
 import TenantFinanceDashboard from './finance/TenantFinanceDashboard';
 import Payments from './finance/Payments';
 import InvoiceList from './finance/InvoiceList';
 import RentCollections from './finance/RentCollections';
 
-const AppLayout = ({ children }) => {
-  const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-  if (!user.role) return <Navigate to="/" replace />;
+const AppLayout = ({ children, user }) => {
+    const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/");
-  };
+    
 
-  const getMenuItems = () => {
-    switch (user.role) {
-      case 'Tenant': return [
-        { path: '/tenant/dashboard', label: 'Dashboard' },
-        { path: '/tenant/payments', label: 'Rent & Payments' },
-        { path: '/tenant/maintenance', label: 'Maintenance Requests' },
-        { path: '/tenant/booking', label: 'Facility Booking' },
-        { path: '/tenant/visitors', label: 'Visitor Management' }
-      ];
-      // ... (other roles remain the same)
-      case 'Finance Officer': return [
-        { path: '/finance/dashboard', label: 'Financial Dashboard' },
-        { path: '/finance/invoices', label: 'Invoices & Receipts' },
-        { path: '/finance/collections', label: 'Rent Collections' }
-      ];
-      default: return [];
+    const [active, setActive] = useState('Dashboard');
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [sidebarCompact, setSidebarCompact] = useState(false);
+
+    if (!user.role) {
+        return <Navigate to="/" replace />;
     }
-  };
 
-  return (
-    <div style={{ display: 'flex' }}>
-      <aside style={{ width: 'var(--sidebar-width)', background: 'var(--pinnacle-crimson)', color: 'white', minHeight: '100vh', padding: 'var(--spacing-md)' }}>
-        <div style={{ color: 'var(--pinnacle-gold)', fontSize: '1.5rem', marginBottom: '2rem' }}>Pinnacle Towers</div>
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          {getMenuItems().map(item => (
-            <Link key={item.path} to={item.path} style={{ color: 'white', textDecoration: 'none' }}>{item.label}</Link>
-          ))}
-        </nav>
-        <button onClick={handleLogout} style={{ marginTop: 'auto', background: 'transparent', border: '1px solid white', color: 'white', padding: '10px', cursor: 'pointer' }}>
-          Sign Out
-        </button>
-      </aside>
-      <main style={{ flex: 1, padding: '20px' }}>{children}</main>
-    </div>
-  );
+    const selectNav = (label) => {
+        setActive(label);
+
+        const routes = {
+            Dashboard: '/tenant/dashboard',
+            'My profile': '/tenant/profile',
+            'My lease': '/tenant/lease',
+            Payments: '/tenant/payments',
+            Maintenance: '/tenant/maintenance',
+            Bookings: '/tenant/booking',
+            Visitors: '/tenant/visitors',
+            Documents: '/tenant/documents',
+            Messages: '/tenant/messages',
+            Announcements: '/tenant/announcements'
+        };
+
+        if (routes[label]) {
+            navigate(routes[label]);
+        }
+
+        setMenuOpen(false);
+    };
+
+    const toggleSidebar = () => {
+        setSidebarCompact((prev) => !prev);
+    };
+
+    return (
+        <div
+            className={`app-shell ${
+                sidebarCompact ? 'sidebar-compact' : ''
+            }`}
+        >
+            <Sidebar
+                active={active}
+                selectNav={selectNav}
+                menuOpen={menuOpen}
+                sidebarCompact={sidebarCompact}
+                toggleSidebar={toggleSidebar}
+                user={user}
+            />
+
+            <div className="main-shell">
+                <Topbar
+                    menuOpen={menuOpen}
+                    setMenuOpen={setMenuOpen}
+                    selectNav={selectNav}
+                />
+
+                <main className="page-content">
+                    {children}
+                </main>
+            </div>
+        </div>
+    );
 };
 
+
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/change-password" element={<ChangePassword />} />
-        <Route path="/tenant/dashboard" element={<TenantDashboard />} />
-        <Route path="/tenant/payments" element={<AppLayout><Payments /></AppLayout>} />
-        
-        {/* Finance Officer Routes */}
-        <Route path="/finance/dashboard" element={<AppLayout><TenantFinanceDashboard /></AppLayout>} />
-        <Route path="/finance/invoices" element={<AppLayout><InvoiceList /></AppLayout>} />
-        <Route path="/finance/collections" element={<AppLayout><RentCollections /></AppLayout>} />
-        
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
-  );
+    const [user, setUser] = useState(() => {
+        return JSON.parse(
+            localStorage.getItem('user') || '{}'
+        );
+    });
+    return (
+        <Router>
+            <Routes>
+
+                {/* AUTHENTICATION ROUTES */}
+
+                <Route
+                    path="/"
+                    element={<Login setUser={setUser} />}
+                />
+
+                <Route
+                    path="/forgot-password"
+                    element={<ForgotPassword />}
+                />
+
+                <Route
+                    path="/reset-password"
+                    element={<ResetPassword />}
+                />
+
+                <Route
+                    path="/change-password"
+                    element={<ChangePassword />}
+                />
+
+
+                {/* TENANT ROUTES */}
+
+                <Route
+                    path="/tenant/dashboard"
+                    element={
+                        <AppLayout user={user}>
+                            <TenantDashboard user={user}/>
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/profile"
+                    element={
+                        <AppLayout user={user}>
+                            <MyProfile user={user} />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/payments"
+                    element={
+                        <AppLayout user={user}>
+                            <Payments />
+                        </AppLayout>
+                    }
+                />
+
+
+                {/* FINANCE OFFICER ROUTES */}
+
+                <Route
+                    path="/finance/dashboard"
+                    element={
+                        <AppLayout user={user}>
+                            <TenantFinanceDashboard />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/finance/invoices"
+                    element={
+                        <AppLayout>
+                            <InvoiceList />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/finance/collections"
+                    element={
+                        <AppLayout>
+                            <RentCollections />
+                        </AppLayout>
+                    }
+                />
+
+
+                {/* FALLBACK */}
+
+                <Route
+                    path="*"
+                    element={<Navigate to="/" replace />}
+                />
+
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;

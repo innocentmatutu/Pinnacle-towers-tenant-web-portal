@@ -1,0 +1,734 @@
+
+/* =========================================================
+   MARK / TENANT DASHBOARD
+   Scoped exclusively to .tenant-dashboard
+
+   This prevents conflicts with Rose's global application CSS.
+   ========================================================= */
+
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+.tenant-dashboard {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    color: var(--ink, #202329);
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+}
+
+.tenant-dashboard *,
+.tenant-dashboard *::before,
+.tenant-dashboard *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.tenant-dashboard__header {
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.tenant-dashboard__header-info {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
+.tenant-dashboard__header h1 {
+    margin: 0 0 6px;
+
+    font-size: clamp(24px, 2vw, 30px);
+    line-height: 1.2;
+    font-weight: 700;
+
+    color: var(--ink, #202329);
+}
+
+.tenant-dashboard__unit {
+    margin: 0 0 14px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: var(--wine, #7c0d22);
+}
+
+.tenant-dashboard__meta {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px 20px;
+
+    min-width: 0;
+
+    font-size: 12px;
+    color: var(--muted, #70747b);
+}
+
+.tenant-dashboard__meta span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   HEADER ACTIONS
+   ========================================================= */
+
+.tenant-dashboard__actions {
+    flex: 0 1 auto;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.tenant-dashboard__btn {
+    min-height: 40px;
+
+    padding: 10px 17px;
+
+    border-radius: 6px;
+
+    font: 600 12px inherit;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tenant-dashboard__btn--primary {
+    border: 1px solid var(--wine, #7c0d22);
+
+    background: var(--wine, #7c0d22);
+    color: #fff;
+}
+
+.tenant-dashboard__btn--primary:hover {
+    background: var(--wine-dark, #65091a);
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 10px rgba(124, 13, 34, 0.18);
+}
+
+.tenant-dashboard__btn--outline {
+    border: 1px solid var(--gold, #c99a43);
+
+    background: #fff;
+
+    color: var(--ink, #202329);
+}
+
+.tenant-dashboard__btn--outline:hover {
+    background: #f9f0df;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   METRICS
+   ========================================================= */
+
+.tenant-dashboard__metrics {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+
+    /*
+       auto-fit is intentional.
+
+       The cards automatically reduce from:
+       4 -> 3 -> 2 -> 1
+
+       depending on the actual available width.
+    */
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(min(100%, 215px), 1fr)
+        );
+
+    gap: 16px;
+
+    margin-bottom: 32px;
+}
+
+.tenant-dashboard__metric-card {
+    min-width: 0;
+
+    width: 100%;
+
+    padding: 20px;
+
+    background: #fff;
+
+    border: 1px solid var(--line, #e6e3df);
+    border-radius: 9px;
+
+    box-shadow:
+        0 2px 5px rgba(38, 26, 17, 0.025);
+
+    overflow: hidden;
+}
+
+.tenant-dashboard__card-top {
+    min-width: 0;
+
+    margin-bottom: 14px;
+}
+
+.tenant-dashboard__card-top span {
+    display: block;
+
+    min-width: 0;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: var(--muted, #70747b);
+
+    overflow-wrap: anywhere;
+}
+
+.tenant-dashboard__metric-card h2 {
+    margin: 0 0 6px;
+
+    font-size: clamp(21px, 2vw, 26px);
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    overflow-wrap: anywhere;
+}
+
+.tenant-dashboard__metric-card p {
+    margin: 0 0 17px;
+
+    font-size: 11px;
+
+    color: var(--muted, #70747b);
+
+    overflow-wrap: anywhere;
+}
+
+.tenant-dashboard__metric-card a {
+    display: inline-block;
+
+    max-width: 100%;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: var(--wine, #7c0d22);
+
+    text-decoration: none;
+
+    overflow-wrap: anywhere;
+}
+
+.tenant-dashboard__metric-card a:hover {
+    text-decoration: underline;
+}
+
+.tenant-dashboard__danger {
+    color: var(--wine, #7c0d22);
+}
+
+.tenant-dashboard__success {
+    color: var(--green, #22875e);
+}
+
+.tenant-dashboard__primary {
+    color: var(--wine, #7c0d22);
+}
+
+.tenant-dashboard__warning {
+    color: var(--gold, #c99a43);
+}
+
+
+/* =========================================================
+   ACTIVITY TITLE
+   ========================================================= */
+
+.tenant-dashboard__section-title {
+    margin: 0 0 16px;
+
+    font-size: 18px;
+    line-height: 1.3;
+    font-weight: 600;
+
+    color: var(--ink, #202329);
+}
+
+
+/* =========================================================
+   ACTIVITY GRID
+   ========================================================= */
+
+.tenant-dashboard__activity {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+
+    /*
+       Each card needs approximately 280px.
+
+       The browser automatically chooses:
+       3 columns when possible
+       2 columns when necessary
+       1 column on narrow screens.
+    */
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(min(100%, 280px), 1fr)
+        );
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   FEED CARD
+   ========================================================= */
+
+.tenant-dashboard__feed {
+    min-width: 0;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #fff;
+
+    border: 1px solid var(--line, #e6e3df);
+    border-radius: 9px;
+
+    box-shadow:
+        0 2px 5px rgba(38, 26, 17, 0.025);
+
+    overflow: hidden;
+}
+
+.tenant-dashboard__feed-header {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 17px 18px;
+
+    border-bottom: 1px solid var(--line, #e6e3df);
+}
+
+.tenant-dashboard__feed-header h4 {
+    min-width: 0;
+
+    margin: 0;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: var(--ink, #202329);
+
+    overflow-wrap: anywhere;
+}
+
+.tenant-dashboard__feed-header a {
+    flex-shrink: 0;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    color: var(--wine, #7c0d22);
+
+    text-decoration: none;
+
+    white-space: nowrap;
+}
+
+.tenant-dashboard__feed-header a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   FEED LIST
+   ========================================================= */
+
+.tenant-dashboard__feed ul {
+    list-style: none;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 0 18px;
+
+    flex: 1;
+}
+
+.tenant-dashboard__feed li {
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #f0eeea;
+}
+
+.tenant-dashboard__feed li:last-child {
+    border-bottom: none;
+}
+
+.tenant-dashboard__feed li > div {
+    min-width: 0;
+
+    flex: 1 1 auto;
+}
+
+.tenant-dashboard__feed strong {
+    display: block;
+
+    min-width: 0;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: var(--ink, #202329);
+
+    overflow-wrap: anywhere;
+}
+
+.tenant-dashboard__feed small {
+    display: block;
+
+    min-width: 0;
+
+    margin-top: 3px;
+
+    font-size: 10px;
+    line-height: 1.4;
+
+    color: var(--muted, #70747b);
+
+    overflow-wrap: anywhere;
+}
+
+.tenant-dashboard__amount {
+    flex: 0 0 auto;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: var(--green, #22875e);
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.tenant-dashboard__badge {
+    flex: 0 0 auto;
+
+    padding: 4px 7px;
+
+    border-radius: 10px;
+
+    font-size: 8px;
+    line-height: 1.2;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.tenant-dashboard__badge--pending {
+    color: #9b6b18;
+    background: #fcf3e3;
+}
+
+.tenant-dashboard__badge--closed {
+    color: #70747b;
+    background: #f0efed;
+}
+
+.tenant-dashboard__badge--progress {
+    color: var(--wine, #7c0d22);
+    background: var(--wine-light, #f7e9ed);
+}
+
+
+/* =========================================================
+   NOTICES
+   ========================================================= */
+
+.tenant-dashboard__notices li {
+    align-items: flex-start;
+}
+
+.tenant-dashboard__dot {
+    width: 7px;
+    height: 7px;
+
+    margin-top: 5px;
+
+    flex: 0 0 7px;
+
+    border-radius: 50%;
+
+    background: var(--wine, #7c0d22);
+}
+
+
+/* =========================================================
+   FEED FOOTER
+   ========================================================= */
+
+.tenant-dashboard__feed-footer {
+    padding: 13px 18px;
+
+    border-top: 1px solid var(--line, #e6e3df);
+
+    text-align: center;
+}
+
+.tenant-dashboard__feed-footer a {
+    font-size: 11px;
+    font-weight: 600;
+
+    color: var(--wine, #7c0d22);
+
+    text-decoration: none;
+}
+
+.tenant-dashboard__feed-footer a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   DASHBOARD FOOTER
+   ========================================================= */
+
+.tenant-dashboard__footer {
+    width: 100%;
+
+    margin-top: 28px;
+    padding: 22px 0 8px;
+
+    border-top: 1px solid var(--line, #e6e3df);
+
+    text-align: center;
+
+    font-size: 10px;
+
+    color: var(--muted, #70747b);
+
+    background: transparent;
+}
+
+
+/* =========================================================
+   IMPORTANT:
+   These breakpoints are based on the ACTUAL AVAILABLE
+   CONTENT WIDTH after Rose's sidebar.
+
+   We do NOT touch:
+   .sidebar
+   .main-area
+   .page-content
+   .quick-actions
+   .card
+   .summary-grid
+
+   from Rose's application.
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   MEDIUM DESKTOP
+   --------------------------------------------------------- */
+
+@media (max-width: 1100px) {
+
+    .tenant-dashboard__header {
+        gap: 18px;
+    }
+
+    .tenant-dashboard__meta {
+        gap: 5px 14px;
+    }
+
+    .tenant-dashboard__metric-card {
+        padding: 18px;
+    }
+
+    .tenant-dashboard__feed-header {
+        padding: 15px;
+    }
+
+    .tenant-dashboard__feed ul {
+        padding: 0 15px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   TABLET / SMALL DESKTOP
+   --------------------------------------------------------- */
+
+@media (max-width: 850px) {
+
+    .tenant-dashboard__header {
+        flex-direction: column;
+    }
+
+    .tenant-dashboard__actions {
+        width: 100%;
+
+        justify-content: flex-start;
+    }
+
+    .tenant-dashboard__metrics {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+    .tenant-dashboard__activity {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+    .tenant-dashboard__header {
+        margin-bottom: 22px;
+    }
+
+    .tenant-dashboard__header h1 {
+        font-size: 24px;
+    }
+
+    .tenant-dashboard__meta {
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+    .tenant-dashboard__actions {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        width: 100%;
+    }
+
+    .tenant-dashboard__btn {
+        width: 100%;
+    }
+
+    .tenant-dashboard__metrics,
+    .tenant-dashboard__activity {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    .tenant-dashboard__metric-card {
+        padding: 18px;
+    }
+
+    .tenant-dashboard__feed-header {
+        padding: 15px;
+    }
+
+    .tenant-dashboard__feed ul {
+        padding: 0 15px;
+    }
+
+    .tenant-dashboard__feed li {
+        gap: 8px;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   VERY SMALL PHONES
+   --------------------------------------------------------- */
+
+@media (max-width: 380px) {
+
+    .tenant-dashboard__actions {
+        grid-template-columns: 1fr;
+    }
+
+    .tenant-dashboard__badge {
+        font-size: 7px;
+        padding: 3px 6px;
+    }
+
+    .tenant-dashboard__amount {
+        font-size: 10px;
+    }
+}
