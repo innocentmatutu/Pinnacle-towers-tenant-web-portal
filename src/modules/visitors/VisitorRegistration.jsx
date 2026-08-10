@@ -2,6 +2,9 @@ import { useState } from 'react';
 import Icon from "../../components/Icon";
 import Card from "../../components/Card";
 import "./visitors.css";
+import Input from './Input';
+import Select from './Select';
+import { purposeOptions } from '../../constants';
 
 export default function VisitorRegistration({ onClose, onRegister }) {
   const [formData, setFormData] = useState({
@@ -94,113 +97,89 @@ export default function VisitorRegistration({ onClose, onRegister }) {
 
         <form onSubmit={handleSubmit}>
           <div className="form-grid">
-            <div className="form-group">
-              <label>Visitor Name *</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Full name"
-                className={errors.name ? 'error' : ''}
-              />
-              {errors.name && <span className="error-message">{errors.name}</span>}
-            </div>
+            <Input
+              label="Visitor Name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Full name"
+              required
+              error={errors.name}
+            />
 
-            <div className="form-group">
-              <label>ID No. *</label>
-              <input
-                type="number"
-                name="idNumber"
-                value={formData.idNumber}
-                onChange={handleChange}
-                placeholder="ID Number"
-                className={errors.idNumber ? 'error' : ''}
-              />
-              {errors.idNumber && <span className="error-message">{errors.idNumber}</span>}
-            </div>
+            <Input
+              label="ID No."
+              name="idNumber"
+              type="number"
+              value={formData.idNumber}
+              onChange={handleChange}
+              placeholder="ID Number"
+              required
+              error={errors.idNumber}
+            />
 
-            <div className="form-group">
-              <label>Contact *</label>
-              <input
-                type="text"
-                name="contact"
-                value={formData.contact}
-                onChange={handleChange}
-                placeholder="Phone number or email"
-                className={errors.contact ? 'error' : ''}
-              />
-              {errors.contact && <span className="error-message">{errors.contact}</span>}
-            </div>
+            <Input
+              label="Contact"
+              name="contact"
+              value={formData.contact}
+              onChange={handleChange}
+              placeholder="Phone number or email"
+              required
+              error={errors.contact}
+            />
 
-            <div className="form-group">
-              <label>Visit Date *</label>
-              <input
-                type="date"
-                name="visitDate"
-                value={formData.visitDate}
-                onChange={handleChange}
-                className={errors.visitDate ? 'error' : ''}
-                min={new Date().toISOString().split('T')[0]}
-              />
-              {errors.visitDate && <span className="error-message">{errors.visitDate}</span>}
-            </div>
+            <Input
+              label="Visit Date"
+              name="visitDate"
+              type="date"
+              value={formData.visitDate}
+              onChange={handleChange}
+              required
+              error={errors.visitDate}
+              min={new Date().toISOString().split('T')[0]}
+            />
 
-            <div className="form-group">
-              <label>Expected Arrival Time *</label>
-              <input
-                type="time"
-                name="arrivalTime"
-                value={formData.arrivalTime}
-                onChange={handleChange}
-                className={errors.arrivalTime ? 'error' : ''}
-              />
-              {errors.arrivalTime && <span className="error-message">{errors.arrivalTime}</span>}
-            </div>
+            <Input
+              label="Expected Arrival Time"
+              name="arrivalTime"
+              type="time"
+              value={formData.arrivalTime}
+              onChange={handleChange}
+              required
+              error={errors.arrivalTime}
+            />
 
-            <div className="form-group">
-              <label>Expected Departure Time *</label>
-              <input
-                type="time"
-                name="departureTime"
-                value={formData.departureTime}
-                onChange={handleChange}
-                className={errors.departureTime ? 'error' : ''}
-              />
-              {errors.departureTime && <span className="error-message">{errors.departureTime}</span>}
-            </div>
+            <Input
+              label="Expected Departure Time"
+              name="departureTime"
+              type="time"
+              value={formData.departureTime}
+              onChange={handleChange}
+              required
+              error={errors.departureTime}
+            />
             
-            <div className="form-group">
-              <label>Return Date *</label>
-              <input
-                type="date"
-                name="departureDate"
-                value={formData.departureDate}
-                onChange={handleChange}
-                className={errors.departureDate ? 'error' : ''}
-                min={new Date().toISOString().split('T')[0]}
-              />
-              {errors.departureDate && <span className="error-message">{errors.departureDate}</span>}
-            </div>
+            <Input
+              label="Return Date"
+              name="departureDate"
+              type="date"
+              value={formData.departureDate}
+              onChange={handleChange}
+              required
+              error={errors.departureDate}
+              min={new Date().toISOString().split('T')[0]}
+            />
 
-            <div className="form-group">
-              <label>Purpose of Visit *</label>
-              <select
-                name="purpose"
-                value={formData.purpose}
-                onChange={handleChange}
-                className={errors.purpose ? 'error' : ''}
-              >
-                <option value="">Select purpose</option>
-                <option value="Meeting with property manager">Meeting with property manager</option>
-                <option value="Maintenance inspection">Maintenance inspection</option>
-                <option value="Package delivery">Package delivery</option>
-                <option value="Business meeting">Business meeting</option>
-                <option value="Family visit">Family visit</option>
-                <option value="Other">Other</option>
-              </select>
-              {errors.purpose && <span className="error-message">{errors.purpose}</span>}
-            </div>
+            <Select
+              label="Purpose of Visit"
+              name="purpose"
+              value={formData.purpose}
+              onChange={handleChange}
+              options={purposeOptions}
+              placeholder="Select purpose"
+              required
+              error={errors.purpose}
+            />
           </div>
 
           <div className="form-group">

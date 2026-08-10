@@ -1,57 +1,35 @@
-import Icon from '../../components/Icon';
-import Card from '../../components/Card';
-import './support.css';
+import Icon from "../../components/Icon";
+import Card from "../../components/Card";
+import "./support.css";
+import { contacts } from "../../constants";
 
 export default function ContactInfo() {
-  const contacts = [
-    {
-      name: 'Property Management',
-      icon: 'building',
-      phone: '+254 20 123 4567',
-      email: 'management@pinnacletowers.co.ke',
-      hours: 'Mon-Fri 8:00 AM - 6:00 PM'
-    },
-    {
-      name: 'Reception Desk',
-      icon: 'message',
-      phone: '+254 20 123 4568',
-      email: 'reception@pinnacletowers.co.ke',
-      hours: '24/7'
-    },
-    {
-      name: 'Maintenance Department',
-      icon: 'tools',
-      phone: '+254 20 123 4569',
-      email: 'maintenance@pinnacletowers.co.ke',
-      hours: 'Mon-Fri 7:00 AM - 8:00 PM'
-    },
-    {
-      name: 'Security Office',
-      icon: 'security',
-      phone: '+254 20 123 4570',
-      email: 'security@pinnacletowers.co.ke',
-      hours: '24/7'
-    }
-  ];
-
   return (
     <div className="contact-section">
       <p className="section-description">
-        Here you'll find contact information for various building services. 
+        Here you'll find contact information for various building services.
         Please reach out to the appropriate department for your specific needs.
       </p>
 
       <div className="contact-grid">
-        {contacts.map(contact => (
+        {contacts.map((contact) => (
           <Card key={contact.name} className="contact-card">
             <div className="contact-icon">
               <Icon name={contact.icon} size={24} />
             </div>
             <h3>{contact.name}</h3>
             <div className="contact-details">
-              <p><Icon name="message" size={12} /> <a href={`tel:${contact.phone}`}>{contact.phone}</a></p>
-              <p><Icon name="mail" size={12} /> <a href={`mailto:${contact.email}`}>{contact.email}</a></p>
-              <p><Icon name="clock" size={12} /> {contact.hours}</p>
+              <p>
+                <Icon name="message" size={12} />{" "}
+                <a href={`tel:${contact.phone}`}>{contact.phone}</a>
+              </p>
+              <p>
+                <Icon name="mail" size={12} />{" "}
+                <a href={`mailto:${contact.email}`}>{contact.email}</a>
+              </p>
+              <p>
+                <Icon name="clock" size={12} /> {contact.hours}
+              </p>
             </div>
           </Card>
         ))}

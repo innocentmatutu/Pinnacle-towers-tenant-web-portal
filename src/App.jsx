@@ -7,6 +7,7 @@ import Announcements from "./modules/announcements/Announcements";
 import Support from "./modules/support/Support";
 import ParkingDashboard from "./modules/parking/ParkingDashboard";
 import VisitorsDashboard from "./modules/visitors/VisitorsDashboard";
+import CarDashboard from "./modules/cars/CarDashboard";
 
 export default function App() {
   const [active, setActive] = useState("Dashboard");
@@ -51,8 +52,10 @@ export default function App() {
             sendMessage={sendMessage}
           />
         );
+      case "My Cars":
+        return <CarDashboard/>;
       case "Visitors":
-        return <VisitorsDashboard/>;
+        return <VisitorsDashboard selectNav={selectNav}/>;
       case "Parking":
         return <ParkingDashboard/>;
       case "Announcements":

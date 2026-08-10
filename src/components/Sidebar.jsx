@@ -3,6 +3,7 @@ import Icon from "./Icon";
 const navItems = [
   ["dashboard", "Dashboard"],
   ["profile", "My profile"],
+  ["car", "My Cars"],
   ["building", "My lease"],
   ["card", "Payments"],
   ["tools", "Maintenance"],
