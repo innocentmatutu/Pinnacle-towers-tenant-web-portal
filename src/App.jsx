@@ -21,6 +21,9 @@ import TenantFinanceDashboard from './finance/TenantFinanceDashboard';
 import Payments from './finance/Payments';
 import InvoiceList from './finance/InvoiceList';
 import RentCollections from './finance/RentCollections';
+import Billings from './Billings';
+import Documents from './components/records/documents';
+import Report from './components/records/report';
 
 
 const AppLayout = ({ children, user }) => {
@@ -48,6 +51,8 @@ const AppLayout = ({ children, user }) => {
             Bookings: '/tenant/booking',
             Visitors: '/tenant/visitors',
             Documents: '/tenant/documents',
+            'Billing & Payments': '/tenant/billings',
+            Reports: '/tenant/reports',
             Messages: '/tenant/messages',
             Announcements: '/tenant/announcements'
         };
@@ -156,6 +161,45 @@ function App() {
                     }
                 />
 
+                <Route
+                    path="/tenant/lease"
+                    element={
+                    <AppLayout user={user}>
+                        <div>
+                            <h2>My Lease</h2>
+                            <p>Your lease information will appear here.</p>
+                        </div>
+                    </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/documents"
+                    element={
+                    <AppLayout user={user}>
+                        <Documents />
+                    </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/billings"
+                    element={
+                    <AppLayout user={user}>
+                        <Billings />
+                    </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/reports"
+                    element={
+                    <AppLayout user={user}>
+                        <Report />
+                    </AppLayout>
+                    }
+                />
+
 
                 {/* FINANCE OFFICER ROUTES */}
 
@@ -186,7 +230,7 @@ function App() {
                     }
                 />
 
-
+                
                 {/* FALLBACK */}
 
                 <Route

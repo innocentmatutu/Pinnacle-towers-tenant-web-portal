@@ -35,7 +35,7 @@ export default function Payments() {
     }
   };
 
-  if (!user || user.role !== 'Tenant') {
+  if (!user || user.role !== 'tenant') {
     return <div className="card"><h2>Access Denied</h2><p>Restricted to Tenants.</p></div>;
   }
 

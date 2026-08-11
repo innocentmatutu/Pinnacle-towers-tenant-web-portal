@@ -1,9 +1,18 @@
 import Icon from './Icon';
 
 const navItems = [
-  ['dashboard', 'Dashboard'], ['profile', 'My profile'], ['building', 'My lease'], ['card', 'Payments'],
-  ['tools', 'Maintenance'], ['calendar', 'Bookings'], ['users', 'Visitors'], ['file', 'Documents'],
-  ['message', 'Messages'], ['bell', 'Announcements']
+['dashboard', 'Dashboard'],
+['profile', 'My profile'],
+['building', 'My lease'],
+['card', 'Payments'],
+['card', 'Billing & Payments'],
+['tools', 'Maintenance'],
+['calendar', 'Bookings'],
+['users', 'Visitors'],
+['file', 'Documents'],
+['file', 'Reports'],
+['message', 'Messages'],
+['bell', 'Announcements']
 ];
 
 export default function Sidebar({ active, selectNav, menuOpen, sidebarCompact, toggleSidebar,user }) {
