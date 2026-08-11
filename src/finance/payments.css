@@ -55,3 +55,66 @@
 /* Rent specific text colors */
 .text-crimson { color: var(--pinnacle-crimson); font-weight: bold; }
 .text-success { color: var(--pinnacle-success); font-weight: bold; }
+
+/* Payments Component Specific Styles */
+.card {
+    background: var(--pinnacle-card-white, #ffffff);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.payment-tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    border: 1px solid #cbd5e1;
+    background: #f8fafc;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    background: #f1f5f9;
+}
+
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.payment-form input {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    outline: none;
+}
+
+.payment-form input:focus {
+    border-color: var(--pinnacle-crimson);
+}
+
+.primary-btn {
+    background: var(--pinnacle-crimson, #dc2626);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.primary-btn:hover {
+    opacity: 0.9;
+}
