@@ -230,7 +230,7 @@ function App() {
                 <Route
                     path="/finance/invoices"
                     element={
-                        <AppLayout>
+                        <AppLayout user={user}>
                             <InvoiceList />
                         </AppLayout>
                     }
@@ -239,7 +239,7 @@ function App() {
                 <Route
                     path="/finance/collections"
                     element={
-                        <AppLayout>
+                        <AppLayout user={user}>
                             <RentCollections />
                         </AppLayout>
                     }
