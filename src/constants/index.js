@@ -101,7 +101,8 @@ export const sampleRequests = [
   {
     id: 1,
     visitorName: "Jane Doe",
-    vehicle: "Honda Civic",
+    brand: "Honda",
+    model: "Civic",
     plate: "KCE 456B",
     date: "2026-08-10",
     time: "10:00-12:00",
@@ -110,7 +111,8 @@ export const sampleRequests = [
   {
     id: 2,
     visitorName: "John Smith",
-    vehicle: "Nissan X-Trail",
+    brand: "Nissan",
+    model: "X-Trail",
     plate: "KCF 789C",
     date: "2026-08-09",
     time: "14:00-16:00",

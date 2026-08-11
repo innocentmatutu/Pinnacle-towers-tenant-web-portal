@@ -103,7 +103,7 @@ export default function ParkingDashboard({ selectNav }) {
                       <div key={req.id} className="visitor-request-item">
                         <div>
                           <strong>{req.visitorName}</strong>
-                          <small>{req.vehicle} ({req.plate})</small>
+                          <small>{req.brand} {req.model} ({req.plate})</small>
                         </div>
                         <span className={getStatusBadge(req.status)}>
                           {req.status.charAt(0).toUpperCase() + req.status.slice(1)}
