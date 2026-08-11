@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 
 const MyProfile = ({ user }) => {
@@ -10,6 +11,13 @@ const MyProfile = ({ user }) => {
     });
 
     const [saved, setSaved] = useState(false);
+
+    const isFinance = user?.role === 'finance';
+    const isTenant = user?.role === 'tenant';
+
+    const displayRole = isFinance
+        ? 'Finance Officer'
+        : 'Tenant';
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -51,7 +59,6 @@ const MyProfile = ({ user }) => {
         setIsEditing(false);
         setSaved(true);
 
-        // Update the local object used by this page
         Object.assign(user, updatedUser);
     };
 
@@ -106,16 +113,16 @@ const MyProfile = ({ user }) => {
                 <div className="tenant-profile__avatar">
                     {formData.username
                         ? formData.username.substring(0, 2).toUpperCase()
-                        : 'TE'}
+                        : 'U'}
                 </div>
 
                 <div className="tenant-profile__identity">
                     <h2>
-                        {formData.username || 'Tenant'}
+                        {formData.username || 'User'}
                     </h2>
 
                     <span className="tenant-profile__role">
-                        Tenant
+                        {displayRole}
                     </span>
                 </div>
 
@@ -150,15 +157,18 @@ const MyProfile = ({ user }) => {
 
                     <div className="tenant-profile__field">
                         <label>Account Role</label>
-                        <p>Tenant</p>
+                        <p>{displayRole}</p>
                     </div>
 
-                    <div className="tenant-profile__field">
-                        <label>Tenant ID</label>
-                        <p>
-                            {user?.tenantId || 'TEN-402-A'}
-                        </p>
-                    </div>
+                    {/* TENANT ONLY */}
+                    {isTenant && (
+                        <div className="tenant-profile__field">
+                            <label>Tenant ID</label>
+                            <p>
+                                {user?.tenantId || 'TEN-402-A'}
+                            </p>
+                        </div>
+                    )}
 
                     <div className="tenant-profile__field">
                         <label>Phone Number</label>
@@ -209,42 +219,89 @@ const MyProfile = ({ user }) => {
 
             </section>
 
-            {/* TENANCY INFORMATION */}
-            <section className="tenant-profile__section">
+            {/* TENANT INFORMATION */}
+            {isTenant && (
+                <section className="tenant-profile__section">
 
-                <div className="tenant-profile__section-header">
-                    <h2>Tenancy Information</h2>
-                </div>
-
-                <div className="tenant-profile__grid">
-
-                    <div className="tenant-profile__field">
-                        <label>Unit</label>
-                        <p>
-                            {user?.unit || 'Unit 402, Block A'}
-                        </p>
+                    <div className="tenant-profile__section-header">
+                        <h2>Tenancy Information</h2>
                     </div>
 
-                    <div className="tenant-profile__field">
-                        <label>Property</label>
-                        <p>Pinnacle Towers, Nairobi</p>
+                    <div className="tenant-profile__grid">
+
+                        <div className="tenant-profile__field">
+                            <label>Unit</label>
+                            <p>
+                                {user?.unit || 'Unit 402, Block A'}
+                            </p>
+                        </div>
+
+                        <div className="tenant-profile__field">
+                            <label>Property</label>
+                            <p>
+                                Pinnacle Towers, Nairobi
+                            </p>
+                        </div>
+
+                        <div className="tenant-profile__field">
+                            <label>Unit Type</label>
+                            <p>2-Bedroom</p>
+                        </div>
+
+                        <div className="tenant-profile__field">
+                            <label>Lease Status</label>
+                            <p className="tenant-profile__status">
+                                Active
+                            </p>
+                        </div>
+
                     </div>
 
-                    <div className="tenant-profile__field">
-                        <label>Unit Type</label>
-                        <p>2-Bedroom</p>
+                </section>
+            )}
+
+            {/* FINANCE OFFICER INFORMATION */}
+            {isFinance && (
+                <section className="tenant-profile__section">
+
+                    <div className="tenant-profile__section-header">
+                        <h2>Employment Information</h2>
                     </div>
 
-                    <div className="tenant-profile__field">
-                        <label>Lease Status</label>
-                        <p className="tenant-profile__status">
-                            Active
-                        </p>
+                    <div className="tenant-profile__grid">
+
+                        <div className="tenant-profile__field">
+                            <label>Department</label>
+                            <p>
+                                {user?.department || 'Finance'}
+                            </p>
+                        </div>
+
+                        <div className="tenant-profile__field">
+                            <label>Position</label>
+                            <p>
+                                Finance Officer
+                            </p>
+                        </div>
+
+                        <div className="tenant-profile__field">
+                            <label>Employee ID</label>
+                            <p>
+                                {user?.employeeId || 'FIN-001'}
+                            </p>
+                        </div>
+
+                        <div className="tenant-profile__field">
+                            <label>Work Location</label>
+                            <p>
+                                Pinnacle Towers, Nairobi
+                            </p>
+                        </div>
+
                     </div>
 
-                </div>
-
-            </section>
+                </section>
+            )}
 
         </div>
     );

@@ -42,20 +42,26 @@ const AppLayout = ({ children, user }) => {
     const selectNav = (label) => {
         setActive(label);
 
-        const routes = {
+        const tenantRoutes = {
             Dashboard: '/tenant/dashboard',
             'My profile': '/tenant/profile',
-            'My lease': '/tenant/lease',
             Payments: '/tenant/payments',
-            Maintenance: '/tenant/maintenance',
-            Bookings: '/tenant/booking',
-            Visitors: '/tenant/visitors',
+            'My lease': '/tenant/lease',
             Documents: '/tenant/documents',
-            'Billing & Payments': '/tenant/billings',
-            Reports: '/tenant/reports',
-            Messages: '/tenant/messages',
-            Announcements: '/tenant/announcements'
+            Reports: '/tenant/reports'
         };
+
+        const financeRoutes = {
+            Dashboard: '/finance/dashboard',
+            'My profile': '/finance/profile',
+            'Billing & Payments': '/tenant/billings',
+            Invoices: '/finance/invoices',
+            'Rent Collections': '/finance/collections'
+        };
+
+        const routes = user?.role === 'finance'
+            ? financeRoutes
+            : tenantRoutes;
 
         if (routes[label]) {
             navigate(routes[label]);
@@ -208,6 +214,15 @@ function App() {
                     element={
                         <AppLayout user={user}>
                             <TenantFinanceDashboard />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/finance/profile"
+                    element={
+                        <AppLayout user={user}>
+                            <MyProfile user={user} />
                         </AppLayout>
                     }
                 />

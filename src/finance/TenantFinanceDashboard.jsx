@@ -43,7 +43,7 @@ export default function TenantDashboard() {
     <main className="dashboard-container">
       <h1>Dashboard</h1>
       
-      {user?.role === 'Finance Officer' && (
+      {user?.role === 'finance' && (
         <section className="card">
           <h2>Finance Overview</h2>
           <div style={{ marginBottom: '20px', padding: '15px', background: '#f8f9fa', borderRadius: '5px' }}>
@@ -71,7 +71,7 @@ export default function TenantDashboard() {
         </section>
       )}
 
-      {user?.role === 'Tenant' && (
+      {user?.role === 'tenant' && (
         <section className="card">
           <h2>Welcome, {user.username}</h2>
           {/* Integrated RentOverview for consistent tenant data */}
