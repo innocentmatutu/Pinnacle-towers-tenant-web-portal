@@ -1,0 +1,414 @@
+.support-centre {
+  width: 100%;
+}
+
+.support-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 0;
+  flex-wrap: wrap;
+}
+
+.support-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  margin-bottom: -2px;
+}
+
+.support-tab:hover {
+  color: var(--ink);
+}
+
+.support-tab.active {
+  color: var(--wine);
+  border-bottom-color: var(--wine);
+}
+
+.support-content {
+  min-height: 400px;
+}
+
+/* FAQ Section */
+.faq-section .faq-search {
+  max-width: 480px;
+  margin-bottom: 20px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.faq-item:hover {
+  border-color: #d0c8c0;
+}
+
+.faq-item.open {
+  border-color: var(--wine);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--paper);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+  color: var(--ink);
+  transition: background 0.2s ease;
+}
+
+.faq-question:hover {
+  background: var(--canvas);
+}
+
+.faq-question span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.faq-category {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--wine);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.faq-question strong {
+  font-weight: 600;
+}
+
+.faq-answer {
+  padding: 0 16px 16px;
+  background: var(--paper);
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.faq-answer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Contact Section */
+.section-description {
+  color: var(--muted);
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.contact-card {
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.contact-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--wine-light);
+  color: var(--wine);
+  margin: 0 auto 12px;
+}
+
+.contact-card h3 {
+  margin: 0 0 12px;
+  font-size: 15px;
+}
+
+.contact-details p {
+  margin: 4px 0;
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.contact-details a {
+  color: var(--wine);
+  text-decoration: none;
+}
+
+.contact-details a:hover {
+  text-decoration: underline;
+}
+
+/* Emergency Section */
+.emergency-section {
+  padding: 8px 0;
+}
+
+.emergency-header {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 20px 24px;
+  background: #fee;
+  border-radius: 8px;
+  border-left: 4px solid #c0392b;
+  margin-bottom: 24px;
+}
+
+.emergency-header svg {
+  color: #c0392b;
+  flex-shrink: 0;
+}
+
+.emergency-header h2 {
+  margin: 0 0 4px;
+  font-size: 18px;
+}
+
+.emergency-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.emergency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.emergency-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.emergency-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fee;
+  color: #c0392b;
+  flex-shrink: 0;
+}
+
+.emergency-info {
+  flex: 1;
+}
+
+.emergency-info h3 {
+  margin: 0 0 2px;
+  font-size: 14px;
+}
+
+.emergency-info p {
+  margin: 0 0 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.emergency-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--wine);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.emergency-phone:hover {
+  text-decoration: underline;
+}
+
+/* Guides Section */
+.guides-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.guide-item {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.guide-item.open {
+  border-color: var(--wine);
+}
+
+.guide-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+
+.guide-header:hover {
+  background: var(--canvas);
+}
+
+.guide-number {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--wine-light);
+  color: var(--wine);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.guide-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  flex: 1;
+}
+
+.guide-content {
+  padding: 0 16px 16px 56px;
+  background: var(--paper);
+  animation: slideDown 0.3s ease;
+}
+
+.guide-content ol {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.guide-content li {
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.guide-content li:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 760px) {
+  .support-tabs {
+    gap: 2px;
+  }
+  
+  .support-tab {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .support-tab span:not(:first-child) {
+    display: none;
+  }
+  
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .emergency-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .guide-content {
+    padding: 0 12px 12px 12px;
+  }
+  
+  .emergency-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+  
+  .guide-header {
+    gap: 8px;
+    padding: 12px;
+  }
+  
+  .guide-header h3 {
+    font-size: 13px;
+  }
+  
+  .guide-number {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .emergency-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .support-tab {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+  
+  .support-tab svg {
+    width: 14px;
+    height: 14px;
+  }
+}
