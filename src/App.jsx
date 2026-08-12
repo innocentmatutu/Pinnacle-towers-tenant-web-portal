@@ -26,10 +26,10 @@ import Documents from './components/records/documents';
 import Report from './components/records/report';
 
 
-const AppLayout = ({ children, user }) => {
+const AppLayout = ({ children, user, setUser }) => {
     const navigate = useNavigate();
 
-    
+
 
     const [active, setActive] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
@@ -59,9 +59,62 @@ const AppLayout = ({ children, user }) => {
             'Rent Collections': '/finance/collections'
         };
 
-        const routes = user?.role === 'finance'
-            ? financeRoutes
-            : tenantRoutes;
+        const managerRoutes = {
+            Dashboard: '/manager/dashboard',
+            'My profile': '/manager/profile',
+            Tenants: '/manager/tenants',
+            'Properties & Units': '/manager/properties',
+            Maintenance: '/manager/maintenance',
+            Bookings: '/manager/bookings',
+            Visitors: '/manager/visitors',
+            Documents: '/manager/documents',
+            Reports: '/manager/reports'
+        };
+
+        const maintenanceRoutes = {
+            Dashboard: '/maintenance/dashboard',
+            'My profile': '/maintenance/profile',
+            Maintenance: '/maintenance/requests',
+            'Work Orders': '/maintenance/work-orders',
+            Documents: '/maintenance/documents',
+            Reports: '/maintenance/reports'
+        };
+
+        const adminRoutes = {
+            Dashboard: '/admin/dashboard',
+            'My profile': '/admin/profile',
+            'User Management': '/admin/users',
+            'Roles & Permissions': '/admin/roles',
+            'System Settings': '/admin/settings',
+            Reports: '/admin/reports',
+            'Audit Logs': '/admin/audit-logs'
+        };
+
+        let routes;
+
+        switch (user?.role) {
+            case 'finance':
+                routes = financeRoutes;
+                break;
+
+            case 'manager':
+                routes = managerRoutes;
+                break;
+
+            case 'maintenance':
+                routes = maintenanceRoutes;
+                break;
+
+            case 'admin':
+                routes = adminRoutes;
+                break;
+
+            case 'tenant':
+                routes = tenantRoutes;
+                break;
+            default:
+                return;
+        }
 
         if (routes[label]) {
             navigate(routes[label]);
@@ -94,6 +147,7 @@ const AppLayout = ({ children, user }) => {
                     menuOpen={menuOpen}
                     setMenuOpen={setMenuOpen}
                     selectNav={selectNav}
+                    user={user}
                 />
 
                 <main className="page-content">
@@ -104,6 +158,14 @@ const AppLayout = ({ children, user }) => {
     );
 };
 
+const RoleDashboard = ({ title, description }) => {
+    return (
+        <div className="card">
+            <h1>{title}</h1>
+            <p>{description}</p>
+        </div>
+    );
+};
 
 function App() {
     const [user, setUser] = useState(() => {
@@ -152,8 +214,11 @@ function App() {
                 <Route
                     path="/tenant/profile"
                     element={
-                        <AppLayout user={user}>
-                            <MyProfile user={user} />
+                        <AppLayout user={user} setUser={setUser}>
+                            <MyProfile
+                                user={user}
+                                setUser={setUser}
+                            />
                         </AppLayout>
                     }
                 />
@@ -221,8 +286,11 @@ function App() {
                 <Route
                     path="/finance/profile"
                     element={
-                        <AppLayout user={user}>
-                            <MyProfile user={user} />
+                        <AppLayout user={user} setUser={setUser}>
+                            <MyProfile
+                                user={user}
+                                setUser={setUser}
+                            />
                         </AppLayout>
                     }
                 />
@@ -245,7 +313,84 @@ function App() {
                     }
                 />
 
-                
+                {/* PROPERTY MANAGER ROUTES */}
+
+                <Route
+                    path="/manager/dashboard"
+                    element={
+                        <AppLayout user={user}>
+                            <RoleDashboard
+                                title="Property Manager Dashboard"
+                                description="Property management overview will appear here."
+                            />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/manager/profile"
+                    element={
+                        <AppLayout user={user} setUser={setUser}>
+                            <MyProfile
+                                user={user}
+                                setUser={setUser}
+                            />
+                        </AppLayout>
+                    }
+                />
+
+
+                {/* MAINTENANCE OFFICER ROUTES */}
+
+                <Route
+                    path="/maintenance/dashboard"
+                    element={
+                        <AppLayout user={user}>
+                            <RoleDashboard
+                                title="Maintenance Dashboard"
+                                description="Maintenance requests and work orders will appear here."
+                            />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/maintenance/profile"
+                    element={
+                        <AppLayout user={user} setUser={setUser}>
+                            <MyProfile user={user} setUser={setUser} />
+                        </AppLayout>
+                    }
+                />
+
+
+                {/* SYSTEM ADMINISTRATOR ROUTES */}
+
+                <Route
+                    path="/admin/dashboard"
+                    element={
+                        <AppLayout user={user}>
+                            <RoleDashboard
+                                title="System Administrator Dashboard"
+                                description="System administration controls will appear here."
+                            />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/admin/profile"
+                    element={
+                        <AppLayout user={user} setUser={setUser}>
+                            <MyProfile
+                                user={user}
+                                setUser={setUser}
+                            />
+                        </AppLayout>
+                    }
+                />
+
+
                 {/* FALLBACK */}
 
                 <Route

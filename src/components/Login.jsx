@@ -19,7 +19,7 @@ function Login({ setUser }) {
     { value: 'manager', label: 'Property Manager' },
     { value: 'finance', label: 'Finance Officer' },
     { value: 'maintenance', label: 'Maintenance Officer' },
-    { value: 'security', label: 'Security Officer' },
+    //{ value: 'security', label: 'Security Officer' },
     { value: 'admin', label: 'System Administrator' }
   ];
 
@@ -55,12 +55,20 @@ function Login({ setUser }) {
       localStorage.setItem('user', JSON.stringify(sessionUser));
       setUser(sessionUser);
 
+      console.log('LOGIN ROLE:', role);
+      console.log('PASSWORD MATCH:', password === savedPassword);
+      console.log('USERNAME:', username.trim());
+
       if (role === 'finance') {
         navigate('/finance/dashboard');
       } else if (role === 'tenant') {
         navigate('/tenant/dashboard');
       } else if (role === 'admin') {
         navigate('/admin/dashboard');
+      } else if (role === 'manager') {
+        navigate('/manager/dashboard');
+      } else if (role === 'maintenance') {
+        navigate('/maintenance/dashboard');
       } else {
         navigate('/');
       }

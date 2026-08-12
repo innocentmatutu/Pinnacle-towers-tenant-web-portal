@@ -17,10 +17,8 @@ const searchItems = [
   { type: 'Message', title: 'Re: Parking access card', detail: 'Property Management' }
 ];
 
-export default function Topbar({ menuOpen, setMenuOpen, selectNav }) {
-  const user = JSON.parse(
-    localStorage.getItem('user') || '{}'
-  );
+export default function Topbar({ menuOpen, setMenuOpen, selectNav, user }) {
+
   const [query, setQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
   const searchRef = useRef(null);
@@ -111,12 +109,21 @@ export default function Topbar({ menuOpen, setMenuOpen, selectNav }) {
         </div>
         <button className="profile-button" onClick={() => selectNav('My profile')}>
           <span className="avatar">
-            {user.username?.substring(0, 2).toUpperCase()}
+            {user?.profilePhoto ? (
+              <img
+                src={user.profilePhoto}
+                alt="Profile"
+                className="topbar-avatar-image"
+              />
+            ) : (
+              user?.username
+                ? user.username.substring(0, 2).toUpperCase()
+                : 'U'
+            )}
           </span>
 
           <span>
-            <strong>{user.username || 'User'}</strong>
-            
+            <strong>{user?.username || 'User'}</strong>
           </span>
         </button>
       </div>
