@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {jsPDF} from "jspdf";
 
 import './invoices.css'
@@ -13,7 +13,7 @@ function Invoice() {
     apartment: "A-204",
     DateOfIssue: "2026-08-01",
     DueDate:"2026-08-30",
-    amountPaid: 45000,
+    amountDue: 45000,
     TILL: 13466,
     AccountNO: "12345670P",
     status: "Pending",
@@ -25,7 +25,7 @@ function Invoice() {
     apartment: "A-214",
     DateOfIssue: "2026-08-01",
     DueDate:"2026-08-30",
-    amountPaid: 35000,
+    amountDue: 35000,
      TILL: 13466,
     AccountNO: "12345670P",
     status: "Pending",
@@ -37,7 +37,7 @@ function Invoice() {
     apartment: "A-211",
     DateOfIssue: "2026-08-01",
     DueDate:"2026-08-30",
-    amountPaid: 30000,
+    amountDue: 30000,
     TILL: 13466,
     AccountNO: "12345670P",
     status: "Pending",
@@ -136,7 +136,7 @@ function Invoice() {
                         { align: "center", }); 
                         doc.setFont("helvetica", "bold");
                          doc.setFontSize(20);
-                          doc.text( `Ksh. ${invoice.amountPaid.toLocaleString()}`, centerX, 172, { align: "center", } ); 
+                          doc.text( `Ksh. ${invoice.amountDue.toLocaleString()}`, centerX, 172, { align: "center", } ); 
                      //           PAYMENT STATUS
   
                       doc.setFillColor(218,165,32); 
@@ -190,7 +190,7 @@ function Invoice() {
               <tr key={invoice.invoiceNo}>
                 <td className="invoice-id">{invoice.invoiceNo}</td>
                 <td>{invoice.DueDate}</td>
-                <td>{invoice.amountPaid}</td>
+                <td>{invoice.amountDue}</td>
                 <td>
                   <span className={`status-badge ${invoice.status.toLowerCase()}`}>
                     {invoice.status}
