@@ -22,6 +22,11 @@ import Payments from './finance/Payments';
 import InvoiceList from './finance/InvoiceList';
 import RentCollections from './finance/RentCollections';
 
+import MaintenanceRequests from './operations/MaintenanceRequests';
+import Bookings from './booking/Bookings';
+import ServiceRequests from './operations/ServiceRequests';
+import Visitors from './visitors/Visitors';
+import ComplaintsFeedback from './complaints/ComplaintsFeedback';
 
 const AppLayout = ({ children, user }) => {
     const navigate = useNavigate();
@@ -45,11 +50,12 @@ const AppLayout = ({ children, user }) => {
             'My lease': '/tenant/lease',
             Payments: '/tenant/payments',
             Maintenance: '/tenant/maintenance',
+            'Service Requests': '/tenant/service-requests',
             Bookings: '/tenant/booking',
             Visitors: '/tenant/visitors',
-            Documents: '/tenant/documents',
             Messages: '/tenant/messages',
-            Announcements: '/tenant/announcements'
+            Announcements: '/tenant/announcements',
+           'Complaints & Feedback': '/tenant/complaints'
         };
 
         if (routes[label]) {
@@ -156,6 +162,50 @@ function App() {
                     }
                 />
 
+                <Route
+                    path="/tenant/maintenance"
+                    element={
+                        <AppLayout user={user}>
+                            <MaintenanceRequests />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/booking"
+                    element={
+                        <AppLayout user={user}>
+                            <Bookings />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/service-requests"
+                    element={
+                        <AppLayout user={user}>
+                            <ServiceRequests />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/visitors"
+                    element={
+                        <AppLayout user={user}>
+                            <Visitors />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/complaints"
+                    element={
+                        <AppLayout user={user}>
+                            <ComplaintsFeedback />
+                        </AppLayout>
+                    }
+                />
 
                 {/* FINANCE OFFICER ROUTES */}
 
