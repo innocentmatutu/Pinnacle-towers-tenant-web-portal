@@ -1,6 +1,6 @@
 import Icon from './Icon';
 
-const navItems = [
+const tenantNavItems = [
     ['dashboard', 'Dashboard'],
     ['profile', 'My profile'],
     ['building', 'My lease'],
