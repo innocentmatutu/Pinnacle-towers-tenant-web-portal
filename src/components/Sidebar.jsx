@@ -24,6 +24,43 @@ const financeNavItems = [
   ['bell', 'Announcements']
 ];
 
+const managerNavItems = [
+    ['dashboard', 'Dashboard'],
+    ['profile', 'My profile'],
+    ['users', 'Tenants'],
+    ['building', 'Properties & Units'],
+    ['tools', 'Maintenance'],
+    ['calendar', 'Bookings'],
+    ['users', 'Visitors'],
+    ['file', 'Documents'],
+    ['file', 'Reports'],
+    ['message', 'Messages'],
+    ['bell', 'Announcements']
+];
+
+const maintenanceNavItems = [
+    ['dashboard', 'Dashboard'],
+    ['profile', 'My profile'],
+    ['tools', 'Maintenance'],
+    ['file', 'Work Orders'],
+    ['file', 'Documents'],
+    ['file', 'Reports'],
+    ['message', 'Messages'],
+    ['bell', 'Announcements']
+];
+
+const adminNavItems = [
+    ['dashboard', 'Dashboard'],
+    ['profile', 'My profile'],
+    ['users', 'User Management'],
+    ['users', 'Roles & Permissions'],
+    ['building', 'System Settings'],
+    ['file', 'Reports'],
+    ['file', 'Audit Logs'],
+    ['message', 'Messages'],
+    ['bell', 'Announcements']
+];
+
 export default function Sidebar({
   active,
   selectNav,
@@ -34,15 +71,36 @@ export default function Sidebar({
 }) {
   const role = user?.role?.toLowerCase();
 
-  const navItems =
-    role === 'finance'
-      ? financeNavItems
-      : tenantNavItems;
+  let navItems;
+  let roleLabel;
 
-  const roleLabel =
-    role === 'finance'
-      ? 'Finance Officer'
-      : 'Tenant';
+  switch (role) {
+      case 'finance':
+          navItems = financeNavItems;
+          roleLabel = 'Finance Officer';
+          break;
+
+      case 'manager':
+          navItems = managerNavItems;
+          roleLabel = 'Property Manager';
+          break;
+
+      case 'maintenance':
+          navItems = maintenanceNavItems;
+          roleLabel = 'Maintenance Officer';
+          break;
+
+      case 'admin':
+          navItems = adminNavItems;
+          roleLabel = 'System Administrator';
+          break;
+
+      case 'tenant':
+      default:
+          navItems = tenantNavItems;
+          roleLabel = 'Tenant';
+          break;
+  }
 
   return (
     <aside className={`sidebar ${menuOpen ? 'is-open' : ''}`}>
