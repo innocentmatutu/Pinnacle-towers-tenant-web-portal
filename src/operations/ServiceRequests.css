@@ -1,0 +1,567 @@
+/* =========================================================
+   SERVICE REQUESTS PAGE
+========================================================= */
+
+.service-page {
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+    color: #2B1818;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.page-header h1 {
+    margin: 0 0 6px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #2B1818;
+}
+
+.page-header p {
+    margin: 0;
+    color: #64748B;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   NEW REQUEST BUTTON
+========================================================= */
+
+.new-request-btn {
+    background-color: #8B0000;
+    color: #ffffff;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.new-request-btn:hover {
+    background-color: #680000;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.stat-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: #8B0000;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #64748B;
+}
+
+
+/* =========================================================
+   SERVICE CARD
+========================================================= */
+
+.service-card {
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.requests-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.requests-toolbar h2 {
+    margin: 0;
+    margin-right: auto;
+    font-size: 18px;
+    color: #2B1818;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-input {
+    width: 220px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    outline: none;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.search-input:focus {
+    border-color: #8B0000;
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   STATUS FILTER
+========================================================= */
+
+.status-filter {
+    width: 160px;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #2B1818;
+    outline: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.status-filter:focus {
+    border-color: #8B0000;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.service-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.service-table thead {
+    background: #f8fafc;
+}
+
+.service-table th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    color: #475569;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.service-table td {
+    padding: 15px 16px;
+    font-size: 14px;
+    color: #334155;
+    border-bottom: 1px solid #eef0f2;
+    vertical-align: middle;
+}
+
+.service-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.service-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   PRIORITY BADGES
+========================================================= */
+
+.priority {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.priority.low {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.priority.medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.priority.high {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+========================================================= */
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status.submitted {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.status.assigned {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.status.in-progress {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status.completed {
+    background: #dcfce7;
+    color: #166534;
+}
+
+
+/* =========================================================
+   TABLE BUTTONS
+========================================================= */
+
+.table-btn {
+    border: none;
+    background: #f1f5f9;
+    color: #8B0000;
+    padding: 7px 11px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: 0.2s ease;
+}
+
+.table-btn:hover {
+    background: #8B0000;
+    color: #ffffff;
+}
+
+.delete-btn {
+    color: #dc2626;
+}
+
+.delete-btn:hover {
+    background: #dc2626;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #64748B;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   MODAL CONTENT
+========================================================= */
+
+.modal-content {
+    width: 100%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-sizing: border-box;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #2B1818;
+}
+
+.modal-header button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: #64748B;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.modal-header button:hover {
+    background: #f1f5f9;
+    color: #8B0000;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #2B1818;
+    background: #ffffff;
+    outline: none;
+}
+
+.form-group input,
+.form-group select {
+    height: 42px;
+}
+
+.form-group textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #8B0000;
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   MODAL BUTTONS
+========================================================= */
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.cancel-btn {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #d1d5db;
+    padding: 10px 18px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancel-btn:hover {
+    background: #e2e8f0;
+}
+
+
+/* =========================================================
+   SCROLLBAR FOR MODAL
+========================================================= */
+
+.modal-content::-webkit-scrollbar {
+    width: 7px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f8fafc;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .requests-toolbar {
+        flex-wrap: wrap;
+    }
+
+    .requests-toolbar h2 {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .search-input {
+        flex: 1;
+    }
+
+    .status-filter {
+        width: 160px;
+    }
+
+    .service-table {
+        min-width: 750px;
+    }
+
+    .service-card {
+        overflow-x: auto;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .service-page {
+        padding: 15px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .new-request-btn {
+        width: 100%;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+
+    .requests-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-input,
+    .status-filter {
+        width: 100%;
+    }
+
+    .modal-content {
+        max-height: 95vh;
+        padding: 18px;
+    }
+
+    .modal-buttons {
+        flex-direction: column-reverse;
+    }
+
+    .modal-buttons button {
+        width: 100%;
+    }
+}
