@@ -24,6 +24,11 @@ import RentCollections from './finance/RentCollections';
 import Billings from './Billings';
 import Documents from './components/records/documents';
 import Report from './components/records/report';
+import CarDashboard from './modules/cars/CarDashboard';
+import VisitorDashboard from './modules/visitors/VisitorsDashboard';
+import ParkingDashboard from './modules/parking/ParkingDashboard';
+import Announcements from './modules/announcements/Announcements';
+import Support from './modules/support/Support';
 
 
 const AppLayout = ({ children, user, setUser }) => {
@@ -48,7 +53,12 @@ const AppLayout = ({ children, user, setUser }) => {
             Payments: '/tenant/payments',
             'My lease': '/tenant/lease',
             Documents: '/tenant/documents',
-            Reports: '/tenant/reports'
+            Reports: '/tenant/reports',
+            "My cars": "/tenant/cars",
+            Visitors: "tenant/visitors",
+            Parking: "tenant/parking",
+            Announcements: "tenant/announcements",
+            Support: "tenant/support",
         };
 
         const financeRoutes = {
@@ -224,6 +234,15 @@ function App() {
                 />
 
                 <Route
+                    path="/tenant/cars"
+                    element={
+                        <AppLayout user={user}>
+                            <CarDashboard user={user} />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
                     path="/tenant/payments"
                     element={
                         <AppLayout user={user}>
@@ -241,6 +260,24 @@ function App() {
                             <p>Your lease information will appear here.</p>
                         </div>
                     </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/visitors"
+                    element={
+                        <AppLayout user={user}>
+                            <VisitorDashboard  user={user}/>
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/parking"
+                    element={
+                        <AppLayout user={user}>
+                            <ParkingDashboard user={user} />
+                        </AppLayout>
                     }
                 />
 
@@ -267,6 +304,24 @@ function App() {
                     element={
                     <AppLayout user={user}>
                         <Report />
+                    </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/announcements"
+                    element={
+                    <AppLayout user={user}>
+                        <Announcements />
+                    </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/support"
+                    element={
+                    <AppLayout user={user}>
+                        <Support />
                     </AppLayout>
                     }
                 />

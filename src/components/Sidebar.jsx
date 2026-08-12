@@ -1,17 +1,19 @@
 import Icon from './Icon';
 
 const tenantNavItems = [
-  ['dashboard', 'Dashboard'],
-  ['profile', 'My profile'],
-  ['building', 'My lease'],
-  ['card', 'Payments'],
-  ['tools', 'Maintenance'],
-  ['calendar', 'Bookings'],
-  ['users', 'Visitors'],
-  ['file', 'Documents'],
-  ['file', 'Reports'],
-  ['message', 'Messages'],
-  ['bell', 'Announcements']
+  ["dashboard", "Dashboard"],
+  ["profile", "My profile"],
+  ["car", "My cars"],
+  ["building", "My lease"],
+  ["card", "Payments"],
+  ["tools", "Maintenance"],
+  ["calendar", "Bookings"],
+  ["users", "Visitors"],
+  ["parking", "Parking"],
+  ["file", "Documents"],
+  ["message", "Messages"],
+  ["bell", "Announcements"],
+  ["support", "Support"],
 ];
 
 const financeNavItems = [
