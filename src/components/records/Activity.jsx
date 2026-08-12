@@ -21,7 +21,7 @@ function Activity() {
                         </span>
                     </div>
 
-                    <h2 className="cash">
+                    <h2 style={{color:"#d2930a"}}>
                         Ksh. 5,420,000
                     </h2>
 
@@ -38,7 +38,7 @@ function Activity() {
                         </span>
                     </div>
 
-                    <h2 className="cash">
+                    <h2 style={{color:"#d2930a"}}>
                         Ksh. 29,678.00
                     </h2>
 
@@ -48,6 +48,28 @@ function Activity() {
              
 
             </div>
+              <div className="facility-card">
+                   <h2>Lease Expires</h2>
+
+                    <div className="stats">
+                       <div>
+                        <span className="number">
+                            20
+                        </span>
+                      <span className='label'>Tentants Expires this Month</span>  
+                    </div>
+                </div>
+                
+                
+                <div >
+                    <span className="number">
+                        5
+                        </span>
+                        <br/>
+                        <span className="label"> Tenants Expires the Next Month</span>
+                        </div>
+                   </div>
+                
 
 
             {/* MAINTENANCE REPORT */}
@@ -143,6 +165,9 @@ function Activity() {
                       <span className='label'>bookings</span>  
                     </div>
                 </div>
+
+              
+                
 
 
 
