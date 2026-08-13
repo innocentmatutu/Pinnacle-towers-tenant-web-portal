@@ -26,6 +26,9 @@ import Documents from './components/records/documents';
 import Report from './components/records/report';
 import Messages from './components/Messages';
 import Announcements from './components/Announcements';
+import MaintenanceRequests from './operations/MaintenanceRequests';
+import ServiceRequests from './operations/ServiceRequests';
+import ComplaintsFeedback from './complaints/ComplaintsFeedback';
 
 
 const AppLayout = ({ children, user, setUser }) => {
@@ -48,11 +51,14 @@ const AppLayout = ({ children, user, setUser }) => {
             Dashboard: '/tenant/dashboard',
             'My profile': '/tenant/profile',
             Payments: '/tenant/payments',
+            Maintenance: '/tenant/maintenance',
+            'Service Requests': '/tenant/service-requests',
             'My lease': '/tenant/lease',
             Documents: '/tenant/documents',
             Reports: '/tenant/reports',
             Messages: '/tenant/messages',
-            Announcements: '/tenant/announcements'
+            Announcements: '/tenant/announcements',
+            'Complaints & Feedback': '/tenant/complaints',
         };
 
         const financeRoutes = {
@@ -244,6 +250,24 @@ function App() {
                     }
                 />
 
+                <Route 
+                    path="/tenant/maintenance" 
+                    element={ 
+                        <AppLayout user={user}> 
+                            <MaintenanceRequests /> 
+                        </AppLayout> 
+                    } 
+                />
+
+                <Route 
+                    path="/tenant/service-requests" 
+                    element={ 
+                        <AppLayout user={user}> 
+                            <ServiceRequests /> 
+                        </AppLayout> 
+                    } 
+                />
+
                 <Route
                     path="/tenant/lease"
                     element={
@@ -297,6 +321,15 @@ function App() {
                     element={
                         <AppLayout user={user}>
                             <Announcements user={user} />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/complaints"
+                    element={
+                        <AppLayout user={user}>
+                            <ComplaintsFeedback />
                         </AppLayout>
                     }
                 />
