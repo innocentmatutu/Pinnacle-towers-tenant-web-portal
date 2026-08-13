@@ -9,6 +9,8 @@ const tenantNavItems = [
     ['tools', 'Service Requests'],
     ['calendar', 'Bookings'],
     ['users', 'Visitors'],
+    ['file', 'Documents'],
+    ['file','Reports'],
     ['bell', 'Announcements'],
     ['message', 'Complaints & Feedback']
 ];
