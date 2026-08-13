@@ -24,17 +24,9 @@ import RentCollections from './finance/RentCollections';
 import Billings from './Billings';
 import Documents from './components/records/documents';
 import Report from './components/records/report';
-import CarDashboard from './modules/cars/CarDashboard';
-import VisitorDashboard from './modules/visitors/VisitorsDashboard';
-import ParkingDashboard from './modules/parking/ParkingDashboard';
-import Announcements from './modules/announcements/Announcements';
-import Support from './modules/support/Support';
+import Messages from './components/Messages';
+import Announcements from './components/Announcements';
 
-import MaintenanceRequests from './operations/MaintenanceRequests';
-import Bookings from './booking/Bookings';
-import ServiceRequests from './operations/ServiceRequests';
-import Visitors from './visitors/Visitors';
-import ComplaintsFeedback from './complaints/ComplaintsFeedback';
 
 const AppLayout = ({ children, user, setUser }) => {
     const navigate = useNavigate();
@@ -56,21 +48,21 @@ const AppLayout = ({ children, user, setUser }) => {
             Dashboard: '/tenant/dashboard',
             'My profile': '/tenant/profile',
             Payments: '/tenant/payments',
-            Maintenance: '/tenant/maintenance',
-            'Service Requests': '/tenant/service-requests',
-            Bookings: '/tenant/booking',
-            Visitors: '/tenant/visitors',
+            'My lease': '/tenant/lease',
+            Documents: '/tenant/documents',
+            Reports: '/tenant/reports',
             Messages: '/tenant/messages',
-            Announcements: '/tenant/announcements',
-            'Complaints & Feedback': '/tenant/complaints'
-            };
+            Announcements: '/tenant/announcements'
+        };
 
         const financeRoutes = {
             Dashboard: '/finance/dashboard',
             'My profile': '/finance/profile',
             'Billing & Payments': '/tenant/billings',
             Invoices: '/finance/invoices',
-            'Rent Collections': '/finance/collections'
+            'Rent Collections': '/finance/collections',
+            Messages: '/tenant/messages',
+            Announcements: '/tenant/announcements'
         };
 
         const managerRoutes = {
@@ -82,7 +74,9 @@ const AppLayout = ({ children, user, setUser }) => {
             Bookings: '/manager/bookings',
             Visitors: '/manager/visitors',
             Documents: '/manager/documents',
-            Reports: '/manager/reports'
+            Reports: '/manager/reports',
+            Messages: '/tenant/messages',
+            Announcements: '/tenant/announcements'
         };
 
         const maintenanceRoutes = {
@@ -91,7 +85,9 @@ const AppLayout = ({ children, user, setUser }) => {
             Maintenance: '/maintenance/requests',
             'Work Orders': '/maintenance/work-orders',
             Documents: '/maintenance/documents',
-            Reports: '/maintenance/reports'
+            Reports: '/maintenance/reports',
+            Messages: '/tenant/messages',
+            Announcements: '/tenant/announcements'
         };
 
         const adminRoutes = {
@@ -101,7 +97,9 @@ const AppLayout = ({ children, user, setUser }) => {
             'Roles & Permissions': '/admin/roles',
             'System Settings': '/admin/settings',
             Reports: '/admin/reports',
-            'Audit Logs': '/admin/audit-logs'
+            'Audit Logs': '/admin/audit-logs',
+            Messages: '/tenant/messages',
+            Announcements: '/tenant/announcements'
         };
 
         let routes;
@@ -238,15 +236,6 @@ function App() {
                 />
 
                 <Route
-                    path="/tenant/cars"
-                    element={
-                        <AppLayout user={user}>
-                            <CarDashboard user={user} />
-                        </AppLayout>
-                    }
-                />
-
-                <Route
                     path="/tenant/payments"
                     element={
                         <AppLayout user={user}>
@@ -255,116 +244,50 @@ function App() {
                     }
                 />
 
-                                <Route
+                <Route
                     path="/tenant/lease"
                     element={
-                        <AppLayout user={user}>
-                            <div>
-                                <h2>My Lease</h2>
-                                <p>Your lease information will appear here.</p>
-                            </div>
-                        </AppLayout>
+                    <AppLayout user={user}>
+                        <div>
+                            <h2>My Lease</h2>
+                            <p>Your lease information will appear here.</p>
+                        </div>
+                    </AppLayout>
                     }
                 />
 
                 <Route
-                    path="/tenant/maintenance"
+                    path="/tenant/documents"
                     element={
-                        <AppLayout user={user}>
-                            <MaintenanceRequests />
-                        </AppLayout>
-                    }
-                />
-
-                <Route
-                    path="/tenant/booking"
-                    element={
-                        <AppLayout user={user}>
-                            <Bookings />
-                        </AppLayout>
-                    }
-                />
-
-                <Route
-                    path="/tenant/service-requests"
-                    element={
-                        <AppLayout user={user}>
-                            <ServiceRequests />
-                        </AppLayout>
-                    }
-                />
-
-                                <Route
-                    path="/tenant/lease"
-                    element={
-                        <AppLayout user={user}>
-                            <div>
-                                <h2>My Lease</h2>
-                                <p>Your lease information will appear here.</p>
-                            </div>
-                        </AppLayout>
-                    }
-                />
-
-                <Route
-                    path="/tenant/maintenance"
-                    element={
-                        <AppLayout user={user}>
-                            <MaintenanceRequests />
-                        </AppLayout>
-                    }
-                />
-
-                <Route
-                    path="/tenant/booking"
-                    element={
-                        <AppLayout user={user}>
-                            <Bookings />
-                        </AppLayout>
-                    }
-                />
-
-                <Route
-                    path="/tenant/service-requests"
-                    element={
-                        <AppLayout user={user}>
-                            <ServiceRequests />
-                        </AppLayout>
-                    }
-                />
-
-                                <Route
-                    path="/tenant/visitors"
-                    element={
-                        <AppLayout user={user}>
-                            <VisitorDashboard user={user} />
-                        </AppLayout>
-                    }
-                />
-
-                                <Route
-                    path="/tenant/parking"
-                    element={
-                        <AppLayout user={user}>
-                            <ParkingDashboard user={user} />
-                        </AppLayout>
+                    <AppLayout user={user}>
+                        <Documents />
+                    </AppLayout>
                     }
                 />
 
                 <Route
                     path="/tenant/billings"
                     element={
-                        <AppLayout user={user}>
-                            <Billings />
-                        </AppLayout>
+                    <AppLayout user={user}>
+                        <Billings />
+                    </AppLayout>
                     }
                 />
 
                 <Route
                     path="/tenant/reports"
                     element={
+                    <AppLayout user={user}>
+                        <Report />
+                    </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/messages"
+                    element={
                         <AppLayout user={user}>
-                            <Report />
+                            <Messages user={user} />
                         </AppLayout>
                     }
                 />
@@ -373,25 +296,7 @@ function App() {
                     path="/tenant/announcements"
                     element={
                         <AppLayout user={user}>
-                            <Announcements />
-                        </AppLayout>
-                    }
-                />
-
-                <Route
-                    path="/tenant/support"
-                    element={
-                        <AppLayout user={user}>
-                            <Support />
-                        </AppLayout>
-                    }
-                />
-
-                <Route
-                    path="/tenant/complaints"
-                    element={
-                        <AppLayout user={user}>
-                            <ComplaintsFeedback />
+                            <Announcements user={user} />
                         </AppLayout>
                     }
                 />
@@ -438,6 +343,24 @@ function App() {
                     }
                 />
 
+                <Route
+                    path="/finance/messages"
+                    element={
+                        <AppLayout user={user}>
+                            <Messages user={user} />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/finance/announcements"
+                    element={
+                        <AppLayout user={user}>
+                            <Announcements user={user} />
+                        </AppLayout>
+                    }
+                />
+
                 {/* PROPERTY MANAGER ROUTES */}
 
                 <Route
@@ -460,6 +383,24 @@ function App() {
                                 user={user}
                                 setUser={setUser}
                             />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/manager/messages"
+                    element={
+                        <AppLayout user={user}>
+                            <Messages user={user} />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/manager/announcements"
+                    element={
+                        <AppLayout user={user}>
+                            <Announcements user={user} />
                         </AppLayout>
                     }
                 />
@@ -488,6 +429,24 @@ function App() {
                     }
                 />
 
+                <Route
+                    path="/maintenance/messages"
+                    element={
+                        <AppLayout user={user}>
+                            <Messages user={user} />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/maintenance/announcements"
+                    element={
+                        <AppLayout user={user}>
+                            <Announcements user={user} />
+                        </AppLayout>
+                    }
+                />
+
 
                 {/* SYSTEM ADMINISTRATOR ROUTES */}
 
@@ -511,6 +470,24 @@ function App() {
                                 user={user}
                                 setUser={setUser}
                             />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/admin/messages"
+                    element={
+                        <AppLayout user={user}>
+                            <Messages user={user} />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/admin/announcements"
+                    element={
+                        <AppLayout user={user}>
+                            <Announcements user={user} />
                         </AppLayout>
                     }
                 />

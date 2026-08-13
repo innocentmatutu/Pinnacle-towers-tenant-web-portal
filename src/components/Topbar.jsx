@@ -9,12 +9,48 @@ const notificationItems = [
 ];
 
 const searchItems = [
-  { type: 'Document', title: 'Lease agreement - Unit 12B', detail: 'Updated 12 June 2026' },
-  { type: 'Payment', title: 'Rent receipt - June 2026', detail: 'KSh 24,500 paid' },
-  { type: 'Maintenance', title: 'Kitchen sink drainage', detail: 'In progress' },
-  { type: 'Announcement', title: 'Planned water interruption', detail: '25 July 2026' },
-  { type: 'Booking', title: 'Rooftop terrace reservation', detail: '02 August 2026' },
-  { type: 'Message', title: 'Re: Parking access card', detail: 'Property Management' }
+  {
+    type: 'Document',
+    title: 'Lease agreement - Unit 12B',
+    detail: 'Updated 12 June 2026',
+    roles: ['tenant', 'manager', 'maintenance'],
+    target: 'Documents'
+  },
+  {
+    type: 'Payment',
+    title: 'Rent receipt - June 2026',
+    detail: 'KSh 24,500 paid',
+    roles: ['tenant', 'finance'],
+    target: 'Billing & Payments'
+  },
+  {
+    type: 'Maintenance',
+    title: 'Kitchen sink drainage',
+    detail: 'In progress',
+    roles: ['tenant', 'manager', 'maintenance'],
+    target: 'Maintenance'
+  },
+  {
+    type: 'Announcement',
+    title: 'Planned water interruption',
+    detail: '25 July 2026',
+    roles: ['tenant', 'finance','manager', 'maintenance', 'admin'],
+    target: 'Announcements'
+  },
+  {
+    type: 'Booking',
+    title: 'Rooftop terrace reservation',
+    detail: '02 August 2026',
+    roles: ['tenant', 'manager'],
+    target: 'Bookings'
+  },
+  {
+    type: 'Message',
+    title: 'Re: Parking access card',
+    detail: 'Property Management',
+    roles: ['tenant', 'manager', 'finance', 'maintenance','admin'],
+    target: 'Messages'
+  }
 ];
 
 export default function Topbar({ menuOpen, setMenuOpen, selectNav, user }) {
@@ -27,8 +63,18 @@ export default function Topbar({ menuOpen, setMenuOpen, selectNav, user }) {
   const notifRef = useRef(null);
 
   const results = useMemo(
-    () => searchItems.filter(item => `${item.type} ${item.title} ${item.detail}`.toLowerCase().includes(query.toLowerCase())),
-    [query]
+    () =>
+      searchItems.filter(item => {
+        const matchesRole = item.roles.includes(user?.role);
+
+        const searchText =
+          `${item.type} ${item.title} ${item.detail}`.toLowerCase();
+
+        const matchesQuery = searchText.includes(query.toLowerCase());
+
+        return matchesRole && matchesQuery;
+      }),
+    [query, user?.role]
   );
 
   useEffect(() => {
@@ -73,8 +119,9 @@ export default function Topbar({ menuOpen, setMenuOpen, selectNav, user }) {
               <button
                 key={item.title}
                 onClick={() => {
-                  setActiveFromSearch(item, selectNav);
+                  selectNav(item.target);
                   setSearchOpen(false);
+                  setQuery('');
                 }}
               >
                 <span className="result-icon">
@@ -132,6 +179,18 @@ export default function Topbar({ menuOpen, setMenuOpen, selectNav, user }) {
 }
 
 function setActiveFromSearch(item, selectNav) {
-  const target = item.type === 'Announcement' ? 'Announcements' : item.type === 'Message' ? 'Messages' : item.type + 's';
-  selectNav(target);
+  const navigationMap = {
+    Document: 'Documents',
+    Payment: 'Billing & Payments',
+    Maintenance: 'Maintenance',
+    Announcement: 'Announcements',
+    Booking: 'Bookings',
+    Message: 'Messages'
+  };
+
+  const target = navigationMap[item.type];
+
+  if (target) {
+    selectNav(target);
+  }
 }

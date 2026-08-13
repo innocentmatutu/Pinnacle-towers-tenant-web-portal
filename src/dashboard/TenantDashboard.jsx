@@ -16,7 +16,7 @@ const TenantDashboard = ({user}) => {
                     </p>
 
                     <div className="tenant-dashboard__meta">
-                        <span>Mark Ng'ang'a</span>
+                        <span>{user.username}</span>
                         <span>Tenant since March 2024</span>
                         <span>Tenant ID: TEN-402-A</span>
                     </div>
