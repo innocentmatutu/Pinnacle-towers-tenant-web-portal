@@ -29,6 +29,8 @@ import Announcements from './components/Announcements';
 import MaintenanceRequests from './operations/MaintenanceRequests';
 import ServiceRequests from './operations/ServiceRequests';
 import ComplaintsFeedback from './complaints/ComplaintsFeedback';
+import MyLease from './modules/lease/MyLease';
+import ManagerDashboard from './dashboard/ManagerDashboard';
 
 
 const AppLayout = ({ children, user, setUser }) => {
@@ -272,10 +274,7 @@ function App() {
                     path="/tenant/lease"
                     element={
                     <AppLayout user={user}>
-                        <div>
-                            <h2>My Lease</h2>
-                            <p>Your lease information will appear here.</p>
-                        </div>
+                        <MyLease />
                     </AppLayout>
                     }
                 />
@@ -400,10 +399,7 @@ function App() {
                     path="/manager/dashboard"
                     element={
                         <AppLayout user={user}>
-                            <RoleDashboard
-                                title="Property Manager Dashboard"
-                                description="Property management overview will appear here."
-                            />
+                           <ManagerDashboard user={user} />
                         </AppLayout>
                     }
                 />

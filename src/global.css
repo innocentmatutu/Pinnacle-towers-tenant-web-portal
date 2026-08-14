@@ -2314,3 +2314,458 @@ footer {
         gap: 5px;
     }
 }
+
+/* =========================================================
+   SIDEBAR — PINNACLE TOWERS
+   ========================================================= */
+
+.sidebar {
+    width: 265px;
+    height: 100vh;
+    height: 100dvh;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #8d0b2f;
+    color: #fff;
+
+    z-index: 100;
+
+    /* IMPORTANT:
+       The sidebar itself must NOT scroll.
+       Only the navigation section scrolls.
+    */
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.sidebar .brand {
+    height: 88px;
+    min-height: 88px;
+
+    padding: 0 28px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sidebar .brand-mark {
+    width: 30px;
+    height: 38px;
+
+    display: flex;
+    align-items: flex-end;
+
+    gap: 3px;
+
+    flex-shrink: 0;
+}
+
+.sidebar .brand-mark span {
+    display: block;
+
+    width: 6px;
+
+    background: #fff;
+}
+
+.sidebar .brand-mark span:nth-child(1) {
+    height: 17px;
+}
+
+.sidebar .brand-mark span:nth-child(2) {
+    height: 27px;
+}
+
+.sidebar .brand-mark span:nth-child(3) {
+    height: 37px;
+}
+
+.sidebar .brand > span:last-child {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.sidebar .brand b {
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   SIDEBAR TOGGLE
+   ========================================================= */
+
+/*
+   The target design uses the hamburger in the TOPBAR,
+   not another menu button inside the sidebar.
+
+   Hide the sidebar toggle so it doesn't consume vertical
+   space and push navigation items out of view.
+*/
+
+.sidebar .sidebar-toggle {
+    display: none;
+}
+
+
+/* =========================================================
+   TENANT PROFILE
+   ========================================================= */
+
+.sidebar .tenant-chip {
+    margin: 22px 18px 18px;
+
+    min-height: 72px;
+
+    padding: 12px 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    flex-shrink: 0;
+}
+
+.sidebar .tenant-chip .avatar {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.16);
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.sidebar .tenant-chip strong {
+    display: block;
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.sidebar .tenant-chip small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   NAVIGATION AREA
+   ========================================================= */
+
+.sidebar nav {
+    flex: 1;
+    min-height: 0;
+
+    padding: 2px 10px 8px;
+
+    /*
+       ONLY THE NAVIGATION SCROLLS.
+       Brand, tenant profile and logout remain fixed.
+    */
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+
+/* Chrome / Edge / Safari */
+
+.sidebar nav::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar nav::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+}
+
+.sidebar nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+
+/* =========================================================
+   NAVIGATION BUTTONS
+   ========================================================= */
+
+.sidebar nav button {
+    width: 100%;
+    height: 48px;
+
+    margin: 1px 0;
+
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    position: relative;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: rgba(255, 255, 255, 0.82);
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* Icons */
+
+.sidebar nav button svg {
+    width: 21px;
+    height: 21px;
+
+    flex-shrink: 0;
+
+    stroke-width: 1.8;
+}
+
+
+/* Hover */
+
+.sidebar nav button:hover {
+    background: rgba(255, 255, 255, 0.08);
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   ACTIVE NAV ITEM
+   ========================================================= */
+
+.sidebar nav button.active {
+    background: rgba(0, 0, 0, 0.20);
+
+    color: #fff;
+
+    font-weight: 600;
+}
+
+
+/* Gold active indicator */
+
+.sidebar nav button.active::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 7px;
+
+    width: 3px;
+    height: 34px;
+
+    background: #f2c94c;
+
+    border-radius: 0 3px 3px 0;
+}
+
+
+/* =========================================================
+   NAV BADGE
+   ========================================================= */
+
+.sidebar nav button em {
+    margin-left: auto;
+
+    padding: 2px 7px;
+
+    border-radius: 10px;
+
+    background: #f2c94c;
+
+    color: #5b0a20;
+
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   LOGOUT AREA
+   ========================================================= */
+
+.sidebar-bottom {
+    width: 100%;
+
+    flex-shrink: 0;
+
+    margin-top: 0;
+
+    padding: 10px 10px 16px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+
+    background: #8d0b2f;
+}
+
+
+/* Logout button */
+
+.sidebar-bottom .logout-button {
+    width: 100%;
+    height: 48px;
+
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: rgba(255, 255, 255, 0.82);
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* Logout hover */
+
+.sidebar-bottom .logout-button:hover {
+    background: rgba(255, 255, 255, 0.08);
+
+    color: #fff;
+}
+
+
+/* Logout icon */
+
+.sidebar-bottom .logout-button svg {
+    width: 21px;
+    height: 21px;
+
+    flex-shrink: 0;
+
+    stroke-width: 1.8;
+}
+
+
+/* Small footer text */
+
+.sidebar-bottom small {
+    display: block;
+
+    margin-top: 3px;
+
+    padding: 0 18px;
+
+    color: rgba(255, 255, 255, 0.45);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT OFFSET
+   ========================================================= */
+
+.main-area,
+.main-shell {
+    margin-left: 265px;
+
+    width: calc(100% - 265px);
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+
+        transition: transform 0.25s ease;
+    }
+
+    .sidebar.is-open {
+        transform: translateX(0);
+    }
+
+    .main-area,
+    .main-shell {
+        margin-left: 0;
+        width: 100%;
+    }
+}

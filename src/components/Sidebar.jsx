@@ -118,7 +118,7 @@ export default function Sidebar({
         </span>
       </div>
 
-      <button
+      {/*<button
         className="sidebar-toggle"
         aria-label={
           sidebarCompact
@@ -131,7 +131,7 @@ export default function Sidebar({
         <span>
           {sidebarCompact ? 'Expand menu' : 'Collapse menu'}
         </span>
-      </button>
+      </button>*/}
 
       <div className="tenant-chip">
         <span className="avatar">
@@ -161,14 +161,18 @@ export default function Sidebar({
       </nav>
 
       <div className="sidebar-bottom">
-        <button>
-          <Icon name="pin" />
-          Pinnacle Towers, Nairobi
+        <button
+          type="button"
+          onClick={() => {
+            localStorage.removeItem('user');
+            window.location.href = '/';
+          }}
+          className="logout-button"
+        >
+          <Icon name="logout" size={20} />
+          <span>Logout</span>
         </button>
 
-        <small>
-          {roleLabel} portal · v1.0
-        </small>
       </div>
 
     </aside>
