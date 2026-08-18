@@ -29,3 +29,67 @@
     background-color: transparent;
     text-align: left;
 }
+
+.facility-card { 
+    background: #ffffff; 
+    border: 1px solid #e5e5e5; 
+    border-radius: 12px; padding: 22px; 
+    display: flex;
+    
+      min-height: 100px;
+       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); 
+       width: 100%;
+       
+    } 
+.facility-card:hover { transform: translateY(-3px); box-shadow: 0 7px 18px rgba(0, 0, 0, 0.1); } 
+
+
+/*    FACILITY ICONS  */ 
+
+
+/* Facility Booking */ 
+.facility-card h2{
+    margin:0 0 20px;
+    font-size:20px;
+    color:#8b0008;
+
+}
+.stats{
+    display:flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+.stats div{
+    display: flex;
+    flex-direction: column;
+}
+.number{
+    font-size: 30px;
+    font-weight: bold;
+    color:#d2930a
+
+}
+.label{
+    margin-top: 5px;
+    font-size: 14px;
+    color: #8b0008;
+}
+ 
+ .badge{
+  border: 1px solid #660006;
+    color: #8b0008; 
+    background-color: rgba(218, 165, 32, 0.12);;
+  border-radius: 12px;
+  padding: 4px 8px;
+
+  font-size: 12px;
+  font-weight: 500;
+    
+ }
+ .item{
+    color: #d2930a;
+ }
+ .title{
+    font-size: 40px;
+    color: #660006;
+ }
