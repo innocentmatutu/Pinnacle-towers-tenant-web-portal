@@ -61,8 +61,8 @@ function Paymentreceipts() {
    const pageWidth = doc.internal.pageSize.getWidth(); 
    const pageHeight = doc.internal.pageSize.getHeight(); 
    const centerX = pageWidth / 2; 
-   //                      HEADER  
-   
+   // ========================= // HEADER // ========================= 
+   // 
    doc.setFillColor(139,0,0); doc.rect(0, 0, pageWidth, 42, "F");
     // Property name // 
     doc.setTextColor(255, 255, 255); 
