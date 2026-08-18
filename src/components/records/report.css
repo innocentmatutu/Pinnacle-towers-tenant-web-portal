@@ -29,6 +29,55 @@
     background-color: transparent;
     text-align: left;
 }
+/* MAINTAINCE REQUEST*/
+feed-card {
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.feed-card:hover {
+    transform: translateY(-5px);
+}
+
+.feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #dee2e6;
+}
+.feed-header h4 { font-size: 16px; font-weight: 600; color: var(--dark-color); }
+.feed-header h4 i { margin-right: 8px; color: var(--primary-color); }
+
+
+.feed-list {
+    list-style: none;
+    padding: 0 20px;
+    flex: 1;
+}
+
+.feed-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #dee2e6;
+}
+.feed-list li:last-child { border-bottom: none; }
+
+.feed-item-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding-right: 10px;
+}
+
+/*    FACILITY ICONS  */ 
 
 .facility-card { 
     background: #ffffff; 
@@ -44,7 +93,7 @@
 .facility-card:hover { transform: translateY(-3px); box-shadow: 0 7px 18px rgba(0, 0, 0, 0.1); } 
 
 
-/*    FACILITY ICONS  */ 
+
 
 
 /* Facility Booking */ 
