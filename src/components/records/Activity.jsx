@@ -146,82 +146,213 @@ function Activity() {
 
             </div>
 
-
-            {/* FACILITY REPORT */}
-
-            <h3 className="title">
+ {/* FACILITY REPORT */}
+            
+ <h3 className="title">
                 Facility Report
             </h3>
+             <ul className="feed-list">
 
-           
-                <div className="facility-card">
-                   
+                    <li>
+                        <div className="feed-item-left">
+                            <div>
+                                <strong>booking</strong>
+                               
+                            </div>
+                        </div>
 
-                    <div className="stats">
-                       <div>
                         <span className="number">
                             24
                         </span>
-                      <span className='label'>bookings</span>  
-                    </div>
-                </div>
-
-              
-                
+                    </li>
 
 
+                    <li>
+                        <div className="feed-item-left">
+                            <div>
+                                <strong>Available Facilities</strong>
+                                <br/>
+                            
+                            </div>
+                        </div>
 
-
-                <div >
-                    <span className="number">
-                        8
+                        <span className="number">
+                            8
                         </span>
-                        <br/>
-                        <span className="label">Available Facilities</span>
-                   
-
-                </div>
+                    </li>
 
 
-                <div className="facility-card">
-                    
+                    <li>
+                        <div className="feed-item-left">
+                            <div>
+                                <strong>Active Booking</strong>
+                                  <br/>
+                              
+                            </div>
+                        </div>
 
-                    <div class className="stats">
-                        <span className='label'>Active Bookings</span>
+                        <span className="number ">
+                            20
+                        </span>
+                    </li>
 
-                       <span  className='number'>20</span>
-                    </div>
-                </div>
+                </ul>
 
             </div>
-
-        </div>
         
        
         {/* Visitor Logs */} 
+
         
+            <h3 className="title">
+                Vistor logs
+            </h3>
+
+            <div className="feed-card">
+                 
+                <div className="feed-header">
+ <span>Visitor ID  & Visit Details</span>
+        <span>Host</span>
+                </div>
+
+
+                <ul className="feed-list">
+
+                    <li>
+                        <div className="feed-item-left">
+                            <div>
+                                <strong>John Kiragu</strong>
+                                <br/>
+                                <small  className="item">
+                                    checked in on 2 Jul 2026
+                                </small>
+                            </div>
+                        </div>
+
+                        <span className="label">
+                            Dan Maina
+                        </span>
+                    </li>
+
+
+                    <li>
+                        <div className="feed-item-left">
+                            <div>
+                                <strong>Fred Justin</strong>
+                                <br/>
+                                <small className="item">
+                                    checked in on 28 Jun 2026
+                                </small>
+                            </div>
+                        </div>
+
+                        <span className="label">
+                            Grace Francis
+                        </span>
+                    </li>
+
+
+                    <li>
+                        <div className="feed-item-left">
+                            <div>
+                                <strong>Plumber</strong>
+                                  <br/>
+                                <small className="item">
+                                    Checked in on 1 August 2026
+                                </small>
+                            </div>
+                        </div>
+
+                        <span className=" label">
+                        Hariet Wanjiku
+                        </span>
+                    </li>
+
+                </ul>
+
+            </div>
     
-        <div className="facility-card "> 
-        
-             <h2> Visitor Logs </h2>
-            <span className='number'>36</span>
-            <br/>
-
-            <span className='label'> Visitors this month </span> 
-
-             </div> 
              {/* Tenant Activity */} 
-             <div className="facility-card "> 
-            <div className='stats'>
-                 <h2> Tenant Activity </h2>
-                 </div>
-                 <div>
-              <span  className='number'>68</span  >
-              <br/> 
+           <h3 className="title">
+                Tenant Activity
+            </h3>    
+   <div className='feed-card'>
+          <div className="feed-header">
+    <span>Date</span>
+   <span>Tenant Name</span>
+    <span>Unit</span>
+    <span>Activity Logged</span>
+    <span>Logged By</span>
+</div>
 
-              <span className='label'> Active tenants </span> 
-              </div> 
-              </div>
+<ul className="feed-list">
+
+    <li>
+        <div>
+
+            <strong>17 July 2026</strong>
+        </div>
+        <div>
+
+            <small>John Kiragu</small>
+        </div>
+
+        <small className="item">
+            402
+        </small>
+
+        <span className="label">
+              Submitted Request:<br/>Leaking Sink
+        </span>
+        
+        <span className="item">
+            Tenant Portal
+        </span>
+    </li>
+
+    <li>
+          <div>
+            <strong>1 August 2026</strong>
+        </div>
+        <div>
+            <small>Hariet Wanjiku</small>
+        </div>
+
+        <small className="item">
+            405
+        </small>
+
+        <span className="label">
+            Maintaence dispatched :<br/>plumber for 2:00pm
+        </span>
+          <span className="item">
+            System Auto
+        </span>
+    </li>
+
+    <li>
+        <div>
+            <strong>30 July 2026</strong>
+        </div>
+        <div>
+            <small>Maureen Ocheing</small>
+        </div>
+
+        <small className="item">
+            401
+        </small>
+
+        <span className="label">
+Occupany:<br/>Moved out And gave out Physical Keys 
+        </span>
+
+          <span className="item">
+            Care Taker
+        </span>
+    </li>
+
+</ul>
+</div>
               
                </>
 
