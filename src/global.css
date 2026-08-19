@@ -2769,3 +2769,56 @@ footer {
         width: 100%;
     }
 }
+
+/* =========================================================
+   SYSTEM MAINTENANCE SCREEN
+   ========================================================= */
+
+.maintenance-screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    background: #f7f5f6;
+}
+
+.maintenance-card {
+    width: min(520px, 100%);
+    padding: 42px 36px;
+    border: 1px solid #e8e1e4;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.maintenance-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(141, 11, 47, 0.08);
+    font-size: 28px;
+}
+
+.maintenance-card h1 {
+    margin: 0 0 12px;
+    color: var(--text-dark, #222);
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+}
+
+.maintenance-card p {
+    margin: 0 auto 10px;
+    max-width: 430px;
+    color: var(--text-light, #777);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+}

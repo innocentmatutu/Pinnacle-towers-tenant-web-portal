@@ -1,0 +1,537 @@
+/* =========================================================
+   USER MANAGEMENT
+   ========================================================= */
+
+.user-management {
+    width: 100%;
+    min-height: 100%;
+    padding: 4px 0 32px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.user-management-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.user-management-header h1 {
+    margin: 0 0 6px;
+    color: var(--text-dark, #222);
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.user-management-header p {
+    margin: 0;
+    color: var(--text-light, #777);
+    font-size: 14px;
+}
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.user-management .primary-button {
+    border: none;
+    border-radius: 8px;
+    padding: 11px 18px;
+    background: var(--primary-color, #8d0b2f);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.user-management .primary-button:hover {
+    background: #720825;
+    box-shadow: 0 5px 14px rgba(141, 11, 47, 0.18);
+    transform: translateY(-1px);
+}
+
+.user-management .primary-button:active {
+    transform: translateY(0);
+}
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+
+.user-management-filters {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 190px 190px;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 18px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.user-management-filters input,
+.user-management-filters select {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    padding: 0 13px;
+    background: #fff;
+    color: #333;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.user-management-filters input::placeholder {
+    color: #999;
+}
+
+.user-management-filters input:focus,
+.user-management-filters select:focus {
+    border-color: var(--primary-color, #8d0b2f);
+    box-shadow: 0 0 0 3px rgba(141, 11, 47, 0.08);
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.user-management-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.user-management-table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.user-management-table thead {
+    background: #faf7f8;
+}
+
+.user-management-table th {
+    padding: 15px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #666;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.user-management-table td {
+    padding: 16px;
+    border-bottom: 1px solid #eeeeee;
+    color: #444;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.user-management-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.user-management-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.user-management-table tbody tr:hover {
+    background: #fcfafb;
+}
+
+.user-management-table td strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #292929;
+    font-weight: 600;
+}
+
+.user-management-table td small {
+    display: block;
+    color: #999;
+    font-size: 11px;
+}
+
+.empty-users {
+    padding: 45px 20px !important;
+    color: #888 !important;
+    text-align: center;
+}
+
+/* =========================================================
+   ROLE BADGE
+   ========================================================= */
+
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    border: 1px solid rgba(141, 11, 47, 0.16);
+    border-radius: 999px;
+    padding: 4px 10px;
+    background: rgba(141, 11, 47, 0.07);
+    color: var(--primary-color, #8d0b2f);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* =========================================================
+   STATUS BADGE
+   ========================================================= */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 28px;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.status-badge.active {
+    border: 1px solid #cde8d5;
+    background: #eef9f1;
+    color: #287a3d;
+}
+
+.status-badge.active::before {
+    background: #3c9a54;
+}
+
+.status-badge.inactive {
+    border: 1px solid #e2e2e2;
+    background: #f5f5f5;
+    color: #777;
+}
+
+.status-badge.inactive::before {
+    background: #999;
+}
+
+/* =========================================================
+   ACTIONS
+   ========================================================= */
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.user-actions button {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 7px 10px;
+    background: #fff;
+    color: #555;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.user-actions button:hover {
+    border-color: var(--primary-color, #8d0b2f);
+    background: #faf4f6;
+    color: var(--primary-color, #8d0b2f);
+}
+
+.user-actions .danger-action {
+    border-color: #edcccc;
+    color: #b43b3b;
+}
+
+.user-actions .danger-action:hover {
+    border-color: #d99b9b;
+    background: #fff5f5;
+    color: #9e2222;
+}
+
+/* =========================================================
+   MODAL OVERLAY
+   ========================================================= */
+
+.user-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(20, 20, 20, 0.55);
+    backdrop-filter: blur(2px);
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.user-modal {
+    width: min(680px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    animation: userModalIn 0.18s ease-out;
+}
+
+@keyframes userModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.99);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =========================================================
+   MODAL HEADER
+   ========================================================= */
+
+.user-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 26px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.user-modal-header h2 {
+    margin: 0 0 5px;
+    color: #292929;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+}
+
+.user-modal-header p {
+    margin: 0;
+    color: #888;
+    font-size: 13px;
+}
+
+.modal-close {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    border: none;
+    border-radius: 50%;
+    background: #f5f5f5;
+    color: #555;
+    font-size: 21px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.modal-close:hover {
+    background: #eee;
+    color: #222;
+}
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.user-modal form {
+    padding: 26px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    color: #444;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    padding: 0 12px;
+    background: #fff;
+    color: #333;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary-color, #8d0b2f);
+    box-shadow: 0 0 0 3px rgba(141, 11, 47, 0.08);
+}
+
+/* =========================================================
+   MODAL ACTIONS
+   ========================================================= */
+
+.user-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #eeeeee;
+}
+
+.user-modal-actions button {
+    min-height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    padding: 0 16px;
+    background: #fff;
+    color: #555;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.user-modal-actions button:hover {
+    background: #f7f7f7;
+}
+
+.user-modal-actions .primary-button {
+    border-color: var(--primary-color, #8d0b2f);
+    background: var(--primary-color, #8d0b2f);
+    color: #fff;
+}
+
+.user-modal-actions .primary-button:hover {
+    background: #720825;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .user-management-filters {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .user-management-filters input {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 650px) {
+    .user-management {
+        padding-bottom: 20px;
+    }
+
+    .user-management-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .user-management-header h1 {
+        font-size: 25px;
+    }
+
+    .user-management-header .primary-button {
+        width: 100%;
+    }
+
+    .user-management-filters {
+        grid-template-columns: 1fr;
+        padding: 14px;
+    }
+
+    .user-management-filters input {
+        grid-column: auto;
+    }
+
+    .user-modal-overlay {
+        align-items: flex-start;
+        padding: 14px;
+        overflow-y: auto;
+    }
+
+    .user-modal {
+        max-height: none;
+    }
+
+    .user-modal-header,
+    .user-modal form {
+        padding: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .user-modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .user-modal-actions button {
+        width: 100%;
+    }
+}

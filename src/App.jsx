@@ -28,15 +28,36 @@ import Messages from './components/Messages';
 import Announcements from './components/Announcements';
 import MaintenanceRequests from './operations/MaintenanceRequests';
 import ServiceRequests from './operations/ServiceRequests';
+import WorkOrders from './operations/WorkOrders';
 import ComplaintsFeedback from './complaints/ComplaintsFeedback';
 import MyLease from './modules/lease/MyLease';
 import ManagerDashboard from './dashboard/ManagerDashboard';
+import MaintenanceDashboard from './dashboard/MaintenanceDashboard';
+import AdminDashboard from './dashboard/AdminDashboard';
+import Bookings from './Booking/Bookings';
+import Visitors from './Visitors/Visitors';
+import UserManagement from './admin/UserManagement';
+import RolesPermissions from './admin/RolesPermissions';
+import ProtectedRoute from './components/ProtectedRoute';
+import SystemSettings from './admin/SystemSettings';
+import AuditLogs from './admin/AuditLogs';
 
 
 const AppLayout = ({ children, user, setUser }) => {
     const navigate = useNavigate();
 
+    const systemSettings = (() => {
+        try {
+            return JSON.parse(
+                localStorage.getItem('admin_system_settings') || '{}'
+            );
+        } catch {
+            return {};
+        }
+    })();
 
+    const maintenanceMode =
+        systemSettings?.portal?.maintenanceMode === true;
 
     const [active, setActive] = useState('Dashboard');
     const [menuOpen, setMenuOpen] = useState(false);
@@ -44,6 +65,33 @@ const AppLayout = ({ children, user, setUser }) => {
 
     if (!user.role) {
         return <Navigate to="/" replace />;
+    }
+
+        if (
+        maintenanceMode &&
+        user.role?.toLowerCase() !== 'admin'
+    ) {
+        return (
+            <div className="maintenance-screen">
+                <div className="maintenance-card">
+                    <div className="maintenance-icon">
+                        🔧
+                    </div>
+
+                    <h1>System Maintenance</h1>
+
+                    <p>
+                        The Pinnacle Towers Tenant Portal is
+                        temporarily unavailable while maintenance
+                        is being performed.
+                    </p>
+
+                    <p>
+                        Please try again later.
+                    </p>
+                </div>
+            </div>
+        );
     }
 
     const selectNav = (label) => {
@@ -61,6 +109,8 @@ const AppLayout = ({ children, user, setUser }) => {
             Messages: '/tenant/messages',
             Announcements: '/tenant/announcements',
             'Complaints & Feedback': '/tenant/complaints',
+            Bookings: '/tenant/bookings',
+            Visitors: '/tenant/visitors'
         };
 
         const financeRoutes = {
@@ -69,8 +119,8 @@ const AppLayout = ({ children, user, setUser }) => {
             'Billing & Payments': '/tenant/billings',
             Invoices: '/finance/invoices',
             'Rent Collections': '/finance/collections',
-            Messages: '/tenant/messages',
-            Announcements: '/tenant/announcements'
+            Messages: '/finance/messages',
+            Announcements: '/finance/announcements'
         };
 
         const managerRoutes = {
@@ -83,8 +133,8 @@ const AppLayout = ({ children, user, setUser }) => {
             Visitors: '/manager/visitors',
             Documents: '/manager/documents',
             Reports: '/manager/reports',
-            Messages: '/tenant/messages',
-            Announcements: '/tenant/announcements'
+            Messages: '/manager/messages',
+            Announcements: '/manager/announcements'
         };
 
         const maintenanceRoutes = {
@@ -94,8 +144,8 @@ const AppLayout = ({ children, user, setUser }) => {
             'Work Orders': '/maintenance/work-orders',
             Documents: '/maintenance/documents',
             Reports: '/maintenance/reports',
-            Messages: '/tenant/messages',
-            Announcements: '/tenant/announcements'
+            Messages: '/maintenance/messages',
+            Announcements: '/maintenance/announcements'
         };
 
         const adminRoutes = {
@@ -106,8 +156,8 @@ const AppLayout = ({ children, user, setUser }) => {
             'System Settings': '/admin/settings',
             Reports: '/admin/reports',
             'Audit Logs': '/admin/audit-logs',
-            Messages: '/tenant/messages',
-            Announcements: '/tenant/announcements'
+            Messages: '/admin/messages',
+            Announcements: '/admin/announcements'
         };
 
         let routes;
@@ -140,6 +190,8 @@ const AppLayout = ({ children, user, setUser }) => {
             navigate(routes[label]);
         }
 
+        
+
         setMenuOpen(false);
     };
 
@@ -171,7 +223,9 @@ const AppLayout = ({ children, user, setUser }) => {
                 />
 
                 <main className="page-content">
-                    {children}
+                    {React.isValidElement(children)
+                        ? React.cloneElement(children, { selectNav })
+                        : children}
                 </main>
             </div>
         </div>
@@ -226,7 +280,10 @@ function App() {
                     path="/tenant/dashboard"
                     element={
                         <AppLayout user={user}>
-                            <TenantDashboard user={user}/>
+                            <TenantDashboard 
+                                user={user}
+                                //selectNav={selectNav}
+                            />
                         </AppLayout>
                     }
                 />
@@ -333,6 +390,24 @@ function App() {
                     }
                 />
 
+                <Route
+                    path="/tenant/bookings"
+                    element={
+                        <AppLayout user={user}>
+                            <Bookings />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/tenant/visitors"
+                    element={
+                        <AppLayout user={user}>
+                            <Visitors />
+                        </AppLayout>
+                    }
+                />
+
 
                 {/* FINANCE OFFICER ROUTES */}
 
@@ -417,6 +492,53 @@ function App() {
                 />
 
                 <Route
+                    path="/manager/maintenance"
+                    element={
+                        <AppLayout user={user}>
+                            <MaintenanceRequests />
+                        </AppLayout>
+                    }
+                />
+
+                
+
+                <Route
+                    path="/manager/bookings"
+                    element={
+                        <AppLayout user={user}>
+                            <Bookings />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/manager/visitors"
+                    element={
+                        <AppLayout user={user}>
+                            <Visitors />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/manager/documents"
+                    element={
+                        <AppLayout user={user}>
+                            <Documents />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/manager/reports"
+                    element={
+                        <AppLayout user={user}>
+                            <Report />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
                     path="/manager/messages"
                     element={
                         <AppLayout user={user}>
@@ -441,10 +563,7 @@ function App() {
                     path="/maintenance/dashboard"
                     element={
                         <AppLayout user={user}>
-                            <RoleDashboard
-                                title="Maintenance Dashboard"
-                                description="Maintenance requests and work orders will appear here."
-                            />
+                            <MaintenanceDashboard user={user} />
                         </AppLayout>
                     }
                 />
@@ -454,6 +573,42 @@ function App() {
                     element={
                         <AppLayout user={user} setUser={setUser}>
                             <MyProfile user={user} setUser={setUser} />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/maintenance/requests"
+                    element={
+                        <AppLayout user={user}>
+                            <MaintenanceRequests />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/maintenance/work-orders"
+                    element={
+                        <AppLayout user={user}>
+                            <WorkOrders />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/maintenance/documents"
+                    element={
+                        <AppLayout user={user}>
+                            <Documents />
+                        </AppLayout>
+                    }
+                />
+
+                <Route
+                    path="/maintenance/reports"
+                    element={
+                        <AppLayout user={user}>
+                            <Report />
                         </AppLayout>
                     }
                 />
@@ -483,13 +638,21 @@ function App() {
                     path="/admin/dashboard"
                     element={
                         <AppLayout user={user}>
-                            <RoleDashboard
-                                title="System Administrator Dashboard"
-                                description="System administration controls will appear here."
-                            />
+                            <AdminDashboard user={user} />
                         </AppLayout>
                     }
                 />
+
+                <Route
+                    path="/admin/reports"
+                    element={
+                        <AppLayout user={user}>
+                            <Report />
+                        </AppLayout>
+                    }
+                />
+
+                
 
                 <Route
                     path="/admin/profile"
@@ -502,6 +665,8 @@ function App() {
                         </AppLayout>
                     }
                 />
+
+                
 
                 <Route
                     path="/admin/messages"
@@ -520,6 +685,64 @@ function App() {
                         </AppLayout>
                     }
                 />
+
+                <Route
+                    path="/admin/users"
+                    element={
+                        <ProtectedRoute
+                            allowedRoles={['admin']}
+                            permission="Users"
+                        >
+                            <AppLayout user={user}>
+                                <UserManagement />
+                            </AppLayout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/admin/roles"
+                    element={
+                        <ProtectedRoute
+                            allowedRoles={['admin']}
+                            permission="Roles & Permissions"
+                        >
+                            <AppLayout user={user}>
+                                <RolesPermissions />
+                            </AppLayout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/admin/settings"
+                    element={
+                        <ProtectedRoute
+                            allowedRoles={['admin']}
+                            permission="System Settings"
+                        >
+                            <AppLayout user={user}>
+                                <SystemSettings />
+                            </AppLayout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/admin/audit-logs"
+                    element={
+                        <ProtectedRoute
+                            allowedRoles={['admin']}
+                            permission="Audit Logs"
+                        >
+                            <AppLayout user={user}>
+                                <AuditLogs />
+                            </AppLayout>
+                        </ProtectedRoute>
+                    }
+                />
+
+                
 
 
                 {/* FALLBACK */}

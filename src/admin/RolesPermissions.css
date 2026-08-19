@@ -1,0 +1,428 @@
+/* =========================================================
+   ROLES & PERMISSIONS
+   PINNACLE TOWERS ADMIN PORTAL
+   ========================================================= */
+
+.roles-permissions {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 0 40px;
+    color: var(--text-color, #2d2d2d);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.roles-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.roles-header h1 {
+    margin: 0 0 6px;
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--primary-color, #8d0b2f);
+}
+
+.roles-header p {
+    margin: 0;
+    color: var(--text-light, #777);
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+.roles-layout {
+    display: grid;
+    grid-template-columns: 270px minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+}
+
+
+/* =========================================================
+   ROLES LIST
+   ========================================================= */
+
+.roles-list-card,
+.permissions-card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+
+.roles-list-card {
+    overflow: hidden;
+}
+
+.roles-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.roles-list-header h2 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #333;
+}
+
+.roles-list-header span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 8px;
+    border-radius: 50px;
+    background: rgba(141, 11, 47, 0.08);
+    color: var(--primary-color, #8d0b2f);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.roles-list {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+
+
+/* =========================================================
+   ROLE BUTTONS
+   ========================================================= */
+
+.role-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 14px 15px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #333;
+    text-align: left;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.role-item:hover {
+    background: #f8f3f5;
+}
+
+.role-item.active {
+    background: var(--primary-color, #8d0b2f);
+    color: #fff;
+}
+
+.role-item-name {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.role-item-count {
+    font-size: 12px;
+    color: #888;
+}
+
+.role-item.active .role-item-count {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+
+/* =========================================================
+   PERMISSIONS CARD
+   ========================================================= */
+
+.permissions-card {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.permissions-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.permissions-header h2 {
+    margin: 0 0 5px;
+    font-size: 21px;
+    font-weight: 700;
+    color: #333;
+}
+
+.permissions-header p {
+    margin: 0;
+    color: #777;
+    font-size: 13px;
+}
+
+.permissions-summary {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.permissions-summary strong {
+    font-size: 25px;
+    color: var(--primary-color, #8d0b2f);
+}
+
+.permissions-summary span {
+    font-size: 12px;
+    color: #888;
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+   ========================================================= */
+
+.permission-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px 24px;
+    background: #fafafa;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.permission-actions button {
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    background: #fff;
+    color: #555;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.permission-actions button:hover {
+    border-color: var(--primary-color, #8d0b2f);
+    color: var(--primary-color, #8d0b2f);
+    background: #fff;
+}
+
+
+/* =========================================================
+   PERMISSION ROWS
+   ========================================================= */
+
+.permissions-list {
+    padding: 0 24px;
+}
+
+.permission-row {
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 17px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.permission-row:last-child {
+    border-bottom: none;
+}
+
+.permission-row h3 {
+    margin: 0 0 5px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+}
+
+.permission-row p {
+    margin: 0;
+    color: #888;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   TOGGLE SWITCH
+   ========================================================= */
+
+.permission-toggle {
+    position: relative;
+    flex: 0 0 auto;
+    width: 46px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.permission-toggle input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    border-radius: 50px;
+    background: #d5d5d5;
+    transition: background-color 0.2s ease;
+}
+
+.toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    left: 3px;
+    top: 3px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.permission-toggle input:checked + .toggle-slider {
+    background: var(--primary-color, #8d0b2f);
+}
+
+.permission-toggle input:checked + .toggle-slider::before {
+    transform: translateX(21px);
+}
+
+.permission-toggle input:focus-visible + .toggle-slider {
+    outline: 2px solid var(--primary-color, #8d0b2f);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .roles-layout {
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .roles-list-header,
+    .permissions-header {
+        padding: 18px;
+    }
+
+    .permissions-list {
+        padding: 0 18px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+    .roles-permissions {
+        padding-bottom: 25px;
+    }
+
+    .roles-header h1 {
+        font-size: 25px;
+    }
+
+    .roles-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .roles-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+    }
+
+    .role-item {
+        padding: 12px;
+    }
+
+    .permissions-header {
+        align-items: flex-start;
+    }
+
+    .permission-actions {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+    .roles-header {
+        margin-bottom: 18px;
+    }
+
+    .roles-header h1 {
+        font-size: 22px;
+    }
+
+    .roles-header p {
+        font-size: 13px;
+    }
+
+    .roles-list {
+        grid-template-columns: 1fr;
+    }
+
+    .permissions-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 17px;
+    }
+
+    .permissions-list {
+        padding: 0 17px;
+    }
+
+    .permission-row {
+        gap: 12px;
+    }
+
+    .permission-row h3 {
+        font-size: 13px;
+    }
+
+    .permission-row p {
+        font-size: 11px;
+    }
+}

@@ -4,6 +4,31 @@ const MyProfile = ({ user, setUser }) => {
     const isFinance = user?.role === 'finance';
     const isTenant = user?.role === 'tenant';
 
+    /*
+     * Read System Settings.
+     * Tenant profile editing is controlled by:
+     * admin_system_settings.portal.allowTenantProfileEditing
+     */
+    let allowTenantProfileEditing = true;
+
+    try {
+        const systemSettings = JSON.parse(
+            localStorage.getItem('admin_system_settings') || '{}'
+        );
+
+        allowTenantProfileEditing =
+            systemSettings?.portal?.allowTenantProfileEditing !== false;
+    } catch {
+        allowTenantProfileEditing = true;
+    }
+
+    /*
+     * System Settings currently controls tenant
+     * profile editing. Staff profiles remain editable.
+     */
+    const canEditProfile =
+        !isTenant || allowTenantProfileEditing;
+
     const roleLabels = {
         tenant: 'Tenant',
         manager: 'Property Manager',
@@ -30,8 +55,8 @@ const MyProfile = ({ user, setUser }) => {
     );
 
     /*
-     * Keep the profile page synchronized with the
-     * current user state.
+     * Keep the profile page synchronized
+     * with the current user state.
      */
     useEffect(() => {
         setFormData({
@@ -52,6 +77,17 @@ const MyProfile = ({ user, setUser }) => {
         user?.profilePhoto
     ]);
 
+    /*
+     * If System Settings disables profile editing
+     * while the user is currently editing, exit edit mode.
+     */
+    useEffect(() => {
+        if (!canEditProfile && isEditing) {
+            setIsEditing(false);
+            setSaved(false);
+        }
+    }, [canEditProfile, isEditing]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -70,7 +106,6 @@ const MyProfile = ({ user, setUser }) => {
             return;
         }
 
-        // Maximum file size: 2MB
         if (file.size > 2 * 1024 * 1024) {
             alert('Profile photo must be 2MB or smaller.');
             e.target.value = '';
@@ -100,6 +135,10 @@ const MyProfile = ({ user, setUser }) => {
     };
 
     const handleEdit = () => {
+        if (!canEditProfile) {
+            return;
+        }
+
         setIsEditing(true);
         setSaved(false);
     };
@@ -120,6 +159,10 @@ const MyProfile = ({ user, setUser }) => {
     };
 
     const handleSave = () => {
+        if (!canEditProfile) {
+            return;
+        }
+
         const updatedUser = {
             ...user,
 
@@ -130,8 +173,6 @@ const MyProfile = ({ user, setUser }) => {
             emergencyContact: formData.emergencyContact.trim(),
             emergencyPhone: formData.emergencyPhone.trim(),
 
-            // IMPORTANT:
-            // Save the CURRENT photo, not an old formData photo.
             profilePhoto: profilePhoto
         };
 
@@ -144,14 +185,12 @@ const MyProfile = ({ user, setUser }) => {
         );
 
         /*
-         * Update App.jsx's global user state.
-         * This causes Topbar and Sidebar to immediately
-         * receive the new user information.
+         * Update App.jsx global user state.
          */
         setUser(updatedUser);
 
         /*
-         * Keep the local profile state synchronized.
+         * Keep local state synchronized.
          */
         setFormData({
             username: updatedUser.username,
@@ -181,17 +220,21 @@ const MyProfile = ({ user, setUser }) => {
                     </p>
                 </div>
 
-                {!isEditing ? (
+                {canEditProfile && !isEditing && (
                     <button
+                        type="button"
                         className="tenant-profile__edit-btn"
                         onClick={handleEdit}
                     >
                         Edit Profile
                     </button>
-                ) : (
+                )}
+
+                {canEditProfile && isEditing && (
                     <div className="tenant-profile__actions">
 
                         <button
+                            type="button"
                             className="tenant-profile__cancel-btn"
                             onClick={handleCancel}
                         >
@@ -199,6 +242,7 @@ const MyProfile = ({ user, setUser }) => {
                         </button>
 
                         <button
+                            type="button"
                             className="tenant-profile__save-btn"
                             onClick={handleSave}
                         >
@@ -209,6 +253,13 @@ const MyProfile = ({ user, setUser }) => {
                 )}
 
             </div>
+
+            {/* PROFILE EDITING DISABLED MESSAGE */}
+            {!canEditProfile && (
+                <div className="tenant-profile__success">
+                    Profile editing has been disabled by the system administrator.
+                </div>
+            )}
 
             {/* SUCCESS MESSAGE */}
             {saved && (
@@ -253,7 +304,7 @@ const MyProfile = ({ user, setUser }) => {
             </section>
 
             {/* PROFILE PHOTO */}
-            {isEditing && (
+            {canEditProfile && isEditing && (
                 <section className="tenant-profile__section">
 
                     <div className="tenant-profile__section-header">
@@ -298,7 +349,7 @@ const MyProfile = ({ user, setUser }) => {
 
                         <label>Username</label>
 
-                        {isEditing ? (
+                        {isEditing && canEditProfile ? (
                             <input
                                 type="text"
                                 name="username"
@@ -343,7 +394,7 @@ const MyProfile = ({ user, setUser }) => {
 
                         <label>Phone Number</label>
 
-                        {isEditing ? (
+                        {isEditing && canEditProfile ? (
                             <input
                                 type="tel"
                                 name="phone"
@@ -365,7 +416,7 @@ const MyProfile = ({ user, setUser }) => {
 
                         <label>Email Address</label>
 
-                        {isEditing ? (
+                        {isEditing && canEditProfile ? (
                             <input
                                 type="email"
                                 name="email"
@@ -458,7 +509,7 @@ const MyProfile = ({ user, setUser }) => {
 
                                 <label>Contact Name</label>
 
-                                {isEditing ? (
+                                {isEditing && canEditProfile ? (
                                     <input
                                         type="text"
                                         name="emergencyContact"
@@ -482,7 +533,7 @@ const MyProfile = ({ user, setUser }) => {
 
                                 <label>Contact Phone</label>
 
-                                {isEditing ? (
+                                {isEditing && canEditProfile ? (
                                     <input
                                         type="tel"
                                         name="emergencyPhone"
@@ -569,3 +620,5 @@ const MyProfile = ({ user, setUser }) => {
 };
 
 export default MyProfile;
+
+

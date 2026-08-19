@@ -1,0 +1,254 @@
+/* =========================================================
+   AUDIT LOGS
+   ========================================================= */
+
+.audit-logs {
+    width: 100%;
+    min-height: 100%;
+    padding: 4px 0 32px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.audit-logs-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.audit-logs-header h1 {
+    margin: 0 0 6px;
+    color: var(--text-dark, #222);
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.audit-logs-header p {
+    margin: 0;
+    color: var(--text-light, #777);
+    font-size: 14px;
+}
+
+/* =========================================================
+   CLEAR BUTTON
+   ========================================================= */
+
+.audit-clear-button {
+    border: 1px solid #edcccc;
+    border-radius: 8px;
+    padding: 11px 18px;
+    background: #fff;
+    color: #b43b3b;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.audit-clear-button:hover:not(:disabled) {
+    border-color: #d99b9b;
+    background: #fff5f5;
+    color: #9e2222;
+}
+
+.audit-clear-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+
+.audit-filters {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 200px 200px;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 18px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.audit-filters input,
+.audit-filters select {
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    padding: 0 13px;
+    background: #fff;
+    color: #333;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+}
+
+.audit-filters input:focus,
+.audit-filters select:focus {
+    border-color: var(--primary-color, #8d0b2f);
+    box-shadow: 0 0 0 3px rgba(141, 11, 47, 0.08);
+}
+
+/* =========================================================
+   SUMMARY
+   ========================================================= */
+
+.audit-summary {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 12px;
+    color: #777;
+    font-size: 13px;
+}
+
+.audit-summary strong {
+    color: #292929;
+    font-size: 18px;
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.audit-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.audit-table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.audit-table thead {
+    background: #faf7f8;
+}
+
+.audit-table th {
+    padding: 15px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #666;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.audit-table td {
+    padding: 15px 16px;
+    border-bottom: 1px solid #eeeeee;
+    color: #555;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.audit-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.audit-table tbody tr:hover {
+    background: #fcfafb;
+}
+
+.audit-table td strong {
+    color: #292929;
+    font-weight: 600;
+}
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.audit-role,
+.audit-category {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.audit-role {
+    border: 1px solid rgba(141, 11, 47, 0.16);
+    background: rgba(141, 11, 47, 0.07);
+    color: var(--primary-color, #8d0b2f);
+}
+
+.audit-category {
+    border: 1px solid #ddd;
+    background: #f7f7f7;
+    color: #666;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.audit-empty {
+    padding: 50px 20px !important;
+    color: #888 !important;
+    text-align: center;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .audit-filters {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .audit-filters input {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 650px) {
+    .audit-logs {
+        padding-bottom: 20px;
+    }
+
+    .audit-logs-header {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .audit-logs-header h1 {
+        font-size: 25px;
+    }
+
+    .audit-clear-button {
+        width: 100%;
+    }
+
+    .audit-filters {
+        grid-template-columns: 1fr;
+        padding: 14px;
+    }
+
+    .audit-filters input {
+        grid-column: auto;
+    }
+}

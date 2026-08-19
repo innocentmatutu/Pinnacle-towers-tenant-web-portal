@@ -2,7 +2,7 @@
 import React from 'react';
 import './dashboard.css';
 
-const TenantDashboard = ({user}) => {
+const TenantDashboard = ({user, selectNav}) => {
     return (
         <div className="tenant-dashboard">
 
