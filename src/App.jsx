@@ -105,7 +105,7 @@ const AppLayout = ({ children, user, setUser }) => {
             'Service Requests': '/tenant/service-requests',
             'My lease': '/tenant/lease',
             Documents: '/tenant/documents',
-            Reports: '/tenant/reports',
+            //Reports: '/tenant/reports',
             Messages: '/tenant/messages',
             Announcements: '/tenant/announcements',
             'Complaints & Feedback': '/tenant/complaints',
@@ -354,14 +354,7 @@ function App() {
                     }
                 />
 
-                <Route
-                    path="/tenant/reports"
-                    element={
-                    <AppLayout user={user}>
-                        <Report />
-                    </AppLayout>
-                    }
-                />
+               
 
                 <Route
                     path="/tenant/messages"
